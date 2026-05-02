@@ -1,4 +1,4 @@
-name: Build windows zip
+name: Release Windows zip
 
 on:
   workflow_dispatch:
@@ -65,3 +65,25 @@ jobs:
         with:
           name: windows-zip-x86-64-result
           path: app/LocalSend.zip
+
+  release:
+    needs:
+      - build
+      - build_windows_zip
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download zip
+        uses: actions/download-artifact@v7
+        with:
+          name: windows-zip-x86-64-result
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.build.outputs.version }}
+          name: v${{ needs.build.outputs.version }}
+          draft: false
+          files: LocalSend.zip
