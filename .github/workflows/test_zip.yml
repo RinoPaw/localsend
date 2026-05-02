@@ -23,7 +23,7 @@ jobs:
 
   build_windows_zip:
     needs: build
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
       - name: Fix long file paths
