@@ -137,6 +137,13 @@ class ReceiveTab extends StatelessWidget {
             ),
           ),
         ),
+        if (vm.showAdvanced)
+          Positioned.fill(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => vm.toggleAdvanced(),
+            ),
+          ),
         _InfoBox(vm),
         _CornerButtons(
           showAdvanced: vm.showAdvanced,
