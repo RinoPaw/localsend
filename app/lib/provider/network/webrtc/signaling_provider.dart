@@ -75,6 +75,7 @@ class _SetupSignalingConnection extends AsyncGlobalAction {
   Future<void> reduce() async {
     final settings = ref.read(settingsProvider);
     final deviceInfo = ref.read(deviceInfoProvider);
+    final fingerprint = ref.read(securityProvider).certificateHash;
 
     // TODO: Use persistent key
     final key = await crypto.generateKeyPair();
@@ -111,6 +112,7 @@ class _SetupSignalingConnection extends AsyncGlobalAction {
         switch (message) {
           case WsServerMessage_Hello():
             for (final d in message.peers) {
+              if (d.token == fingerprint) continue;
               ref
                   .redux(nearbyDevicesProvider)
                   .dispatch(
@@ -120,6 +122,7 @@ class _SetupSignalingConnection extends AsyncGlobalAction {
             break;
           case WsServerMessage_Join(peer: final peer):
           case WsServerMessage_Update(peer: final peer):
+            if (peer.token == fingerprint) break;
             ref
                 .redux(nearbyDevicesProvider)
                 .dispatch(
