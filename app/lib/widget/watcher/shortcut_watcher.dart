@@ -24,25 +24,17 @@ class ShortcutWatcher extends StatelessWidget {
 
         // Add Control+Q binding for Linux
         // https://github.com/localsend/localsend/issues/194
-        if (checkPlatform([TargetPlatform.linux]))
-          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyQ):
-              _ExitAppIntent(),
+        if (checkPlatform([TargetPlatform.linux])) LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyQ): _ExitAppIntent(),
         // Add Command+W to close the window for macOS
-        if (checkPlatform([TargetPlatform.macOS]))
-          LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyW):
-              _CloseWindowIntent(),
+        if (checkPlatform([TargetPlatform.macOS])) LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyW): _CloseWindowIntent(),
         // Add Control+, to open settings for macOS
-        if (checkPlatform([TargetPlatform.macOS]))
-          LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.comma):
-              _OpenSettingsIntent(),
+        if (checkPlatform([TargetPlatform.macOS])) LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.comma): _OpenSettingsIntent(),
 
         LogicalKeySet(LogicalKeyboardKey.escape): _PopPageIntent(),
 
         // Control+V and Command+V
-        LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyV):
-            _PasteIntent(),
-        LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyV):
-            _PasteIntent(),
+        LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyV): _PasteIntent(),
+        LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyV): _PasteIntent(),
       },
       child: Actions(
         actions: {
@@ -59,9 +51,7 @@ class ShortcutWatcher extends StatelessWidget {
                 ),
               );
               if (context.mounted) {
-                context
-                    .redux(homePageControllerProvider)
-                    .dispatch(ChangeTabAction(HomeTab.send));
+                context.redux(homePageControllerProvider).dispatch(ChangeTabAction(HomeTab.send));
               }
               return null;
             },
@@ -78,9 +68,7 @@ class ShortcutWatcher extends StatelessWidget {
           ),
           _OpenSettingsIntent: CallbackAction(
             onInvoke: (_) async {
-              context
-                  .redux(homePageControllerProvider)
-                  .dispatch(ChangeTabAction(HomeTab.settings));
+              context.redux(homePageControllerProvider).dispatch(ChangeTabAction(HomeTab.settings));
               return null;
             },
           ),
@@ -123,8 +111,5 @@ bool _isFakeMetaKey() {
 }
 
 extension on LogicalKeyboardKey {
-  bool get isMeta =>
-      this == LogicalKeyboardKey.meta ||
-      this == LogicalKeyboardKey.metaLeft ||
-      this == LogicalKeyboardKey.metaRight;
+  bool get isMeta => this == LogicalKeyboardKey.meta || this == LogicalKeyboardKey.metaLeft || this == LogicalKeyboardKey.metaRight;
 }

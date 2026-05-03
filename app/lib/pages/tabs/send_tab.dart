@@ -52,9 +52,7 @@ class SendTab extends StatelessWidget {
         final sizingInformation = SizingInformation(
           MediaQuery.sizeOf(context).width,
         );
-        final buttonWidth = sizingInformation.isDesktop
-            ? BigButton.desktopWidth
-            : BigButton.mobileWidth;
+        final buttonWidth = sizingInformation.isDesktop ? BigButton.desktopWidth : BigButton.mobileWidth;
         final ref = context.ref;
         return Stack(
           children: [
@@ -112,9 +110,7 @@ class SendTab extends StatelessWidget {
                               ),
                               const Spacer(),
                               CustomIconButton(
-                                onPressed: () => ref
-                                    .redux(selectedSendingFilesProvider)
-                                    .dispatch(ClearSelectionAction()),
+                                onPressed: () => ref.redux(selectedSendingFilesProvider).dispatch(ClearSelectionAction()),
                                 child: Icon(
                                   Icons.close,
                                   color: Theme.of(
@@ -133,9 +129,7 @@ class SendTab extends StatelessWidget {
                           ),
                           Text(
                             t.sendTab.selection.size(
-                              size: vm.selectedFiles
-                                  .fold(0, (prev, curr) => prev + curr.size)
-                                  .asReadableFileSize,
+                              size: vm.selectedFiles.fold(0, (prev, curr) => prev + curr.size).asReadableFileSize,
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -273,10 +267,8 @@ class SendTab extends StatelessWidget {
                               device: device,
                               isFavorite: favoriteEntry != null,
                               nameOverride: favoriteEntry?.alias,
-                              onFavoriteTap: () async =>
-                                  await vm.onToggleFavorite(context, device),
-                              onTap: () async =>
-                                  await vm.onTapDevice(context, device),
+                              onFavoriteTap: () async => await vm.onToggleFavorite(context, device),
+                              onTap: () async => await vm.onTapDevice(context, device),
                             ),
                     ),
                   );
@@ -322,9 +314,7 @@ class SendTab extends StatelessWidget {
               ],
             ),
             // make the top draggable on Desktop
-            checkPlatform([TargetPlatform.macOS])
-                ? SizedBox(height: 50, child: MoveWindow())
-                : SizedBox(height: 0, width: 0),
+            checkPlatform([TargetPlatform.macOS]) ? SizedBox(height: 50, child: MoveWindow()) : SizedBox(height: 0, width: 0),
           ],
         );
       },
@@ -356,9 +346,7 @@ class _CircularPopupButton<T> extends StatelessWidget {
         type: MaterialType.transparency,
         child: DividerTheme(
           data: DividerThemeData(
-            color: Theme.of(context).brightness == Brightness.light
-                ? Colors.teal.shade100
-                : Colors.grey.shade700,
+            color: Theme.of(context).brightness == Brightness.light ? Colors.teal.shade100 : Colors.grey.shade700,
           ),
           child: PopupMenuButton(
             offset: const Offset(0, 40),
@@ -388,11 +376,8 @@ class _ScanButton extends StatelessWidget {
     );
     final animations = context.ref.watch(animationProvider);
 
-    final spinning =
-        (scanningFavorites || scanningIps.isNotEmpty) && animations;
-    final iconColor = !animations && scanningIps.isNotEmpty
-        ? Theme.of(context).colorScheme.warning
-        : null;
+    final spinning = (scanningFavorites || scanningIps.isNotEmpty) && animations;
+    final iconColor = !animations && scanningIps.isNotEmpty ? Theme.of(context).colorScheme.warning : null;
 
     if (ips.length <= StartSmartScan.maxInterfaces) {
       return Tooltip(
@@ -403,9 +388,7 @@ class _ScanButton extends StatelessWidget {
           reverse: true,
           child: CustomIconButton(
             onPressed: () async {
-              context
-                  .redux(nearbyDevicesProvider)
-                  .dispatch(ClearFoundDevicesAction());
+              context.redux(nearbyDevicesProvider).dispatch(ClearFoundDevicesAction());
               await context.global.dispatchAsync(
                 StartSmartScan(forceLegacy: true),
               );
@@ -419,9 +402,7 @@ class _ScanButton extends StatelessWidget {
     return _CircularPopupButton(
       tooltip: t.sendTab.scan,
       onSelected: (ip) async {
-        context
-            .redux(nearbyDevicesProvider)
-            .dispatch(ClearFoundDevicesAction());
+        context.redux(nearbyDevicesProvider).dispatch(ClearFoundDevicesAction());
         await context.global.dispatchAsync(
           StartLegacySubnetScan(subnets: [ip]),
         );
@@ -612,10 +593,7 @@ class _MultiSendDeviceListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ref = context.ref;
-    final session = ref
-        .watch(sendProvider)
-        .values
-        .firstWhereOrNull((s) => s.target.ip == device.ip);
+    final session = ref.watch(sendProvider).values.firstWhereOrNull((s) => s.target.ip == device.ip);
     final double? progress;
     if (session != null) {
       final files = session.files.values.where((f) => f.token != null);
@@ -645,9 +623,7 @@ class _MultiSendDeviceListTile extends StatelessWidget {
       progress: progress,
       isFavorite: isFavorite,
       nameOverride: nameOverride,
-      onFavoriteTap: device.ip == null
-          ? null
-          : () async => await vm.onToggleFavorite(context, device),
+      onFavoriteTap: device.ip == null ? null : () async => await vm.onToggleFavorite(context, device),
       onTap: () async => await vm.onTapDeviceMultiSend(context, device),
     );
   }

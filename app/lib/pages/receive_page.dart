@@ -46,10 +46,7 @@ class ReceivePageVm {
     required this.onAccept,
     required this.onDecline,
     required this.onClose,
-  }) : isLink =
-           message != null &&
-           !message.trim().contains(RegExp(r'\s')) &&
-           (Uri.tryParse(message.trim())?.isAbsolute ?? false);
+  }) : isLink = message != null && !message.trim().contains(RegExp(r'\s')) && (Uri.tryParse(message.trim())?.isAbsolute ?? false);
 }
 
 class ReceivePage extends StatefulWidget {
@@ -135,9 +132,7 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                     ),
                                   Builder(
                                     builder: (context) {
-                                      final alias =
-                                          senderFavoriteEntry?.alias ??
-                                          vm.sender.alias;
+                                      final alias = senderFavoriteEntry?.alias ?? vm.sender.alias;
                                       if (alias.isEmpty) {
                                         return Text(
                                           '',
@@ -160,8 +155,7 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                   if (vm.showSenderInfo) ...[
                                     const SizedBox(height: 10),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         InkWell(
                                           onTap: () {
@@ -177,10 +171,7 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                               context,
                                             ).colorScheme.onInverseSurface,
                                             label: switch (vm.sender.ip) {
-                                              String ip =>
-                                                _showFullIp
-                                                    ? ip
-                                                    : '#${ip.visualId}',
+                                              String ip => _showFullIp ? ip : '#${ip.visualId}',
                                               null => 'WebRTC',
                                             },
                                           ),
@@ -203,9 +194,7 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                   const SizedBox(height: 40),
                                   Text(
                                     vm.message != null
-                                        ? (vm.isLink
-                                              ? t.receivePage.subTitleLink
-                                              : t.receivePage.subTitleMessage)
+                                        ? (vm.isLink ? t.receivePage.subTitleLink : t.receivePage.subTitleMessage)
                                         : t.receivePage.subTitle(
                                             n: vm.files.length,
                                           ),
@@ -218,8 +207,7 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                   ),
                                   if (vm.message != null)
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(
@@ -243,8 +231,7 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                         ),
                                         const SizedBox(height: 10),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             ElevatedButton(
                                               onPressed: () {
@@ -267,28 +254,19 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                             ),
                                             if (vm.isLink)
                                               Padding(
-                                                padding:
-                                                    const EdgeInsetsDirectional.only(
-                                                      start: 20,
-                                                    ),
+                                                padding: const EdgeInsetsDirectional.only(
+                                                  start: 20,
+                                                ),
                                                 child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                        backgroundColor:
-                                                            Theme.of(context)
-                                                                .colorScheme
-                                                                .primary,
-                                                        foregroundColor:
-                                                            Theme.of(context)
-                                                                .colorScheme
-                                                                .onPrimary,
-                                                      ),
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: Theme.of(context).colorScheme.primary,
+                                                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                                                  ),
                                                   onPressed: () {
                                                     // ignore: discarded_futures
                                                     launchUrl(
                                                       Uri.parse(vm.message!),
-                                                      mode: LaunchMode
-                                                          .externalApplication,
+                                                      mode: LaunchMode.externalApplication,
                                                     );
                                                     vm.onAccept();
                                                     context.pop();
@@ -393,12 +371,8 @@ class _Actions extends StatelessWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 elevation: colorMode == ColorMode.yaru ? 0 : null,
-                backgroundColor: colorMode == ColorMode.yaru
-                    ? Theme.of(context).colorScheme.surface
-                    : Theme.of(context).colorScheme.error,
-                foregroundColor: colorMode == ColorMode.yaru
-                    ? Theme.of(context).colorScheme.onSurface
-                    : Theme.of(context).colorScheme.onError,
+                backgroundColor: colorMode == ColorMode.yaru ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.error,
+                foregroundColor: colorMode == ColorMode.yaru ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onError,
               ),
               onPressed: () {
                 vm.onDecline();

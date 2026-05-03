@@ -32,13 +32,10 @@ class SendTabVm {
   final List<FavoriteDevice> favoriteDevices;
   final Future<void> Function(BuildContext context) onTapAddress;
   final Future<void> Function(BuildContext context) onTapFavorite;
-  final Future<void> Function(BuildContext context, SendMode mode)
-  onTapSendMode;
-  final Future<void> Function(BuildContext context, Device device)
-  onToggleFavorite;
+  final Future<void> Function(BuildContext context, SendMode mode) onTapSendMode;
+  final Future<void> Function(BuildContext context, Device device) onToggleFavorite;
   final Future<void> Function(BuildContext context, Device device) onTapDevice;
-  final Future<void> Function(BuildContext context, Device device)
-  onTapDeviceMultiSend;
+  final Future<void> Function(BuildContext context, Device device) onTapDeviceMultiSend;
 
   const SendTabVm({
     required this.sendMode,
@@ -79,9 +76,7 @@ final sendTabVmProvider = ViewProvider((ref) {
         builder: (_) => const AddressInputDialog(),
       );
       if (device != null && context.mounted) {
-        await ref
-            .notifier(sendProvider)
-            .startSession(target: device, files: files, background: false);
+        await ref.notifier(sendProvider).startSession(target: device, files: files, background: false);
       }
     },
     onTapFavorite: (context) async {
@@ -96,9 +91,7 @@ final sendTabVmProvider = ViewProvider((ref) {
           return;
         }
 
-        await ref
-            .notifier(sendProvider)
-            .startSession(target: device, files: files, background: false);
+        await ref.notifier(sendProvider).startSession(target: device, files: files, background: false);
       }
     },
     onTapSendMode: (context, mode) async {
@@ -153,10 +146,7 @@ final sendTabVmProvider = ViewProvider((ref) {
           );
     },
     onTapDeviceMultiSend: (context, device) async {
-      final session = ref
-          .read(sendProvider)
-          .values
-          .firstWhereOrNull((s) => s.target.ip == device.ip);
+      final session = ref.read(sendProvider).values.firstWhereOrNull((s) => s.target.ip == device.ip);
       if (session != null) {
         if (session.status == SessionStatus.waiting) {
           ref.notifier(sendProvider).setBackground(session.sessionId, false);
@@ -170,8 +160,7 @@ final sendTabVmProvider = ViewProvider((ref) {
           );
           ref.notifier(sendProvider).setBackground(session.sessionId, true);
           return;
-        } else if (session.status == SessionStatus.sending ||
-            session.status == SessionStatus.finishedWithErrors) {
+        } else if (session.status == SessionStatus.sending || session.status == SessionStatus.finishedWithErrors) {
           ref.notifier(sendProvider).setBackground(session.sessionId, false);
           await context.push(
             () => ProgressPage(
@@ -196,9 +185,7 @@ final sendTabVmProvider = ViewProvider((ref) {
         ref.notifier(sendProvider).closeSession(session.sessionId);
       }
 
-      await ref
-          .notifier(sendProvider)
-          .startSession(target: device, files: files, background: true);
+      await ref.notifier(sendProvider).startSession(target: device, files: files, background: true);
     },
   );
 });

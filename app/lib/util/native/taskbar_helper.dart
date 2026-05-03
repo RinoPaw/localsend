@@ -22,8 +22,7 @@ class TaskbarHelper {
     // Scale down to 0-100 range because Windows Taskbar only supports 32-bit integers
     // This ensures that files with a size of 2^32 bytes or greater can still be displayed correctly
     final (digestedProgress, digestedTotal) = _scaleRange(progress, total);
-    if (total != double.minPositive.toInt() &&
-        total != double.maxFinite.toInt()) {
+    if (total != double.minPositive.toInt() && total != double.maxFinite.toInt()) {
       if (_isWindows) {
         await WindowsTaskbar.setProgress(digestedProgress, digestedTotal);
       } else if (_isMacos) {

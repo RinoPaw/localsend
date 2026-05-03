@@ -64,8 +64,7 @@ class WebRTCReceiveService extends ReduxNotifier<WebRTCReceiveState> {
   }
 }
 
-class AcceptOfferAction
-    extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   @override
   Future<WebRTCReceiveState> reduce() async {
     final controller = await state.connection.acceptOffer(
@@ -88,8 +87,7 @@ class AcceptOfferAction
   }
 }
 
-class _AcceptOfferAction
-    extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class _AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   @override
   Future<WebRTCReceiveState> reduce() async {
     final controller = state.controller;
@@ -103,8 +101,7 @@ class _AcceptOfferAction
 
     final vm = ViewProvider((ref) {
       final state = ref.watch(
-        notifier.provider
-            as ReduxProvider<WebRTCReceiveService, WebRTCReceiveState>,
+        notifier.provider as ReduxProvider<WebRTCReceiveService, WebRTCReceiveState>,
       );
       return ReceivePageVm(
         status: switch (state.status) {
@@ -121,9 +118,7 @@ class _AcceptOfferAction
         sender: state.offer.peer.toDevice(notifier._signalingServer),
         showSenderInfo: true,
         files: convertedFiles,
-        message: files.length == 1 && files[0].fileType.startsWith('text/')
-            ? files[0].preview
-            : null,
+        message: files.length == 1 && files[0].fileType.startsWith('text/') ? files[0].preview : null,
         onAccept: () {},
         onDecline: () {},
         onClose: () {},
@@ -137,8 +132,7 @@ class _AcceptOfferAction
   }
 }
 
-class _InitSessionState
-    extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class _InitSessionState extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   final List<dart_model.FileDto> files;
 
   _InitSessionState(this.files);
@@ -177,8 +171,7 @@ class _InitSessionState
   }
 }
 
-class _SetStatusAction
-    extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class _SetStatusAction extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   final RTCStatus status;
 
   _SetStatusAction(this.status);

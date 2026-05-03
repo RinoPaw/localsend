@@ -129,9 +129,7 @@ class _TroubleshootItemState extends State<_TroubleshootItem> {
                   ],
                 ),
                 AnimatedCrossFade(
-                  crossFadeState: _showCommands
-                      ? CrossFadeState.showSecond
-                      : CrossFadeState.showFirst,
+                  crossFadeState: _showCommands ? CrossFadeState.showSecond : CrossFadeState.showFirst,
                   duration: const Duration(milliseconds: 200),
                   firstChild: Container(),
                   secondChild: SelectionArea(
@@ -164,8 +162,7 @@ class _FixButton extends StatelessWidget {
   final Map<TargetPlatform, _FixAction> onTapMap;
   final _FixAction? onTap;
 
-  _FixButton({required this.label, required this.onTapMap})
-    : onTap = onTapMap[defaultTargetPlatform];
+  _FixButton({required this.label, required this.onTapMap}) : onTap = onTapMap[defaultTargetPlatform];
 
   @override
   Widget build(BuildContext context) {
@@ -180,8 +177,7 @@ class _FixButton extends StatelessWidget {
         } else {
           await showDialog(
             context: context,
-            builder: (_) =>
-                NotAvailableOnPlatformDialog(platforms: onTapMap.keys.toList()),
+            builder: (_) => NotAvailableOnPlatformDialog(platforms: onTapMap.keys.toList()),
           );
         }
       },

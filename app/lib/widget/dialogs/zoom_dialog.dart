@@ -68,8 +68,7 @@ class ZoomDialog extends StatelessWidget {
                 final pending =
                     webSendState?.sessions.values.fold<int>(
                       0,
-                      (prev, curr) =>
-                          prev + (curr.responseHandler != null ? 1 : 0),
+                      (prev, curr) => prev + (curr.responseHandler != null ? 1 : 0),
                     ) ??
                     0;
                 if (pending != 0) {

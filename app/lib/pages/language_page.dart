@@ -48,8 +48,7 @@ class _LanguagePageState extends State<LanguagePage> {
                 children: [
                   Flexible(
                     child: Text(
-                      locale?.humanName ??
-                          t.settingsTab.general.languageOptions.system,
+                      locale?.humanName ?? t.settingsTab.general.languageOptions.system,
                     ),
                   ),
                   if (locale == activeLocale) ...[

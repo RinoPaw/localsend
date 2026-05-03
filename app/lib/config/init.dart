@@ -83,8 +83,7 @@ Future<RefenaContainer> preInit(List<String> args) async {
     supportsDynamicColors: dynamicColors != null,
   );
 
-  if (persistenceService.isFirstAppStart &&
-      !persistenceService.isPortableMode()) {
+  if (persistenceService.isFirstAppStart && !persistenceService.isPortableMode()) {
     await enableContextMenu();
   }
 
@@ -130,8 +129,7 @@ Future<RefenaContainer> preInit(List<String> args) async {
       // keep this app hidden
       startHidden = true;
     } else if (defaultTargetPlatform == TargetPlatform.macOS) {
-      startHidden =
-          await isLaunchedAsLoginItem() && await getLaunchAtLoginMinimized();
+      startHidden = await isLaunchedAsLoginItem() && await getLaunchAtLoginMinimized();
     }
 
     doWhenWindowReady(() {
@@ -159,8 +157,7 @@ Future<RefenaContainer> preInit(List<String> args) async {
       dynamicColorsProvider.overrideWithValue(dynamicColors),
       sleepProvider.overrideWithInitialState((ref) => startHidden),
     ],
-    platformHint:
-        RefenaScope.getPlatformHint(), // help Refena know the correct platform
+    platformHint: RefenaScope.getPlatformHint(), // help Refena know the correct platform
   );
 
   // initialize multi-threading
@@ -226,9 +223,7 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
   }
 
   try {
-    ref
-        .redux(nearbyDevicesProvider)
-        .dispatchAsync(StartMulticastListener()); // ignore: unawaited_futures
+    ref.redux(nearbyDevicesProvider).dispatchAsync(StartMulticastListener()); // ignore: unawaited_futures
   } catch (e) {
     _logger.warning('Starting multicast listener failed', e);
   }
@@ -247,13 +242,9 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
       // handle dropped strings
       pendingStringsStream.listen((pendingStrings) {
         for (final string in pendingStrings) {
-          ref
-              .redux(selectedSendingFilesProvider)
-              .dispatch(AddMessageAction(message: string));
+          ref.redux(selectedSendingFilesProvider).dispatch(AddMessageAction(message: string));
         }
-        ref
-            .redux(homePageControllerProvider)
-            .dispatch(ChangeTabAction(HomeTab.send));
+        ref.redux(homePageControllerProvider).dispatch(ChangeTabAction(HomeTab.send));
       });
 
       await setupMethodCallHandler();
@@ -291,9 +282,7 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
     });
   }
 
-  if (appStart &&
-      !hasInitialShare &&
-      (checkPlatformWithGallery() || checkPlatformCanReceiveShareIntent())) {
+  if (appStart && !hasInitialShare && (checkPlatformWithGallery() || checkPlatformCanReceiveShareIntent())) {
     // Clear cache on every app start.
     // If we received a share intent, then don't clear it, otherwise the shared file will be lost.
     ref.global.dispatchAsync(ClearCacheAction()); // ignore: unawaited_futures
@@ -316,26 +305,18 @@ class _HandleShareIntentAction extends AsyncGlobalAction {
   Future<void> reduce() async {
     final message = payload.content;
     if (message != null && message.trim().isNotEmpty) {
-      ref
-          .redux(selectedSendingFilesProvider)
-          .dispatch(AddMessageAction(message: message));
+      ref.redux(selectedSendingFilesProvider).dispatch(AddMessageAction(message: message));
     }
     await ref
         .redux(selectedSendingFilesProvider)
         .dispatchAsync(
           AddFilesAction(
-            files:
-                payload.attachments
-                    ?.where((a) => a != null)
-                    .cast<SharedAttachment>() ??
-                <SharedAttachment>[],
+            files: payload.attachments?.where((a) => a != null).cast<SharedAttachment>() ?? <SharedAttachment>[],
             converter: CrossFileConverters.convertSharedAttachment,
           ),
         );
 
-    ref
-        .redux(homePageControllerProvider)
-        .dispatch(ChangeTabAction(HomeTab.send));
+    ref.redux(homePageControllerProvider).dispatch(ChangeTabAction(HomeTab.send));
   }
 }
 
@@ -346,13 +327,9 @@ class _HandleAppStartArgumentsAction extends AsyncGlobalAction {
 
   @override
   Future<void> reduce() async {
-    final filesAdded = await ref
-        .redux(selectedSendingFilesProvider)
-        .dispatchAsyncTakeResult(LoadSelectionFromArgsAction(args));
+    final filesAdded = await ref.redux(selectedSendingFilesProvider).dispatchAsyncTakeResult(LoadSelectionFromArgsAction(args));
     if (filesAdded) {
-      ref
-          .redux(homePageControllerProvider)
-          .dispatch(ChangeTabAction(HomeTab.send));
+      ref.redux(homePageControllerProvider).dispatch(ChangeTabAction(HomeTab.send));
     }
   }
 }

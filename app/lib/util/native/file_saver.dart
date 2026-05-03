@@ -4,8 +4,7 @@ import 'dart:typed_data';
 import 'package:gal/gal.dart';
 import 'package:legalize/legalize.dart';
 import 'package:localsend_app/util/file_path_helper.dart';
-import 'package:localsend_app/util/native/channel/android_channel.dart'
-    as android_channel;
+import 'package:localsend_app/util/native/channel/android_channel.dart' as android_channel;
 import 'package:localsend_app/util/native/content_uri_helper.dart';
 import 'package:localsend_app/util/native/directories.dart';
 import 'package:logging/logging.dart';
@@ -44,9 +43,7 @@ Future<(bool, String?)> saveFile({
   DateTime? lastModified,
   DateTime? lastAccessed,
 }) async {
-  final parentDirectory = saveToGallery
-      ? await getCacheDirectory()
-      : destinationDirectory;
+  final parentDirectory = saveToGallery ? await getCacheDirectory() : destinationDirectory;
 
   final (
     destinationPath,
@@ -182,9 +179,7 @@ Future<(bool, String?)> _saveFile({
 
     if (saveToGallery) {
       try {
-        isImage
-            ? await Gal.putImage(destinationPath)
-            : await Gal.putVideo(destinationPath);
+        isImage ? await Gal.putImage(destinationPath) : await Gal.putVideo(destinationPath);
         await File(destinationPath).delete();
         onProgress(savedBytes);
         return (true, null);
@@ -287,9 +282,7 @@ Future<(String, String?, String)> digestFilePathAndPrepareDirectory({
   String destinationPath;
   int counter = 1;
   do {
-    destinationPath = counter == 1
-        ? p.join(dir, actualFileName)
-        : p.join(dir, actualFileName.withCount(counter));
+    destinationPath = counter == 1 ? p.join(dir, actualFileName) : p.join(dir, actualFileName.withCount(counter));
     counter++;
   } while (await File(destinationPath).exists());
   return (destinationPath, null, p.basename(destinationPath));

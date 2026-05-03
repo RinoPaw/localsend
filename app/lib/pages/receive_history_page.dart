@@ -32,11 +32,9 @@ enum _EntryOption {
   String get label {
     return switch (this) {
       _EntryOption.open => t.receiveHistoryPage.entryActions.open,
-      _EntryOption.showInFolder =>
-        t.receiveHistoryPage.entryActions.showInFolder,
+      _EntryOption.showInFolder => t.receiveHistoryPage.entryActions.showInFolder,
       _EntryOption.info => t.receiveHistoryPage.entryActions.info,
-      _EntryOption.delete =>
-        t.receiveHistoryPage.entryActions.deleteFromHistory,
+      _EntryOption.delete => t.receiveHistoryPage.entryActions.deleteFromHistory,
     };
   }
 }
@@ -57,8 +55,7 @@ class ReceiveHistoryPage extends StatelessWidget {
         context,
         entry.fileType,
         entry.path!,
-        onDeleteTap: () =>
-            dispatcher.dispatchAsync(RemoveHistoryEntryAction(entry.id)),
+        onDeleteTap: () => dispatcher.dispatchAsync(RemoveHistoryEntryAction(entry.id)),
       );
     }
   }
@@ -89,9 +86,7 @@ class ReceiveHistoryPage extends StatelessWidget {
                       ? null
                       : () async {
                           // ignore: use_build_context_synchronously
-                          final destination =
-                              context.read(settingsProvider).destination ??
-                              await getDefaultDestinationDirectory();
+                          final destination = context.read(settingsProvider).destination ?? await getDefaultDestinationDirectory();
                           await openFolder(folderPath: destination);
                         },
                   icon: const Icon(Icons.folder),
@@ -116,9 +111,7 @@ class ReceiveHistoryPage extends StatelessWidget {
                           );
 
                           if (context.mounted && result == true) {
-                            await context
-                                .redux(receiveHistoryProvider)
-                                .dispatchAsync(RemoveAllHistoryEntriesAction());
+                            await context.redux(receiveHistoryProvider).dispatchAsync(RemoveAllHistoryEntriesAction());
                           }
                         },
                   icon: const Icon(Icons.delete),
@@ -257,16 +250,12 @@ class ReceiveHistoryPage extends StatelessWidget {
                           }
                         },
                         itemBuilder: (BuildContext context) {
-                          return (entry.path != null
-                                  ? _optionsAll
-                                  : _optionsWithoutOpen)
-                              .map((e) {
-                                return PopupMenuItem<_EntryOption>(
-                                  value: e,
-                                  child: Text(e.label),
-                                );
-                              })
-                              .toList();
+                          return (entry.path != null ? _optionsAll : _optionsWithoutOpen).map((e) {
+                            return PopupMenuItem<_EntryOption>(
+                              value: e,
+                              child: Text(e.label),
+                            );
+                          }).toList();
                         },
                       ),
                     ],

@@ -41,9 +41,7 @@ class FileInfoDialog extends StatelessWidget {
                         Text(t.dialogs.fileInfo.path),
                         const SizedBox(width: 10),
                         SelectableText(
-                          entry.savedToGallery
-                              ? t.progressPage.savedToGallery
-                              : (entry.path ?? ''),
+                          entry.savedToGallery ? t.progressPage.savedToGallery : (entry.path ?? ''),
                         ),
                       ],
                     ),

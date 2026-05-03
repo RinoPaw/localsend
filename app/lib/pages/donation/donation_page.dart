@@ -53,10 +53,7 @@ class DonationPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (vm.platformSupportPayment)
-                    _StoreDonation(vm)
-                  else
-                    const _LinkDonation(),
+                  if (vm.platformSupportPayment) _StoreDonation(vm) else const _LinkDonation(),
                 ],
               ),
               if (vm.pending)
@@ -85,9 +82,7 @@ class _StoreDonation extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: FilledButton.icon(
-              onPressed: vm.purchased.contains(item)
-                  ? null
-                  : () => vm.purchase(item),
+              onPressed: vm.purchased.contains(item) ? null : () => vm.purchase(item),
               icon: const Icon(Icons.favorite),
               label: Text(
                 t.donationPage.donate(amount: vm.prices[item] ?? '...'),

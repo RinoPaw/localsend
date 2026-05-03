@@ -270,8 +270,7 @@ class ReceiveController {
     }
 
     final settings = server.ref.read(settingsProvider);
-    final destinationDir =
-        settings.destination ?? await getDefaultDestinationDirectory();
+    final destinationDir = settings.destination ?? await getDefaultDestinationDirectory();
     final cacheDir = await getCacheDirectory();
     final sessionId = _uuid.v4();
 
@@ -309,25 +308,17 @@ class ReceiveController {
           endTime: null,
           destinationDirectory: destinationDir,
           cacheDirectory: cacheDir,
-          saveToGallery:
-              checkPlatformWithGallery() &&
-              settings.saveToGallery &&
-              dto.files.values.every((f) => !f.fileName.contains('/')),
+          saveToGallery: checkPlatformWithGallery() && settings.saveToGallery && dto.files.values.every((f) => !f.fileName.contains('/')),
           createdDirectories: {},
           responseHandler: streamController,
         ),
       ),
     );
 
-    bool quickSave =
-        settings.quickSave && server.getState().session?.message == null;
-    final quickSaveFromFavorites =
-        settings.quickSaveFromFavorites &&
-        server.getState().session?.message == null;
+    bool quickSave = settings.quickSave && server.getState().session?.message == null;
+    final quickSaveFromFavorites = settings.quickSaveFromFavorites && server.getState().session?.message == null;
     if (quickSaveFromFavorites) {
-      final bool isFavorite = server.ref
-          .read(favoritesProvider)
-          .any((e) => e.fingerprint == dto.info.fingerprint);
+      final bool isFavorite = server.ref.read(favoritesProvider).any((e) => e.fingerprint == dto.info.fingerprint);
       if (isFavorite) {
         quickSave = true;
       }
@@ -337,10 +328,7 @@ class ReceiveController {
       // accept all files
       selection = {for (final f in dto.files.values) f.id: f.fileName};
     } else {
-      if (checkPlatformHasTray() &&
-          (await windowManager.isMinimized() ||
-              !(await windowManager.isVisible()) ||
-              !(await windowManager.isFocused()))) {
+      if (checkPlatformHasTray() && (await windowManager.isMinimized() || !(await windowManager.isVisible()) || !(await windowManager.isFocused()))) {
         await showFromTray();
       }
 
@@ -449,9 +437,7 @@ class ReceiveController {
                 entry.file.id,
                 ReceivingFile(
                   file: entry.file,
-                  status: desiredName != null
-                      ? FileStatus.queue
-                      : FileStatus.skipped,
+                  status: desiredName != null ? FileStatus.queue : FileStatus.skipped,
                   token: desiredName != null ? _uuid.v4() : null,
                   desiredName: desiredName,
                   path: null,
@@ -585,17 +571,13 @@ class ReceiveController {
               fileId,
               (_) => receivingFile.copyWith(status: FileStatus.sending),
             ),
-          startTime:
-              receiveState.startTime ?? DateTime.now().millisecondsSinceEpoch,
-          status: SessionStatus
-              .sending, // in case it was finishedWithErrors and user retries a failed file
+          startTime: receiveState.startTime ?? DateTime.now().millisecondsSinceEpoch,
+          status: SessionStatus.sending, // in case it was finishedWithErrors and user retries a failed file
         ),
       ),
     );
     final fileType = receivingFile.file.fileType;
-    final shouldSaveToGallery =
-        receiveState.saveToGallery &&
-        (fileType == FileType.image || fileType == FileType.video);
+    final shouldSaveToGallery = receiveState.saveToGallery && (fileType == FileType.image || fileType == FileType.video);
 
     String? filePath;
     bool savedToGallery = false;
@@ -624,8 +606,7 @@ class ReceiveController {
         androidSdkInt: server.ref.read(deviceInfoProvider).androidSdkInt,
         createdDirectories: receiveState.createdDirectories,
       );
-      if (server.getState().session == null ||
-          !allowedStates.contains(server.getState().session!.status)) {
+      if (server.getState().session == null || !allowedStates.contains(server.getState().session!.status)) {
         return await request.respondJson(
           500,
           message: 'Server is in invalid state',
@@ -692,32 +673,24 @@ class ReceiveController {
       );
     }
 
-    if (allowedStates.contains(session.status) &&
-        session.files.values.map((e) => e.status).isFinishedOrError) {
+    if (allowedStates.contains(session.status) && session.files.values.map((e) => e.status).isFinishedOrError) {
       final hasError = session.files.values.any(
         (f) => f.status == FileStatus.failed,
       );
       server.setState(
         (oldState) => oldState?.copyWith(
           session: oldState.session!.copyWith(
-            status: hasError
-                ? SessionStatus.finishedWithErrors
-                : SessionStatus.finished,
+            status: hasError ? SessionStatus.finishedWithErrors : SessionStatus.finished,
             endTime: DateTime.now().millisecondsSinceEpoch,
           ),
         ),
       );
       final settings = server.ref.read(settingsProvider);
-      bool quickSave =
-          settings.quickSave && server.getState().session?.message == null;
-      final quickSaveFromFavorites =
-          settings.quickSaveFromFavorites &&
-          server.getState().session?.message == null;
+      bool quickSave = settings.quickSave && server.getState().session?.message == null;
+      final quickSaveFromFavorites = settings.quickSaveFromFavorites && server.getState().session?.message == null;
       if (quickSaveFromFavorites) {
         // dto is not defined here. I must check sender fingerprint
-        final bool isFavorite = server.ref
-            .read(favoritesProvider)
-            .any((e) => e.fingerprint == session.sender.fingerprint);
+        final bool isFavorite = server.ref.read(favoritesProvider).any((e) => e.fingerprint == session.sender.fingerprint);
         if (isFavorite) {
           quickSave = true;
         }
@@ -748,13 +721,11 @@ class ReceiveController {
       _logger.info('Received all files.');
     }
 
-    return server.getState().session?.files[fileId]?.status ==
-            FileStatus.finished
+    return server.getState().session?.files[fileId]?.status == FileStatus.finished
         ? await request.respondJson(200)
         : await request.respondJson(
             500,
-            message:
-                'Could not save file. Check receiving device for more information.',
+            message: 'Could not save file. Check receiving device for more information.',
           );
   }
 
@@ -786,8 +757,7 @@ class ReceiveController {
 
       // check if valid state
       final currentStatus = receiveSession.status;
-      if (currentStatus != SessionStatus.waiting &&
-          currentStatus != SessionStatus.sending) {
+      if (currentStatus != SessionStatus.waiting && currentStatus != SessionStatus.sending) {
         return await request.respondJson(403, message: 'No permission');
       }
 
@@ -831,9 +801,7 @@ class ReceiveController {
         return await request.respondJson(403, message: 'No permission');
       }
 
-      server.ref
-          .notifier(sendProvider)
-          .cancelSessionByReceiver(sendState.sessionId);
+      server.ref.notifier(sendProvider).cancelSessionByReceiver(sendState.sessionId);
       return await request.respondJson(200);
     }
   }
@@ -857,15 +825,10 @@ class ReceiveController {
         }
 
         final Map<String, dynamic> jsonBody = jsonDecode(body);
-        final List<String> args =
-            (jsonBody['args'] as List?)?.cast<String>() ?? <String>[];
-        final filesAdded = await server.ref
-            .redux(selectedSendingFilesProvider)
-            .dispatchAsyncTakeResult(LoadSelectionFromArgsAction(args));
+        final List<String> args = (jsonBody['args'] as List?)?.cast<String>() ?? <String>[];
+        final filesAdded = await server.ref.redux(selectedSendingFilesProvider).dispatchAsyncTakeResult(LoadSelectionFromArgsAction(args));
         if (filesAdded) {
-          server.ref
-              .redux(homePageControllerProvider)
-              .dispatch(ChangeTabAction(HomeTab.send));
+          server.ref.redux(homePageControllerProvider).dispatch(ChangeTabAction(HomeTab.send));
         }
       });
 

@@ -115,8 +115,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                       .notifier(apkSearchParamProvider)
                       .setState(
                         (old) => old.copyWith(
-                          onlyAppsWithLaunchIntent:
-                              !old.onlyAppsWithLaunchIntent,
+                          onlyAppsWithLaunchIntent: !old.onlyAppsWithLaunchIntent,
                         ),
                       );
                   break;
@@ -153,9 +152,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                   controller: _textController,
                   autofocus: true,
                   onChanged: (s) {
-                    ref
-                        .notifier(apkSearchParamProvider)
-                        .setState((old) => old.copyWith(query: s));
+                    ref.notifier(apkSearchParamProvider).setState((old) => old.copyWith(query: s));
                     setState(() {});
                   },
                   decoration: InputDecoration(
@@ -168,9 +165,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                     suffixIcon: apkParams.query.isNotEmpty
                         ? IconButton(
                             onPressed: () {
-                              ref
-                                  .notifier(apkSearchParamProvider)
-                                  .setState((old) => old.copyWith(query: ''));
+                              ref.notifier(apkSearchParamProvider).setState((old) => old.copyWith(query: ''));
                               _textController.clear();
                             },
                             icon: const Icon(Icons.clear),
@@ -193,8 +188,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                         value: apkParams.selectMultipleApps,
                         onChanged: (bool newValue) {
                           setState(() {
-                            apkParams.selectMultipleApps =
-                                !apkParams.selectMultipleApps;
+                            apkParams.selectMultipleApps = !apkParams.selectMultipleApps;
                           });
                         },
                         activeTrackColor: Theme.of(context).colorScheme.primary,
@@ -226,9 +220,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: InkWell(
-                          onTap: () async => (apkParams.selectMultipleApps)
-                              ? _appSelection(app)
-                              : _pickApp(app),
+                          onTap: () async => (apkParams.selectMultipleApps) ? _appSelection(app) : _pickApp(app),
                           customBorder: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -256,13 +248,11 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                                           apkSizeProvider(app.apkFilePath),
                                         );
                                         final appSizeString = appSize.maybeWhen(
-                                          data: (size) =>
-                                              '${size.asReadableFileSize} • ',
+                                          data: (size) => '${size.asReadableFileSize} • ',
                                           orElse: () => '',
                                         );
                                         return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               '$appSizeString${app.versionName != null ? 'v${app.versionName}' : ''}',
@@ -285,12 +275,8 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                               ),
                               if (apkParams.selectMultipleApps)
                                 Icon(
-                                  _selectedApps.contains(app)
-                                      ? Icons.check_circle
-                                      : Icons.radio_button_unchecked,
-                                  color: _selectedApps.contains(app)
-                                      ? Theme.of(context).iconTheme.color
-                                      : Colors.grey,
+                                  _selectedApps.contains(app) ? Icons.check_circle : Icons.radio_button_unchecked,
+                                  color: _selectedApps.contains(app) ? Theme.of(context).iconTheme.color : Colors.grey,
                                 ),
                             ],
                           ),

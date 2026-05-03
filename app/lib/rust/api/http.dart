@@ -74,10 +74,7 @@ class PrepareUploadResult {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PrepareUploadResult &&
-          runtimeType == other.runtimeType &&
-          statusCode == other.statusCode &&
-          response == other.response;
+      other is PrepareUploadResult && runtimeType == other.runtimeType && statusCode == other.statusCode && response == other.response;
 }
 
 class ResultWithPublicKeyRegisterResponseDto {
@@ -95,26 +92,19 @@ class ResultWithPublicKeyRegisterResponseDto {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ResultWithPublicKeyRegisterResponseDto &&
-          runtimeType == other.runtimeType &&
-          publicKey == other.publicKey &&
-          body == other.body;
+      other is ResultWithPublicKeyRegisterResponseDto && runtimeType == other.runtimeType && publicKey == other.publicKey && body == other.body;
 }
 
 @freezed
-sealed class RsHttpClientError
-    with _$RsHttpClientError
-    implements FrbException {
+sealed class RsHttpClientError with _$RsHttpClientError implements FrbException {
   const RsHttpClientError._();
 
   const factory RsHttpClientError.statusCode({
     required int status,
     String? message,
   }) = RsHttpClientError_StatusCode;
-  const factory RsHttpClientError.reqwest(String field0) =
-      RsHttpClientError_Reqwest;
+  const factory RsHttpClientError.reqwest(String field0) = RsHttpClientError_Reqwest;
   const factory RsHttpClientError.json(String field0) = RsHttpClientError_Json;
   const factory RsHttpClientError.io(String field0) = RsHttpClientError_Io;
-  const factory RsHttpClientError.other(String field0) =
-      RsHttpClientError_Other;
+  const factory RsHttpClientError.other(String field0) = RsHttpClientError_Other;
 }

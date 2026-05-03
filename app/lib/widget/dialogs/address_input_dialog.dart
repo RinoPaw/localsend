@@ -115,9 +115,7 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
     }
 
     if (foundDevice != null) {
-      ref
-          .redux(lastDevicesProvider)
-          .dispatch(AddLastDeviceAction(foundDevice!));
+      ref.redux(lastDevicesProvider).dispatch(AddLastDeviceAction(foundDevice!));
       context.pop(foundDevice);
     } else {
       setState(() {
@@ -169,9 +167,7 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
             key: ValueKey('input-$_mode'),
             autofocus: true,
             enabled: !_fetching,
-            keyboardType: _mode == _InputMode.hashtag
-                ? TextInputType.number
-                : TextInputType.text,
+            keyboardType: _mode == _InputMode.hashtag ? TextInputType.number : TextInputType.text,
             decoration: InputDecoration(
               prefixText: _mode == _InputMode.hashtag ? '# ' : 'IP: ',
             ),
@@ -222,9 +218,7 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async =>
-                                    _submit(localIps, settings.port, device.ip),
+                              recognizer: TapGestureRecognizer()..onTap = () async => _submit(localIps, settings.port, device.ip),
                             ),
                           ];
                         })
@@ -274,9 +268,7 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
           child: Text(t.general.cancel),
         ),
         FilledButton(
-          onPressed: _fetching
-              ? null
-              : () async => _submit(localIps, settings.port),
+          onPressed: _fetching ? null : () async => _submit(localIps, settings.port),
           child: Text(t.general.confirm),
         ),
       ],
