@@ -41,27 +41,6 @@ Release 页面：
 
 需要跨网段、NAT 或 WebRTC signaling 时，可以在设置里手动填写自己的 signaling / STUN 服务器。
 
-## 构建
-
-推荐直接用 GitHub Actions：
-
-- `CI`：格式化、分析、测试和版本一致性检查。
-- `Release Windows zip`：构建 Windows 便携 zip，并发布到 GitHub Releases。
-
-本地构建 Windows 版本：
-
-```powershell
-cd app
-flutter pub get
-flutter build windows
-```
-
-便携模式：
-
-```powershell
-New-Item build/windows/x64/runner/Release/settings.json -ItemType File
-```
-
 ## 上游关系
 
 这个仓库只是个人 fork。协议、应用主体和绝大部分代码仍来自 LocalSend 上游项目。
