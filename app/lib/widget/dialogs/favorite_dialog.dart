@@ -40,13 +40,18 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
           .read(httpProvider)
           .v2
           .register(
-        protocol: https ? ProtocolType.https : ProtocolType.http,
-        ip: favorite.ip,
-        port: favorite.port,
-        payload: payload,
-      );
+            protocol: https ? ProtocolType.https : ProtocolType.http,
+            ip: favorite.ip,
+            port: favorite.port,
+            payload: payload,
+          );
 
-      final device = response.body.toDevice(favorite.ip, favorite.port, https, HttpDiscovery(ip: favorite.ip));
+      final device = response.body.toDevice(
+        favorite.ip,
+        favorite.port,
+        https,
+        HttpDiscovery(ip: favorite.ip),
+      );
 
       if (mounted) {
         context.pop(device);
@@ -86,8 +91,12 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
               children: [
                 Expanded(
                   child: TextButton(
-                    style: TextButton.styleFrom(foregroundColor: Theme.of(context).colorScheme.onSurface),
-                    onPressed: _fetching ? null : () async => await _checkConnectionToDevice(favorite),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    onPressed: _fetching
+                        ? null
+                        : () async => await _checkConnectionToDevice(favorite),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text('${favorite.alias}\n(${favorite.ip})'),
@@ -95,8 +104,12 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
                   ),
                 ),
                 TextButton(
-                  style: TextButton.styleFrom(foregroundColor: Theme.of(context).colorScheme.onSurface),
-                  onPressed: _fetching ? null : () async => await _showDeviceDialog(favorite),
+                  style: TextButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.onSurface,
+                  ),
+                  onPressed: _fetching
+                      ? null
+                      : () async => await _showDeviceDialog(favorite),
                   child: const Icon(Icons.edit),
                 ),
               ],
@@ -106,7 +119,12 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
               padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
-                  Text(t.general.error, style: TextStyle(color: Theme.of(context).colorScheme.warning)),
+                  Text(
+                    t.general.error,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.warning,
+                    ),
+                  ),
                   if (_error != null) ...[
                     const SizedBox(width: 5),
                     InkWell(
@@ -118,7 +136,11 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Icon(Icons.info, color: Theme.of(context).colorScheme.warning, size: 20),
+                        child: Icon(
+                          Icons.info,
+                          color: Theme.of(context).colorScheme.warning,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ],
