@@ -240,10 +240,10 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
     } else {
       try {
         fileMap = response.response!.files;
-        final sessionId = response.response!.sessionId;
+        final remoteSessionId = response.response!.sessionId;
         state = state.updateSession(
           sessionId: sessionId,
-          state: (s) => s?.copyWith(remoteSessionId: sessionId),
+          state: (s) => s?.copyWith(remoteSessionId: remoteSessionId),
         );
       } catch (e) {
         state = state.updateSession(
