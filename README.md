@@ -44,6 +44,29 @@ Windows 解压后运行 `localsend_app.exe`。压缩包内带有空的 `settings
 
 需要跨网段、NAT 或 WebRTC signaling 时，可以在设置里填写自己的 signaling / STUN 服务器。
 
+## 项目架构
+
+这个仓库的主体是 Flutter 客户端，Dart 负责界面、状态和业务流程，Rust 负责部分底层网络和加密能力。
+
+- `app/`：主应用。`app/lib/main.dart` 启动 Flutter，`app/lib/config/` 做初始化、主题和运行时配置。
+- `app/lib/pages/` 和 `app/lib/widget/`：界面层，包括首页、发送、接收、设置、调试页和可复用组件。
+- `app/lib/model/`：应用状态和数据结构，旁边的 `*.mapper.dart` 多数是代码生成结果。
+- `app/lib/provider/`：主要业务逻辑和状态管理，使用 Refena。设置、历史记录、进度、设备信息和网络流程都在这里。
+- `app/lib/provider/network/`：局域网发现、发送、接收和可选 WebRTC signaling。排查“为什么发现不到设备”“为什么出现自己”“为什么连接公网”时优先看这里。
+- `app/rust/`：Rust 原生层源码，通过 `flutter_rust_bridge` 暴露给 Dart；`app/lib/rust/` 是对应的 Dart 绑定和生成文件。
+- `app/android/`、`app/windows/`、`app/linux/`、`app/macos/`、`app/ios/`、`app/web/`：各平台工程和平台专用配置。
+- `common/`：App 和命令行工具共用的 Dart 代码。
+- `cli/`、`server/`：命令行和服务端相关代码，不是日常 Windows / Android 构建的主要入口。
+- `.github/workflows/`：CI 和发布流程。当前主要用来检查代码、构建 Windows zip、构建 Android APK。
+
+核心传输流程可以粗略理解为：
+
+1. 应用启动后，`preInit()` 初始化设置、存储、网络和 Refena 容器。
+2. `nearby_devices_provider` / `scan_facade` 负责发现附近设备。
+3. `server_provider` 启动本机 HTTP 服务，接收端 controller 管理接收 session。
+4. `send_provider` 根据目标设备和文件列表发起传输，进度写入 `progress_provider`。
+5. WebRTC / signaling 只在用户配置相关服务器时参与，默认局域网发送不依赖公共 signaling 或 STUN。
+
 ## 说明
 
 LocalSend 是开源项目。本仓库保留原许可证，许可证见 [LICENSE](LICENSE)。
