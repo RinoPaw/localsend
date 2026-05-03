@@ -43,13 +43,52 @@ jobs:
         working-directory: ${{ env.APK_BUILD_DIR }}
         env:
           ENCODED_STRING: ${{ secrets.ANDROID_KEY_PROPERTIES }}
-        run: echo $ENCODED_STRING | base64 -di > app/android/key.properties
+        run: |
+          if [ -z "$ENCODED_STRING" ]; then
+            echo "ANDROID_KEY_PROPERTIES secret is missing" >&2
+            exit 1
+          fi
+          printf '%s' "$ENCODED_STRING" | base64 -d > app/android/key.properties
+          sed -i 's/\r$//' app/android/key.properties
 
       - name: Decode android-keystore.jks file
         working-directory: ${{ env.APK_BUILD_DIR }}
         env:
           ENCODED_STRING: ${{ secrets.ANDROID_KEY_STORE }}
-        run: mkdir secrets && echo $ENCODED_STRING | base64 -di > secrets/android-keystore.jks
+        run: |
+          if [ -z "$ENCODED_STRING" ]; then
+            echo "ANDROID_KEY_STORE secret is missing" >&2
+            exit 1
+          fi
+          printf '%s' "$ENCODED_STRING" | base64 -d > app/android/app/android-keystore.jks
+
+      - name: Validate Android signing
+        working-directory: ${{ env.APK_BUILD_DIR }}
+        run: |
+          set -eu
+          STORE_FILE=$(sed -n 's/^storeFile=//p' app/android/key.properties)
+          STORE_PASSWORD=$(sed -n 's/^storePassword=//p' app/android/key.properties)
+          KEY_ALIAS=$(sed -n 's/^keyAlias=//p' app/android/key.properties)
+          STORE_TYPE=$(sed -n 's/^storeType=//p' app/android/key.properties)
+          STORE_PATH="app/android/app/$STORE_FILE"
+          test -n "$STORE_FILE"
+          test -n "$STORE_PASSWORD"
+          test -n "$KEY_ALIAS"
+          if [ ! -f "$STORE_PATH" ]; then
+            echo "Keystore file not found: $STORE_PATH" >&2
+            exit 1
+          fi
+          if [ -n "$STORE_TYPE" ]; then
+            if ! keytool -list -keystore "$STORE_PATH" -storepass "$STORE_PASSWORD" -storetype "$STORE_TYPE" -alias "$KEY_ALIAS" > /dev/null; then
+              keytool -list -keystore "$STORE_PATH" -storepass "$STORE_PASSWORD" -storetype "$STORE_TYPE"
+              exit 1
+            fi
+          else
+            if ! keytool -list -keystore "$STORE_PATH" -storepass "$STORE_PASSWORD" -alias "$KEY_ALIAS" > /dev/null; then
+              keytool -list -keystore "$STORE_PATH" -storepass "$STORE_PASSWORD"
+              exit 1
+            fi
+          fi
 
       - name: Set up JDK 17
         uses: actions/setup-java@v5
