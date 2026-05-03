@@ -115,15 +115,12 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  if (_stateEnum == _ServerState.initializing ||
-                      _stateEnum == _ServerState.stopping) ...[
+                  if (_stateEnum == _ServerState.initializing || _stateEnum == _ServerState.stopping) ...[
                     const CircularProgressIndicator(),
                     const SizedBox(height: 20),
                     Center(
                       child: Text(
-                        _stateEnum == _ServerState.initializing
-                            ? t.webSharePage.loading
-                            : t.webSharePage.stopping,
+                        _stateEnum == _ServerState.initializing ? t.webSharePage.loading : t.webSharePage.stopping,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
@@ -172,11 +169,9 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ...networkState.localIps.map((ip) {
-                          final url =
-                              '${_encrypted ? 'https' : 'http'}://$ip:${serverState.port}';
+                          final url = '${_encrypted ? 'https' : 'http'}://$ip:${serverState.port}';
                           final urlWithPin = switch (webSendState.pin) {
-                            String() =>
-                              '$url/?pin=${Uri.encodeQueryComponent(webSendState.pin!)}',
+                            String() => '$url/?pin=${Uri.encodeQueryComponent(webSendState.pin!)}',
                             null => url,
                           };
                           return Padding(
@@ -193,8 +188,7 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                                     await Clipboard.setData(
                                       ClipboardData(text: url),
                                     );
-                                    if (context.mounted &&
-                                        checkPlatformIsDesktop()) {
+                                    if (context.mounted && checkPlatformIsDesktop()) {
                                       context.showSnackBar(
                                         t.general.copiedToClipboard,
                                       );
@@ -281,24 +275,18 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                                 children: [
                                   Text(
                                     session.deviceInfo,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          color: session.responseHandler != null
-                                              ? Theme.of(
-                                                  context,
-                                                ).colorScheme.warning
-                                              : null,
-                                        ),
+                                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: session.responseHandler != null
+                                          ? Theme.of(
+                                              context,
+                                            ).colorScheme.warning
+                                          : null,
+                                    ),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
                                     session.ip,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(color: Colors.grey),
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.grey),
                                   ),
                                 ],
                               ),
@@ -306,9 +294,7 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                             if (session.responseHandler != null) ...[
                               TextButton(
                                 onPressed: () {
-                                  ref
-                                      .notifier(serverProvider)
-                                      .declineWebSendRequest(session.sessionId);
+                                  ref.notifier(serverProvider).declineWebSendRequest(session.sessionId);
                                 },
                                 style: TextButton.styleFrom(
                                   foregroundColor: Theme.of(
@@ -319,9 +305,7 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  ref
-                                      .notifier(serverProvider)
-                                      .acceptWebSendRequest(session.sessionId);
+                                  ref.notifier(serverProvider).acceptWebSendRequest(session.sessionId);
                                 },
                                 style: TextButton.styleFrom(
                                   foregroundColor: Theme.of(
@@ -337,12 +321,11 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                                 ),
                                 child: Text(
                                   t.general.accepted,
-                                  style: Theme.of(context).textTheme.bodyMedium!
-                                      .copyWith(
-                                        color: Theme.of(
-                                          context,
-                                        ).colorScheme.onSecondaryContainer,
-                                      ),
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSecondaryContainer,
+                                  ),
                                 ),
                               ),
                           ],
@@ -385,9 +368,7 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
                     Checkbox(
                       value: webSendState.autoAccept,
                       onChanged: (value) {
-                        ref
-                            .notifier(serverProvider)
-                            .setWebSendAutoAccept(value == true);
+                        ref.notifier(serverProvider).setWebSendAutoAccept(value == true);
                       },
                     ),
                   ],

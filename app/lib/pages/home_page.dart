@@ -58,9 +58,7 @@ class _HomePageState extends State<HomePage> with Refena {
     super.initState();
 
     ensureRef((ref) async {
-      ref
-          .redux(homePageControllerProvider)
-          .dispatch(ChangeTabAction(widget.initialTab));
+      ref.redux(homePageControllerProvider).dispatch(ChangeTabAction(widget.initialTab));
       await postInit(context, ref, widget.appStart);
     });
   }
@@ -82,12 +80,9 @@ class _HomePageState extends State<HomePage> with Refena {
         });
       },
       onDragDone: (event) async {
-        if (event.files.length == 1 &&
-            Directory(event.files.first.path).existsSync()) {
+        if (event.files.length == 1 && Directory(event.files.first.path).existsSync()) {
           // user dropped a directory
-          await ref
-              .redux(selectedSendingFilesProvider)
-              .dispatchAsync(AddDirectoryAction(event.files.first.path));
+          await ref.redux(selectedSendingFilesProvider).dispatchAsync(AddDirectoryAction(event.files.first.path));
         } else {
           // user dropped one or more files
           await ref
@@ -111,8 +106,7 @@ class _HomePageState extends State<HomePage> with Refena {
                     children: [
                       NavigationRail(
                         selectedIndex: vm.currentTab.index,
-                        onDestinationSelected: (index) =>
-                            vm.changeTab(HomeTab.values[index]),
+                        onDestinationSelected: (index) => vm.changeTab(HomeTab.values[index]),
                         extended: sizingInformation.isDesktop,
                         backgroundColor: Theme.of(
                           context,
@@ -193,8 +187,7 @@ class _HomePageState extends State<HomePage> with Refena {
             bottomNavigationBar: sizingInformation.isMobile
                 ? NavigationBar(
                     selectedIndex: vm.currentTab.index,
-                    onDestinationSelected: (index) =>
-                        vm.changeTab(HomeTab.values[index]),
+                    onDestinationSelected: (index) => vm.changeTab(HomeTab.values[index]),
                     destinations: HomeTab.values.map((tab) {
                       return NavigationDestination(
                         icon: Icon(tab.icon),

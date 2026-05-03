@@ -11,9 +11,7 @@ final securityProvider = ReduxProvider<SecurityService, StoredSecurityContext>(
     return SecurityService(ref.read(persistenceProvider));
   },
   onChanged: (_, next, ref) {
-    ref
-        .redux(parentIsolateProvider)
-        .dispatch(IsolateSyncSecurityContextAction(securityContext: next));
+    ref.redux(parentIsolateProvider).dispatch(IsolateSyncSecurityContextAction(securityContext: next));
   },
 );
 
@@ -29,8 +27,7 @@ class SecurityService extends ReduxNotifier<StoredSecurityContext> {
 }
 
 /// Generates a new [StoredSecurityContext] and persists it.
-class ResetSecurityContextAction
-    extends AsyncReduxAction<SecurityService, StoredSecurityContext> {
+class ResetSecurityContextAction extends AsyncReduxAction<SecurityService, StoredSecurityContext> {
   @override
   Future<StoredSecurityContext> reduce() async {
     final securityContext = generateSecurityContext();

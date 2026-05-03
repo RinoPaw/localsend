@@ -61,8 +61,7 @@ class InitLocalIpAction extends ReduxAction<LocalIpService, NetworkState> {
   }
 }
 
-class FetchLocalIpAction
-    extends AsyncReduxAction<LocalIpService, NetworkState> {
+class FetchLocalIpAction extends AsyncReduxAction<LocalIpService, NetworkState> {
   @override
   Future<NetworkState> reduce() async {
     return NetworkState(
@@ -87,14 +86,13 @@ Future<List<String>> _getIp({
     _logger.warning('Failed to get wifi IP', e);
   }
 
-  final nativeResult =
-      (await getNetworkInterfaces(whitelist: whitelist, blacklist: blacklist))
-          .map(
-            (interface) => interface.addresses.map((a) => a.address).toList(),
-          )
-          .expand((ip) => ip)
-          .where((ip) => !ip.contains(':')) // ignore IPv6 for now
-          .toList();
+  final nativeResult = (await getNetworkInterfaces(whitelist: whitelist, blacklist: blacklist))
+      .map(
+        (interface) => interface.addresses.map((a) => a.address).toList(),
+      )
+      .expand((ip) => ip)
+      .where((ip) => !ip.contains(':')) // ignore IPv6 for now
+      .toList();
 
   final addresses = rankIpAddresses(nativeResult, ip);
   _logger.info('Network state: $addresses');

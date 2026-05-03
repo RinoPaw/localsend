@@ -16,9 +16,7 @@ class CustomBackButton extends StatelessWidget {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
     return IconButton(
       icon: Icon(
-        isRtl
-            ? Icons.arrow_forward_ios_rounded
-            : Icons.arrow_back_ios_new_rounded,
+        isRtl ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_new_rounded,
         color: color ?? IconTheme.of(context).color,
       ),
       tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -46,8 +44,7 @@ PreferredSizeWidget basicLocalSendAppbar(String title) {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Padding space for macOS traffic lights
-                      if (!kIsWeb && Platform.isMacOS)
-                        const SizedBox(width: 60),
+                      if (!kIsWeb && Platform.isMacOS) const SizedBox(width: 60),
                       // Originally leading Icon
                       CustomBackButton(),
                       // Center Title

@@ -15,9 +15,7 @@ String getRemainingTime({
   required int remainingBytes,
 }) {
   if (bytesPerSeconds == 0) {
-    return remainingBytes == 0
-        ? t.progressPage.remainingTime.seconds(n: 0, ss: '00')
-        : '∞';
+    return remainingBytes == 0 ? t.progressPage.remainingTime.seconds(n: 0, ss: '00') : '∞';
   }
 
   final remainingTimeInSeconds = _getRemainingTime(
@@ -39,8 +37,7 @@ String getRemainingTime({
     );
   } else if (remainingTimeInSeconds < _secondsPerDay) {
     final hours = remainingTimeInSeconds ~/ _secondsPerHour;
-    final minutes =
-        (remainingTimeInSeconds % _secondsPerHour) ~/ _secondsPerMinute;
+    final minutes = (remainingTimeInSeconds % _secondsPerHour) ~/ _secondsPerMinute;
     return t.progressPage.remainingTime.hours(h: hours, m: minutes);
   } else {
     final days = remainingTimeInSeconds ~/ _secondsPerDay;

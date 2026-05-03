@@ -73,22 +73,14 @@ ThemeData getTheme(
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: colorScheme.secondaryContainer,
-      border: colorScheme.brightness == Brightness.light
-          ? lightInputBorder
-          : darkInputBorder,
-      focusedBorder: colorScheme.brightness == Brightness.light
-          ? lightInputBorder
-          : darkInputBorder,
-      enabledBorder: colorScheme.brightness == Brightness.light
-          ? lightInputBorder
-          : darkInputBorder,
+      border: colorScheme.brightness == Brightness.light ? lightInputBorder : darkInputBorder,
+      focusedBorder: colorScheme.brightness == Brightness.light ? lightInputBorder : darkInputBorder,
+      enabledBorder: colorScheme.brightness == Brightness.light ? lightInputBorder : darkInputBorder,
       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: colorScheme.brightness == Brightness.dark
-            ? Colors.white
-            : null,
+        foregroundColor: colorScheme.brightness == Brightness.dark ? Colors.white : null,
         padding: EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 8 + desktopPaddingFix,
@@ -118,27 +110,20 @@ Future<void> updateSystemOverlayStyleWithBrightness(
   if (checkPlatform([TargetPlatform.android])) {
     // See https://github.com/flutter/flutter/issues/90098
     final darkMode = brightness == Brightness.dark;
-    final androidSdkInt =
-        RefenaScope.defaultRef.read(deviceInfoProvider).androidSdkInt ?? 0;
+    final androidSdkInt = RefenaScope.defaultRef.read(deviceInfoProvider).androidSdkInt ?? 0;
     final bool edgeToEdge = androidSdkInt >= 29;
 
-    SystemChrome.setEnabledSystemUIMode(
+    await SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.edgeToEdge,
-    ); // ignore: unawaited_futures
+    );
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
-        statusBarIconBrightness: brightness == Brightness.light
-            ? Brightness.dark
-            : Brightness.light,
-        systemNavigationBarColor: edgeToEdge
-            ? Colors.transparent
-            : (darkMode ? Colors.black : Colors.white),
+        statusBarIconBrightness: brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        systemNavigationBarColor: edgeToEdge ? Colors.transparent : (darkMode ? Colors.black : Colors.white),
         systemNavigationBarContrastEnforced: false,
-        systemNavigationBarIconBrightness: darkMode
-            ? Brightness.light
-            : Brightness.dark,
+        systemNavigationBarIconBrightness: darkMode ? Brightness.light : Brightness.dark,
       ),
     );
   } else {
@@ -191,10 +176,7 @@ ColorScheme _determineColorScheme(
   );
 
   final colorScheme = switch (mode) {
-    ColorMode.system =>
-      brightness == Brightness.light
-          ? dynamicColors?.light
-          : dynamicColors?.dark,
+    ColorMode.system => brightness == Brightness.light ? dynamicColors?.light : dynamicColors?.dark,
     ColorMode.localsend => null,
     ColorMode.oled => (dynamicColors?.dark ?? defaultColorScheme).copyWith(
       surface: Colors.black,
@@ -206,9 +188,7 @@ ColorScheme _determineColorScheme(
 }
 
 ThemeData _getYaruTheme(Brightness brightness) {
-  final baseTheme = brightness == Brightness.light
-      ? yaru.yaruLight
-      : yaru.yaruDark;
+  final baseTheme = brightness == Brightness.light ? yaru.yaruLight : yaru.yaruDark;
   final colorScheme = baseTheme.colorScheme;
 
   final lightInputBorder = OutlineInputBorder(
@@ -234,32 +214,20 @@ ThemeData _getYaruTheme(Brightness brightness) {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: colorScheme.secondaryContainer,
-      border: colorScheme.brightness == Brightness.light
-          ? lightInputBorder
-          : darkInputBorder,
-      focusedBorder: colorScheme.brightness == Brightness.light
-          ? lightInputBorder
-          : darkInputBorder,
-      enabledBorder: colorScheme.brightness == Brightness.light
-          ? lightInputBorder
-          : darkInputBorder,
+      border: colorScheme.brightness == Brightness.light ? lightInputBorder : darkInputBorder,
+      focusedBorder: colorScheme.brightness == Brightness.light ? lightInputBorder : darkInputBorder,
+      enabledBorder: colorScheme.brightness == Brightness.light ? lightInputBorder : darkInputBorder,
       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: colorScheme.brightness == Brightness.dark
-            ? Colors.white
-            : null,
-        padding: checkPlatformIsDesktop()
-            ? const EdgeInsets.all(16)
-            : const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        foregroundColor: colorScheme.brightness == Brightness.dark ? Colors.white : null,
+        padding: checkPlatformIsDesktop() ? const EdgeInsets.all(16) : const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        padding: checkPlatformIsDesktop()
-            ? const EdgeInsets.all(16)
-            : const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: checkPlatformIsDesktop() ? const EdgeInsets.all(16) : const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
     ),
   );

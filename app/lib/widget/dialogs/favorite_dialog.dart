@@ -94,9 +94,7 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
                     style: TextButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.onSurface,
                     ),
-                    onPressed: _fetching
-                        ? null
-                        : () async => await _checkConnectionToDevice(favorite),
+                    onPressed: _fetching ? null : () async => await _checkConnectionToDevice(favorite),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text('${favorite.alias}\n(${favorite.ip})'),
@@ -107,9 +105,7 @@ class _FavoritesDialogState extends State<FavoritesDialog> with Refena {
                   style: TextButton.styleFrom(
                     foregroundColor: Theme.of(context).colorScheme.onSurface,
                   ),
-                  onPressed: _fetching
-                      ? null
-                      : () async => await _showDeviceDialog(favorite),
+                  onPressed: _fetching ? null : () async => await _showDeviceDialog(favorite),
                   child: const Icon(Icons.edit),
                 ),
               ],

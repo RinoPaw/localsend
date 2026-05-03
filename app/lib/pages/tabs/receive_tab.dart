@@ -61,10 +61,7 @@ class ReceiveTab extends StatelessWidget {
                               );
                               return RotatingWidget(
                                 duration: const Duration(seconds: 15),
-                                spinning:
-                                    vm.serverState != null &&
-                                    animations &&
-                                    activeTab == HomeTab.receive,
+                                spinning: vm.serverState != null && animations && activeTab == HomeTab.receive,
                                 child: const LocalSendLogo(withText: false),
                               );
                             },
@@ -81,12 +78,7 @@ class ReceiveTab extends StatelessWidget {
                           duration: const Duration(milliseconds: 300),
                           delay: const Duration(milliseconds: 500),
                           child: Text(
-                            vm.serverState == null
-                                ? t.general.offline
-                                : vm.localIps
-                                      .map((ip) => '#${ip.visualId}')
-                                      .toSet()
-                                      .join(' '),
+                            vm.serverState == null ? t.general.offline : vm.localIps.map((ip) => '#${ip.visualId}').toSet().join(' '),
                             style: const TextStyle(fontSize: 24),
                             textAlign: TextAlign.center,
                           ),
@@ -137,11 +129,8 @@ class ReceiveTab extends StatelessWidget {
                               }
                             },
                             selected: {
-                              if (!vm.quickSaveSettings &&
-                                  !vm.quickSaveFromFavoritesSettings)
-                                _QuickSaveMode.off,
-                              if (vm.quickSaveFromFavoritesSettings)
-                                _QuickSaveMode.favorites,
+                              if (!vm.quickSaveSettings && !vm.quickSaveFromFavoritesSettings) _QuickSaveMode.off,
+                              if (vm.quickSaveFromFavoritesSettings) _QuickSaveMode.favorites,
                               if (vm.quickSaveSettings) _QuickSaveMode.on,
                             },
                             segments: [
@@ -238,9 +227,7 @@ class _InfoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
-      crossFadeState: vm.showAdvanced
-          ? CrossFadeState.showSecond
-          : CrossFadeState.showFirst,
+      crossFadeState: vm.showAdvanced ? CrossFadeState.showSecond : CrossFadeState.showFirst,
       duration: const Duration(milliseconds: 200),
       firstChild: Container(),
       secondChild: Align(

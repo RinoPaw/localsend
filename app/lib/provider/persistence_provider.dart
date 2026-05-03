@@ -131,10 +131,7 @@ class PersistenceService {
     }
 
     final bool isFirstAppStart;
-    final existingVersion =
-        (await SharedPreferencesStorePlatform.instance
-                .getAll())['flutter.$_version']
-            as int?;
+    final existingVersion = (await SharedPreferencesStorePlatform.instance.getAll())['flutter.$_version'] as int?;
     _logger.info('Existing version: $existingVersion');
     if (existingVersion == null && !usingLegacyStore) {
       isFirstAppStart = true;
@@ -203,9 +200,7 @@ class PersistenceService {
       await _initColorSetting(prefs, supportsDynamicColors);
     } else {
       // fix when device does not support dynamic colors
-      final supported = supportsDynamicColors
-          ? ColorMode.values
-          : ColorMode.values.where((e) => e != ColorMode.system);
+      final supported = supportsDynamicColors ? ColorMode.values : ColorMode.values.where((e) => e != ColorMode.system);
       final colorMode = supported.firstWhereOrNull(
         (color) => color.name == prefs.getString(_colorKey),
       );
@@ -235,9 +230,7 @@ class PersistenceService {
   ) async {
     await prefs.setString(
       _colorKey,
-      checkPlatform([TargetPlatform.android]) && supportsDynamicColors
-          ? ColorMode.system.name
-          : ColorMode.localsend.name,
+      checkPlatform([TargetPlatform.android]) && supportsDynamicColors ? ColorMode.system.name : ColorMode.localsend.name,
     );
   }
 
@@ -282,29 +275,21 @@ class PersistenceService {
 
   List<ReceiveHistoryEntry> getReceiveHistory() {
     final historyRaw = _prefs.getStringList(_receiveHistory) ?? [];
-    return historyRaw
-        .map((entry) => ReceiveHistoryEntry.fromJson(jsonDecode(entry)))
-        .toList();
+    return historyRaw.map((entry) => ReceiveHistoryEntry.fromJson(jsonDecode(entry))).toList();
   }
 
   Future<void> setReceiveHistory(List<ReceiveHistoryEntry> entries) async {
-    final historyRaw = entries
-        .map((entry) => jsonEncode(entry.toJson()))
-        .toList();
+    final historyRaw = entries.map((entry) => jsonEncode(entry.toJson())).toList();
     await _prefs.setStringList(_receiveHistory, historyRaw);
   }
 
   List<FavoriteDevice> getFavorites() {
     final favoritesRaw = _prefs.getStringList(_favorites) ?? [];
-    return favoritesRaw
-        .map((entry) => FavoriteDevice.fromJson(jsonDecode(entry)))
-        .toList();
+    return favoritesRaw.map((entry) => FavoriteDevice.fromJson(jsonDecode(entry))).toList();
   }
 
   Future<void> setFavorites(List<FavoriteDevice> entries) async {
-    final favoritesRaw = entries
-        .map((entry) => jsonEncode(entry.toJson()))
-        .toList();
+    final favoritesRaw = entries.map((entry) => jsonEncode(entry.toJson())).toList();
     await _prefs.setStringList(_favorites, favoritesRaw);
   }
 
@@ -325,8 +310,7 @@ class PersistenceService {
     if (value == null) {
       return ThemeMode.system;
     }
-    return ThemeMode.values.firstWhereOrNull((theme) => theme.name == value) ??
-        ThemeMode.system;
+    return ThemeMode.values.firstWhereOrNull((theme) => theme.name == value) ?? ThemeMode.system;
   }
 
   Future<void> setTheme(ThemeMode theme) async {
@@ -338,8 +322,7 @@ class PersistenceService {
     if (value == null) {
       return ColorMode.system;
     }
-    return ColorMode.values.firstWhereOrNull((color) => color.name == value) ??
-        ColorMode.system;
+    return ColorMode.values.firstWhereOrNull((color) => color.name == value) ?? ColorMode.system;
   }
 
   Future<void> setColorMode(ColorMode color) async {

@@ -22,9 +22,7 @@ Future<PickDirectoryResult?> pickDirectoryAndroid() async {
 
   return PickDirectoryResultMapper.fromJson({
     'directoryUri': result['directoryUri'],
-    'files': (result['files'] as List)
-        .map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>()))
-        .toList(),
+    'files': (result['files'] as List).map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>())).toList(),
   });
 }
 
@@ -39,9 +37,7 @@ Future<List<FileInfo>?> pickFilesAndroid() async {
     return null;
   }
 
-  return result
-      .map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>()))
-      .toList();
+  return result.map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>())).toList();
 }
 
 Future<bool> getSystemAnimationsStatusAndroid() async {

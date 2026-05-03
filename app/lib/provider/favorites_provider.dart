@@ -20,8 +20,7 @@ class FavoritesService extends ReduxNotifier<List<FavoriteDevice>> {
 }
 
 /// Adds a favorite device.
-class AddFavoriteAction
-    extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
+class AddFavoriteAction extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
   final FavoriteDevice device;
 
   AddFavoriteAction(this.device);
@@ -35,8 +34,7 @@ class AddFavoriteAction
 }
 
 /// Updates a favorite device.
-class UpdateFavoriteAction
-    extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
+class UpdateFavoriteAction extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
   final FavoriteDevice device;
 
   UpdateFavoriteAction(this.device);
@@ -58,8 +56,7 @@ class UpdateFavoriteAction
 }
 
 /// Removes a favorite device.
-class RemoveFavoriteAction
-    extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
+class RemoveFavoriteAction extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
   final String deviceFingerprint;
 
   RemoveFavoriteAction({required this.deviceFingerprint});

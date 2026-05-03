@@ -45,13 +45,10 @@ class DebugPage extends StatelessWidget {
             value: Platform.resolvedExecutable,
           ),
           DebugEntry(name: 'Working Directory', value: Directory.current.path),
-          if (store is SharedPreferencesFile)
-            DebugEntry(name: 'Settings Path', value: store.getPath()),
+          if (store is SharedPreferencesFile) DebugEntry(name: 'Settings Path', value: store.getPath()),
           DebugEntry(
             name: 'App Arguments',
-            value: appArguments.isEmpty
-                ? null
-                : appArguments.map((e) => '"$e"').join(' '),
+            value: appArguments.isEmpty ? null : appArguments.map((e) => '"$e"').join(' '),
           ),
           DebugEntry(name: 'Dart SDK', value: Platform.version),
           const SizedBox(height: 20),
@@ -62,13 +59,11 @@ class DebugPage extends StatelessWidget {
             runSpacing: 10,
             children: [
               FilledButton(
-                onPressed: () async =>
-                    context.push(() => const SecurityDebugPage()),
+                onPressed: () async => context.push(() => const SecurityDebugPage()),
                 child: const Text('Security'),
               ),
               FilledButton(
-                onPressed: () async =>
-                    context.push(() => const DiscoveryDebugPage()),
+                onPressed: () async => context.push(() => const DiscoveryDebugPage()),
                 child: const Text('Discovery'),
               ),
               FilledButton(
@@ -77,13 +72,11 @@ class DebugPage extends StatelessWidget {
               ),
               if (kDebugMode)
                 FilledButton(
-                  onPressed: () async =>
-                      context.push(() => const RefenaTracingPage()),
+                  onPressed: () async => context.push(() => const RefenaTracingPage()),
                   child: const Text('Refena Tracing'),
                 ),
               FilledButton(
-                onPressed: () async =>
-                    await context.ref.read(persistenceProvider).clear(),
+                onPressed: () async => await context.ref.read(persistenceProvider).clear(),
                 child: const Text('Clear settings'),
               ),
             ],

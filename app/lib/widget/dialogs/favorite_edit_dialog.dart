@@ -36,16 +36,12 @@ class _FavoriteEditDialogState extends State<FavoriteEditDialog> with Refena {
   void initState() {
     super.initState();
 
-    _ipController.text =
-        widget.prefilledDevice?.ip ?? widget.favorite?.ip ?? '';
-    _aliasController.text =
-        widget.prefilledDevice?.alias ?? widget.favorite?.alias ?? '';
+    _ipController.text = widget.prefilledDevice?.ip ?? widget.favorite?.ip ?? '';
+    _aliasController.text = widget.prefilledDevice?.alias ?? widget.favorite?.alias ?? '';
 
     ensureRef((ref) {
       _portController.text =
-          widget.prefilledDevice?.port.toString() ??
-          widget.favorite?.port.toString() ??
-          ref.read(settingsProvider).port.toString();
+          widget.prefilledDevice?.port.toString() ?? widget.favorite?.port.toString() ?? ref.read(settingsProvider).port.toString();
     });
   }
 
@@ -61,9 +57,7 @@ class _FavoriteEditDialogState extends State<FavoriteEditDialog> with Refena {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        widget.favorite != null
-            ? t.dialogs.favoriteEditDialog.titleEdit
-            : t.dialogs.favoriteEditDialog.titleAdd,
+        widget.favorite != null ? t.dialogs.favoriteEditDialog.titleEdit : t.dialogs.favoriteEditDialog.titleAdd,
       ),
       content: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -85,8 +79,7 @@ class _FavoriteEditDialogState extends State<FavoriteEditDialog> with Refena {
             const SizedBox(height: 5),
             TextFormField(
               controller: _ipController,
-              autofocus:
-                  widget.favorite == null && widget.prefilledDevice == null,
+              autofocus: widget.favorite == null && widget.prefilledDevice == null,
               enabled: !_fetching,
             ),
             const SizedBox(height: 16),
@@ -195,9 +188,7 @@ class _FavoriteEditDialogState extends State<FavoriteEditDialog> with Refena {
                               ip: _ipController.text,
                               port: int.parse(_portController.text),
                               alias: trimmedNewAlias,
-                              customAlias:
-                                  existingFavorite.customAlias ||
-                                  trimmedNewAlias != existingFavorite.alias,
+                              customAlias: existingFavorite.customAlias || trimmedNewAlias != existingFavorite.alias,
                             ),
                           ),
                         );
@@ -211,16 +202,12 @@ class _FavoriteEditDialogState extends State<FavoriteEditDialog> with Refena {
                     });
 
                     try {
-                      final payload = ref
-                          .read(deviceFullInfoProvider)
-                          .toRegisterDto();
+                      final payload = ref.read(deviceFullInfoProvider).toRegisterDto();
                       final response = await ref
                           .read(httpProvider)
                           .v2
                           .register(
-                            protocol: https
-                                ? ProtocolType.https
-                                : ProtocolType.http,
+                            protocol: https ? ProtocolType.https : ProtocolType.http,
                             ip: ip,
                             port: port,
                             payload: payload,
@@ -236,9 +223,7 @@ class _FavoriteEditDialogState extends State<FavoriteEditDialog> with Refena {
                                 fingerprint: response.body.token,
                                 ip: _ipController.text,
                                 port: int.parse(_portController.text),
-                                alias: name.isEmpty
-                                    ? response.body.alias
-                                    : name,
+                                alias: name.isEmpty ? response.body.alias : name,
                               ),
                             ),
                           );

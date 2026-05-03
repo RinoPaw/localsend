@@ -24,9 +24,7 @@ class DiscoveryDebugPage extends StatelessWidget {
           Row(
             children: [
               ElevatedButton(
-                onPressed: () => ref
-                    .redux(nearbyDevicesProvider)
-                    .dispatch(StartMulticastScan()),
+                onPressed: () => ref.redux(nearbyDevicesProvider).dispatch(StartMulticastScan()),
                 child: const Text('Announce'),
               ),
               const SizedBox(width: 20),

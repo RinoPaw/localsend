@@ -6,8 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:localsend_app/model/cross_file.dart';
 import 'package:localsend_app/util/file_path_helper.dart';
-import 'package:localsend_app/util/native/channel/android_channel.dart'
-    as android_channel;
+import 'package:localsend_app/util/native/channel/android_channel.dart' as android_channel;
 import 'package:share_handler/share_handler.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
@@ -36,9 +35,7 @@ class CrossFileConverters {
       thumbnail: null,
       asset: null,
       path: kIsWeb ? null : file.path,
-      bytes: kIsWeb
-          ? await file.readAsBytes()
-          : null, // we can fetch it now because in Web it is already there
+      bytes: kIsWeb ? await file.readAsBytes() : null, // we can fetch it now because in Web it is already there
       lastModified: kIsWeb ? null : await file.lastModified(),
       lastAccessed: null,
     );

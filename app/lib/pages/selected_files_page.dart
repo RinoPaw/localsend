@@ -45,9 +45,7 @@ class SelectedFilesPage extends StatelessWidget {
                         ),
                         Text(
                           t.sendTab.selection.size(
-                            size: selectedFiles
-                                .fold(0, (prev, curr) => prev + curr.size)
-                                .asReadableFileSize,
+                            size: selectedFiles.fold(0, (prev, curr) => prev + curr.size).asReadableFileSize,
                           ),
                         ),
                       ],
@@ -55,9 +53,7 @@ class SelectedFilesPage extends StatelessWidget {
                   ),
                   FilledButton(
                     onPressed: () {
-                      ref
-                          .redux(selectedSendingFilesProvider)
-                          .dispatch(ClearSelectionAction());
+                      ref.redux(selectedSendingFilesProvider).dispatch(ClearSelectionAction());
                       context.popUntilRoot();
                     },
                     child: Text(t.selectedFilesPage.deleteAll),
@@ -86,10 +82,7 @@ class SelectedFilesPage extends StatelessWidget {
                       splashFactory: NoSplash.splashFactory,
                       highlightColor: Colors.transparent,
                       hoverColor: Colors.transparent,
-                      onTap: file.path != null
-                          ? () async =>
-                                openFile(context, file.fileType, file.path!)
-                          : null,
+                      onTap: file.path != null ? () async => openFile(context, file.fileType, file.path!) : null,
                       child: Card(
                         child: Padding(
                           padding: const EdgeInsets.all(10),
@@ -102,9 +95,7 @@ class SelectedFilesPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      message != null
-                                          ? '"${message.replaceAll('\n', ' ')}"'
-                                          : file.name,
+                                      message != null ? '"${message.replaceAll('\n', ' ')}"' : file.name,
                                       maxLines: 1,
                                       overflow: TextOverflow.fade,
                                       softWrap: false,
@@ -118,8 +109,7 @@ class SelectedFilesPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              if (file.fileType == FileType.text &&
-                                  file.bytes != null)
+                              if (file.fileType == FileType.text && file.bytes != null)
                                 TextButton(
                                   style: TextButton.styleFrom(
                                     foregroundColor: Theme.of(
@@ -153,9 +143,7 @@ class SelectedFilesPage extends StatelessWidget {
                                   ).colorScheme.onSurface,
                                 ),
                                 onPressed: () {
-                                  final currCount = ref
-                                      .read(selectedSendingFilesProvider)
-                                      .length;
+                                  final currCount = ref.read(selectedSendingFilesProvider).length;
                                   ref
                                       .redux(selectedSendingFilesProvider)
                                       .dispatch(

@@ -16,8 +16,7 @@ class LastDevicesService extends ReduxNotifier<List<Device>> {
 }
 
 /// Adds a device to the list of last devices.
-class AddLastDeviceAction
-    extends ReduxAction<LastDevicesService, List<Device>> {
+class AddLastDeviceAction extends ReduxAction<LastDevicesService, List<Device>> {
   final Device device;
 
   AddLastDeviceAction(this.device);

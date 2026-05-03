@@ -40,11 +40,7 @@ StoredSecurityContext generateSecurityContext([AsymmetricKeyPair? keyPair]) {
 /// Calculates the hash of a certificate.
 String calculateHashOfCertificate(String certificate) {
   // Convert PEM to DER
-  final pemContent = certificate
-      .replaceAll('\r\n', '\n')
-      .split('\n')
-      .where((line) => line.isNotEmpty && !line.startsWith('---'))
-      .join();
+  final pemContent = certificate.replaceAll('\r\n', '\n').split('\n').where((line) => line.isNotEmpty && !line.startsWith('---')).join();
   final der = base64Decode(pemContent);
 
   // Calculate hash

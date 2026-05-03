@@ -41,8 +41,7 @@ class WindowDimensionsController {
       await WindowManager.instance.setPosition(persistedDimensions.position);
     } else {
       final primaryDisplay = await ScreenRetriever.instance.getPrimaryDisplay();
-      final hasEnoughWidthForDefaultSize =
-          primaryDisplay.digestedSize.width >= 1200;
+      final hasEnoughWidthForDefaultSize = primaryDisplay.digestedSize.width >= 1200;
       await WindowManager.instance.setSize(
         hasEnoughWidthForDefaultSize ? _defaultSize : _minimalSize,
       );
@@ -61,9 +60,7 @@ class WindowDimensionsController {
     );
     final maxHeight = displays.fold(
       0.0,
-      (previousValue, element) => previousValue > element.digestedSize.height
-          ? previousValue
-          : element.digestedSize.height,
+      (previousValue, element) => previousValue > element.digestedSize.height ? previousValue : element.digestedSize.height,
     );
     final minX = displays.fold(0.0, (previousValue, element) {
       final currX = element.visiblePosition?.dx ?? 0;
@@ -73,12 +70,8 @@ class WindowDimensionsController {
       final currY = element.visiblePosition?.dy ?? 0;
       return currY < previousValue ? currY : previousValue;
     });
-    final checkX =
-        windowPosition.dx >= minX &&
-        windowPosition.dx + (windowSize?.width ?? 0) <= sumWidth;
-    final checkY =
-        windowPosition.dy >= minY &&
-        windowPosition.dy + (windowSize?.height ?? 0) <= maxHeight;
+    final checkX = windowPosition.dx >= minX && windowPosition.dx + (windowSize?.width ?? 0) <= sumWidth;
+    final checkY = windowPosition.dy >= minY && windowPosition.dy + (windowSize?.height ?? 0) <= maxHeight;
 
     return checkX && checkY;
   }

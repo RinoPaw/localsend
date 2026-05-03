@@ -30,9 +30,7 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
     getNetworkInterfaces(whitelist: null, blacklist: null).then((value) {
       if (mounted) {
         setState(() {
-          rawInterfaces = value
-              .map((e) => (e.name, e.addresses.map((a) => a.address).toList()))
-              .toList();
+          rawInterfaces = value.map((e) => (e.name, e.addresses.map((a) => a.address).toList())).toList();
         });
       }
     });
@@ -41,10 +39,8 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch(settingsProvider);
-    final currList =
-        settings.networkWhitelist ?? settings.networkBlacklist ?? [];
-    final Future<void> Function(List<String>?) updateFunction =
-        settings.networkWhitelist != null
+    final currList = settings.networkWhitelist ?? settings.networkBlacklist ?? [];
+    final Future<void> Function(List<String>?) updateFunction = settings.networkWhitelist != null
         ? context.notifier(settingsProvider).setNetworkWhitelist
         : context.notifier(settingsProvider).setNetworkBlacklist;
     return Scaffold(
@@ -119,20 +115,14 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                   value: settings.networkWhitelist != null,
                   onChanged: (value) async {
                     if (value == false) {
-                      await context
-                          .notifier(settingsProvider)
-                          .setNetworkWhitelist(null);
+                      await context.notifier(settingsProvider).setNetworkWhitelist(null);
                     } else {
-                      await context
-                          .notifier(settingsProvider)
-                          .setNetworkWhitelist(switch (currList) {
-                            [] => [''],
-                            _ => [...currList],
-                          });
+                      await context.notifier(settingsProvider).setNetworkWhitelist(switch (currList) {
+                        [] => [''],
+                        _ => [...currList],
+                      });
                       if (context.mounted) {
-                        await context
-                            .notifier(settingsProvider)
-                            .setNetworkBlacklist(null);
+                        await context.notifier(settingsProvider).setNetworkBlacklist(null);
                       }
                     }
                   },
@@ -142,20 +132,14 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                   value: settings.networkBlacklist != null,
                   onChanged: (value) async {
                     if (value == false) {
-                      await context
-                          .notifier(settingsProvider)
-                          .setNetworkBlacklist(null);
+                      await context.notifier(settingsProvider).setNetworkBlacklist(null);
                     } else {
-                      await context
-                          .notifier(settingsProvider)
-                          .setNetworkBlacklist(switch (currList) {
-                            [] => [''],
-                            _ => [...currList],
-                          });
+                      await context.notifier(settingsProvider).setNetworkBlacklist(switch (currList) {
+                        [] => [''],
+                        _ => [...currList],
+                      });
                       if (context.mounted) {
-                        await context
-                            .notifier(settingsProvider)
-                            .setNetworkWhitelist(null);
+                        await context.notifier(settingsProvider).setNetworkWhitelist(null);
                       }
                     }
                   },
@@ -194,8 +178,7 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                 ),
               );
             }),
-            if (settings.networkWhitelist != null ||
-                settings.networkBlacklist != null)
+            if (settings.networkWhitelist != null || settings.networkBlacklist != null)
               LocalHero(
                 tag: 'network_interfaces_bottom',
                 child: Row(

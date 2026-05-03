@@ -46,8 +46,7 @@ class _QuickActionsDialogState extends State<QuickActionsDialog> with Refena {
   bool _isValid = true;
 
   bool _validate(String input) {
-    if (!isValidFilename(input, os: Platform.operatingSystem) &&
-        input.isNotEmpty) {
+    if (!isValidFilename(input, os: Platform.operatingSystem) && input.isNotEmpty) {
       setState(() {
         _isValid = false;
       });
@@ -140,13 +139,9 @@ class _QuickActionsDialogState extends State<QuickActionsDialog> with Refena {
               },
             ),
             const SizedBox(height: 10),
-            if (_padZero)
-              Text('${t.general.example}: ${_prefix}04.jpg')
-            else
-              Text('${t.general.example}: ${_prefix}4.jpg'),
+            if (_padZero) Text('${t.general.example}: ${_prefix}04.jpg') else Text('${t.general.example}: ${_prefix}4.jpg'),
           ],
-          if (_action == _QuickAction.random)
-            Text('${t.general.example}: $_randomUuid.jpg'),
+          if (_action == _QuickAction.random) Text('${t.general.example}: $_randomUuid.jpg'),
         ],
       ),
       actions: [

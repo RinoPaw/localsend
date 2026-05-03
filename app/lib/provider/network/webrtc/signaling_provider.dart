@@ -40,25 +40,19 @@ final signalingProvider = ReduxProvider<SignalingService, SignalingState>((
 class SignalingService extends ReduxNotifier<SignalingState> {
   final PersistenceService _persistence;
 
-  SignalingService({required PersistenceService persistence})
-    : _persistence = persistence;
+  SignalingService({required PersistenceService persistence}) : _persistence = persistence;
 
   @override
   SignalingState init() {
     return SignalingState(
-      signalingServers:
-          _persistence.getSignalingServers() ??
-          ['wss://public.localsend.org/v1/ws'],
-      stunServers:
-          _persistence.getStunServers() ?? ['stun:stun.localsend.org:5349'],
+      signalingServers: _persistence.getSignalingServers() ?? ['wss://public.localsend.org/v1/ws'],
+      stunServers: _persistence.getStunServers() ?? ['stun:stun.localsend.org:5349'],
       connections: {},
     );
   }
 }
 
-class SetupSignalingConnection
-    extends ReduxAction<SignalingService, SignalingState>
-    with GlobalActions {
+class SetupSignalingConnection extends ReduxAction<SignalingService, SignalingState> with GlobalActions {
   @override
   SignalingState reduce() {
     for (final signalingServer in state.signalingServers) {
@@ -133,23 +127,20 @@ class _SetupSignalingConnection extends AsyncGlobalAction {
                 );
             break;
           case WsServerMessage_Left():
-            ref
-                .redux(nearbyDevicesProvider)
-                .dispatch(UnregisterSignalingDeviceAction(message.peerId.uuid));
+            ref.redux(nearbyDevicesProvider).dispatch(UnregisterSignalingDeviceAction(message.peerId.uuid));
             break;
           case WsServerMessage_Offer():
-            final provider =
-                ReduxProvider<WebRTCReceiveService, WebRTCReceiveState>((ref) {
-                  return WebRTCReceiveService(
-                    signalingServer: signalingServer,
-                    stunServers: ref.read(signalingProvider).stunServers,
-                    connection: connection!,
-                    offer: message.field0,
-                    settings: ref.read(settingsProvider),
-                    favorites: ref.read(favoritesProvider),
-                    key: ref.read(securityProvider),
-                  );
-                });
+            final provider = ReduxProvider<WebRTCReceiveService, WebRTCReceiveState>((ref) {
+              return WebRTCReceiveService(
+                signalingServer: signalingServer,
+                stunServers: ref.read(signalingProvider).stunServers,
+                connection: connection!,
+                offer: message.field0,
+                settings: ref.read(settingsProvider),
+                favorites: ref.read(favoritesProvider),
+                key: ref.read(securityProvider),
+              );
+            });
 
             await ref.redux(provider).dispatchAsync(AcceptOfferAction());
             break;
@@ -158,17 +149,14 @@ class _SetupSignalingConnection extends AsyncGlobalAction {
         }
       }
     } finally {
-      ref
-          .redux(signalingProvider)
-          .dispatch(_RemoveConnectionAction(signalingServer: signalingServer));
+      ref.redux(signalingProvider).dispatch(_RemoveConnectionAction(signalingServer: signalingServer));
     }
 
     return state;
   }
 }
 
-class _SetConnectionAction
-    extends ReduxAction<SignalingService, SignalingState> {
+class _SetConnectionAction extends ReduxAction<SignalingService, SignalingState> {
   final String signalingServer;
   final LsSignalingConnection connection;
 
@@ -185,8 +173,7 @@ class _SetConnectionAction
   }
 }
 
-class _RemoveConnectionAction
-    extends ReduxAction<SignalingService, SignalingState> {
+class _RemoveConnectionAction extends ReduxAction<SignalingService, SignalingState> {
   final String signalingServer;
 
   _RemoveConnectionAction({required this.signalingServer});

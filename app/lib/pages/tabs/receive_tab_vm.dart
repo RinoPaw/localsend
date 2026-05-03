@@ -31,8 +31,7 @@ class ReceiveTabVm {
   final bool showHistoryButton;
   final Future<void> Function() toggleAdvanced;
   final Future<void> Function(BuildContext context, bool enable) onSetQuickSave;
-  final Future<void> Function(BuildContext context, bool enable)
-  onSetQuickSaveFromFavorites;
+  final Future<void> Function(BuildContext context, bool enable) onSetQuickSaveFromFavorites;
 
   const ReceiveTabVm({
     required this.aliasSettings,

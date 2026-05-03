@@ -24,20 +24,14 @@ class BigButton extends StatelessWidget {
     final sizingInformation = SizingInformation(
       MediaQuery.sizeOf(context).width,
     );
-    final buttonWidth = sizingInformation.isDesktop
-        ? desktopWidth
-        : mobileWidth;
+    final buttonWidth = sizingInformation.isDesktop ? desktopWidth : mobileWidth;
     return SizedBox(
       width: buttonWidth,
       height: 65.0,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: filled
-              ? colorScheme.primary
-              : colorScheme.secondaryContainerIfDark,
-          foregroundColor: filled
-              ? colorScheme.onPrimary
-              : colorScheme.onSecondaryContainerIfDark,
+          backgroundColor: filled ? colorScheme.primary : colorScheme.secondaryContainerIfDark,
+          foregroundColor: filled ? colorScheme.onPrimary : colorScheme.onSecondaryContainerIfDark,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),

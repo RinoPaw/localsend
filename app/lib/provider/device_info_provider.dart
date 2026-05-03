@@ -27,9 +27,7 @@ final deviceInfoProvider = ViewProvider<DeviceInfoResult>(
     );
   },
   onChanged: (_, next, ref) {
-    ref
-        .redux(parentIsolateProvider)
-        .dispatch(IsolateSyncDeviceInfoAction(deviceInfo: next));
+    ref.redux(parentIsolateProvider).dispatch(IsolateSyncDeviceInfoAction(deviceInfo: next));
   },
 );
 

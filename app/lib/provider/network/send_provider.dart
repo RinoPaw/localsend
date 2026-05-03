@@ -40,10 +40,9 @@ final _logger = Logger('Send');
 ///
 /// In contrast to [serverProvider], this provider does not manage a server.
 /// Instead, it only does HTTP requests to other servers.
-final sendProvider =
-    NotifierProvider<SendNotifier, Map<String, SendSessionState>>((ref) {
-      return SendNotifier();
-    });
+final sendProvider = NotifierProvider<SendNotifier, Map<String, SendSessionState>>((ref) {
+  return SendNotifier();
+});
 
 class SendNotifier extends Notifier<Map<String, SendSessionState>> {
   SendNotifier();
@@ -83,16 +82,12 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
                   size: file.size,
                   fileType: file.fileType,
                   hash: null,
-                  preview:
-                      files.length == 1 &&
-                          files.first.fileType == FileType.text &&
-                          files.first.bytes != null
+                  preview: files.length == 1 && files.first.fileType == FileType.text && files.first.bytes != null
                       ? utf8.decode(
                           files.first.bytes!,
                         ) // send simple message by embedding it into the preview
                       : null,
-                  metadata:
-                      file.lastModified != null || file.lastAccessed != null
+                  metadata: file.lastModified != null || file.lastAccessed != null
                       ? FileMetadata(
                           lastModified: file.lastModified,
                           lastAccessed: file.lastAccessed,
@@ -126,14 +121,11 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
         deviceType: originDevice.deviceType.toRust(),
         token: originDevice.fingerprint,
         port: originDevice.port,
-        protocol: originDevice.https
-            ? rust_model.ProtocolType.https
-            : rust_model.ProtocolType.http,
+        protocol: originDevice.https ? rust_model.ProtocolType.https : rust_model.ProtocolType.http,
         hasWebInterface: originDevice.download,
       ),
       files: {
-        for (final entry in requestState.files.entries)
-          entry.key: entry.value.file.toRust(),
+        for (final entry in requestState.files.entries) entry.key: entry.value.file.toRust(),
       },
     );
 
@@ -179,8 +171,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
             await sleepAsync(500);
 
             pin = await showDialog<String>(
-              context:
-                  Routerino.context, // ignore: use_build_context_synchronously
+              context: Routerino.context, // ignore: use_build_context_synchronously
               builder: (_) => PinDialog(
                 obscureText: true,
                 showInvalidPin: !pinFirstAttempt,
@@ -192,8 +183,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
             if (pin == null) {
               state = state.updateSession(
                 sessionId: sessionId,
-                state: (s) =>
-                    s?.copyWith(status: SessionStatus.canceledBySender),
+                state: (s) => s?.copyWith(status: SessionStatus.canceledBySender),
               );
               return;
             }
@@ -287,14 +277,11 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
 
     final sendingFiles = {
       for (final file in requestState.files.values)
-        file.file.id: fileMap.containsKey(file.file.id)
-            ? file.copyWith(token: fileMap[file.file.id])
-            : file.copyWith(status: FileStatus.skipped),
+        file.file.id: fileMap.containsKey(file.file.id) ? file.copyWith(token: fileMap[file.file.id]) : file.copyWith(status: FileStatus.skipped),
     };
 
     if (state[sessionId]?.background == false) {
-      final background =
-          ref.read(settingsProvider).sendMode == SendMode.multiple;
+      final background = ref.read(settingsProvider).sendMode == SendMode.multiple;
 
       // ignore: use_build_context_synchronously, unawaited_futures
       Routerino.context.pushAndRemoveUntil(
@@ -311,8 +298,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
 
     state = state.updateSession(
       sessionId: sessionId,
-      state: (s) =>
-          s?.copyWith(status: SessionStatus.sending, files: sendingFiles),
+      state: (s) => s?.copyWith(status: SessionStatus.sending, files: sendingFiles),
     );
 
     await _sendLoop(ref, sessionId, target, sendingFiles);
@@ -326,8 +312,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
   ) async {
     state = state.updateSession(
       sessionId: sessionId,
-      state: (s) =>
-          s?.copyWith(startTime: DateTime.now().millisecondsSinceEpoch),
+      state: (s) => s?.copyWith(startTime: DateTime.now().millisecondsSinceEpoch),
     );
 
     final queue = Queue<SendingFile>()..addAll(files.values);
@@ -380,9 +365,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
         state = state.updateSession(
           sessionId: sessionId,
           state: (s) => s?.copyWith(
-            status: hasError
-                ? SessionStatus.finishedWithErrors
-                : SessionStatus.finished,
+            status: hasError ? SessionStatus.finishedWithErrors : SessionStatus.finished,
             endTime: DateTime.now().millisecondsSinceEpoch,
           ),
         );
@@ -489,9 +472,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
       }
 
       // set progress to 100% when successfully finished
-      ref
-          .notifier(progressProvider)
-          .setProgress(sessionId: sessionId, fileId: file.file.id, progress: 1);
+      ref.notifier(progressProvider).setProgress(sessionId: sessionId, fileId: file.file.id, progress: 1);
     } catch (e, st) {
       fileError = e.humanErrorMessage;
       _logger.warning('Error while sending file ${file.file.fileName}', e, st);
@@ -501,9 +482,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
         state: (s) => s?.copyWith(
           sendingTasks: s.sendingTasks
               ?.where(
-                (task) =>
-                    !(task.isolateIndex == isolateIndex &&
-                        task.taskId == taskResult.taskId),
+                (task) => !(task.isolateIndex == isolateIndex && task.taskId == taskResult.taskId),
               )
               .toList(),
         ),
@@ -521,8 +500,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
 
     if (isRetry) {
       final state = this.state[sessionId];
-      if (state != null &&
-          state.files.values.map((e) => e.status).isFinishedOrError) {
+      if (state != null && state.files.values.map((e) => e.status).isFinishedOrError) {
         _finish(sessionId: sessionId);
         return false;
       }
@@ -603,8 +581,7 @@ class SendNotifier extends Notifier<Map<String, SendSessionState>> {
       return;
     }
     state = state.removeSession(ref, sessionId);
-    if (sessionState.status == SessionStatus.finished &&
-        ref.read(settingsProvider).sendMode == SendMode.single) {
+    if (sessionState.status == SessionStatus.finished && ref.read(settingsProvider).sendMode == SendMode.single) {
       // clear selected files
       ref.redux(selectedSendingFilesProvider).dispatch(ClearSelectionAction());
     }

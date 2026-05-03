@@ -96,13 +96,8 @@ class SendController {
       final requestSessionId = request.uri.queryParameters['sessionId'];
       if (requestSessionId != null) {
         // Check if the user already has permission
-        final session = server
-            .getState()
-            .webSendState
-            ?.sessions[requestSessionId];
-        if (session != null &&
-            session.responseHandler == null &&
-            session.ip == request.ip) {
+        final session = server.getState().webSendState?.sessions[requestSessionId];
+        if (session != null && session.responseHandler == null && session.ip == request.ip) {
           final deviceInfo = server.ref.read(deviceInfoProvider);
           return await request.respondJson(
             200,
@@ -117,8 +112,7 @@ class SendController {
               ),
               sessionId: session.sessionId,
               files: {
-                for (final entry in state.webSendState!.files.entries)
-                  entry.key: entry.value.file,
+                for (final entry in state.webSendState!.files.entries) entry.key: entry.value.file,
               },
             ).toJson(),
           );
@@ -153,9 +147,7 @@ class SendController {
         ),
       );
 
-      final accepted =
-          state.webSendState?.autoAccept == true ||
-          await streamController.stream.first;
+      final accepted = state.webSendState?.autoAccept == true || await streamController.stream.first;
       if (!accepted) {
         // user rejected the file transfer
         server.setState(
@@ -163,8 +155,7 @@ class SendController {
             webSendState: oldState.webSendState!.copyWith(
               sessions: {
                 for (final entry in oldState.webSendState!.sessions.entries)
-                  if (entry.key != sessionId)
-                    entry.key: entry.value, // remove session
+                  if (entry.key != sessionId) entry.key: entry.value, // remove session
               },
             ),
           ),
@@ -181,8 +172,7 @@ class SendController {
             sessionId: sessionId,
             update: (oldSession) {
               return oldSession.copyWith(
-                responseHandler:
-                    null, // this indicates that the session is active
+                responseHandler: null, // this indicates that the session is active
               );
             },
           ),
@@ -202,8 +192,7 @@ class SendController {
           ),
           sessionId: sessionId,
           files: {
-            for (final entry in state.webSendState!.files.entries)
-              entry.key: entry.value.file,
+            for (final entry in state.webSendState!.files.entries) entry.key: entry.value.file,
           },
         ).toJson(),
       );
@@ -216,9 +205,7 @@ class SendController {
       }
 
       final session = server.getState().webSendState?.sessions[sessionId];
-      if (session == null ||
-          session.responseHandler != null ||
-          session.ip != request.ip) {
+      if (session == null || session.responseHandler != null || session.ip != request.ip) {
         return await request.respondJson(403, message: 'Invalid sessionId.');
       }
 
@@ -245,8 +232,7 @@ class SendController {
           'attachment; filename="${Uri.encodeComponent(fileName)}"',
         );
 
-      final isInlineContent =
-          file.bytes != null; // text message, clipboard content
+      final isInlineContent = file.bytes != null; // text message, clipboard content
       if (isInlineContent) {
         request.response.headers.set('content-length', '${file.bytes!.length}');
 
@@ -264,14 +250,10 @@ class SendController {
         final isContentUri = path.startsWith('content://');
 
         // Read file size at download time, since the file could have changed since it was selected (#2359, #2043)
-        final fileSize = isContentUri
-            ? await UriContent().getContentLength(Uri.parse(path))
-            : File(path).lengthSync();
+        final fileSize = isContentUri ? await UriContent().getContentLength(Uri.parse(path)) : File(path).lengthSync();
         request.response.headers.set('content-length', '$fileSize');
 
-        final fileStream = isContentUri
-            ? UriContent().getContentStream(Uri.parse(path))
-            : File(path).openRead();
+        final fileStream = isContentUri ? UriContent().getContentStream(Uri.parse(path)) : File(path).openRead();
         final (streamController, subscription) = fileStream.digested();
 
         await request.response.addStream(streamController.stream).then((_) {
@@ -298,15 +280,12 @@ class SendController {
                   size: file.size,
                   fileType: file.fileType,
                   hash: null,
-                  preview:
-                      files.first.fileType == FileType.text &&
-                          files.first.bytes != null
+                  preview: files.first.fileType == FileType.text && files.first.bytes != null
                       ? utf8.decode(
                           files.first.bytes!,
                         ) // send simple message by embedding it into the preview
                       : null,
-                  metadata:
-                      file.lastModified != null || file.lastAccessed != null
+                  metadata: file.lastModified != null || file.lastAccessed != null
                       ? FileMetadata(
                           lastModified: file.lastModified,
                           lastAccessed: file.lastAccessed,
@@ -340,11 +319,7 @@ class SendController {
   }
 
   void _respondRequest(String sessionId, bool accepted) {
-    final controller = server
-        .getState()
-        .webSendState
-        ?.sessions[sessionId]
-        ?.responseHandler;
+    final controller = server.getState().webSendState?.sessions[sessionId]?.responseHandler;
     if (controller == null) {
       return;
     }
