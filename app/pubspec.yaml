@@ -1,9 +1,9 @@
 name: localsend_app
 description: An open source cross-platform alternative to AirDrop
-homepage: https://localsend.org/
+homepage: https://github.com/RinoPaw/localsend
 publish_to: "none"
 
-version: 1.17.0+58
+version: 1.17.1+59
 
 environment:
   flutter: ^3.25.0
