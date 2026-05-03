@@ -22,10 +22,7 @@ void showInitErrorApp({
 
   runApp(
     RefenaScope(
-      child: _ErrorApp(
-        error: error,
-        stackTrace: stackTrace,
-      ),
+      child: _ErrorApp(error: error, stackTrace: stackTrace),
     ),
   );
 
@@ -36,10 +33,7 @@ class _ErrorApp extends StatefulWidget {
   final Object error;
   final StackTrace stackTrace;
 
-  const _ErrorApp({
-    required this.error,
-    required this.stackTrace,
-  });
+  const _ErrorApp({required this.error, required this.stackTrace});
 
   @override
   State<_ErrorApp> createState() => _ErrorAppState();
@@ -56,7 +50,8 @@ class _ErrorAppState extends State<_ErrorApp> {
     _controller.text = 'Error: ${widget.error}\n\n${widget.stackTrace}';
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final info = await PackageInfo.fromPlatform();
-      _controller.text = 'LocalSend ${info.version} (${info.buildNumber})\n\nError: ${widget.error}\n\n${widget.stackTrace}';
+      _controller.text =
+          'LocalSend ${info.version} (${info.buildNumber})\n\nError: ${widget.error}\n\n${widget.stackTrace}';
     });
   }
 
@@ -72,9 +67,7 @@ class _ErrorAppState extends State<_ErrorApp> {
           readOnly: true,
           decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(10),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(),
-            ),
+            border: OutlineInputBorder(borderSide: BorderSide()),
           ),
         ),
       ),

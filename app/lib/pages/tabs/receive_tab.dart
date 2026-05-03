@@ -17,11 +17,7 @@ import 'package:localsend_app/widget/rotating_widget.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
-enum _QuickSaveMode {
-  off,
-  favorites,
-  on,
-}
+enum _QuickSaveMode { off, favorites, on }
 
 class ReceiveTab extends StatelessWidget {
   const ReceiveTab();
@@ -34,10 +30,15 @@ class ReceiveTab extends StatelessWidget {
       children: [
         checkPlatform([TargetPlatform.macOS])
             ? SizedBox(height: 50, child: MoveWindow())
-            : SizedBox(height: 0, width: 0), // makes the top part that's not occupied by another widget draggable
+            : SizedBox(
+                height: 0,
+                width: 0,
+              ), // makes the top part that's not occupied by another widget draggable
         Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: ResponsiveListView.defaultMaxWidth),
+            constraints: const BoxConstraints(
+              maxWidth: ResponsiveListView.defaultMaxWidth,
+            ),
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: ColumnListView(
@@ -53,10 +54,17 @@ class ReceiveTab extends StatelessWidget {
                           child: Consumer(
                             builder: (context, ref) {
                               final animations = ref.watch(animationProvider);
-                              final activeTab = ref.watch(homePageControllerProvider.select((state) => state.currentTab));
+                              final activeTab = ref.watch(
+                                homePageControllerProvider.select(
+                                  (state) => state.currentTab,
+                                ),
+                              );
                               return RotatingWidget(
                                 duration: const Duration(seconds: 15),
-                                spinning: vm.serverState != null && animations && activeTab == HomeTab.receive,
+                                spinning:
+                                    vm.serverState != null &&
+                                    animations &&
+                                    activeTab == HomeTab.receive,
                                 child: const LocalSendLogo(withText: false),
                               );
                             },
@@ -64,13 +72,21 @@ class ReceiveTab extends StatelessWidget {
                         ),
                         FittedBox(
                           fit: BoxFit.scaleDown,
-                          child: Text(vm.serverState?.alias ?? vm.aliasSettings, style: const TextStyle(fontSize: 48)),
+                          child: Text(
+                            vm.serverState?.alias ?? vm.aliasSettings,
+                            style: const TextStyle(fontSize: 48),
+                          ),
                         ),
                         InitialFadeTransition(
                           duration: const Duration(milliseconds: 300),
                           delay: const Duration(milliseconds: 500),
                           child: Text(
-                            vm.serverState == null ? t.general.offline : vm.localIps.map((ip) => '#${ip.visualId}').toSet().join(' '),
+                            vm.serverState == null
+                                ? t.general.offline
+                                : vm.localIps
+                                      .map((ip) => '#${ip.visualId}')
+                                      .toSet()
+                                      .join(' '),
                             style: const TextStyle(fontSize: 24),
                             textAlign: TextAlign.center,
                           ),
@@ -93,23 +109,39 @@ class ReceiveTab extends StatelessWidget {
                               if (selection.contains(_QuickSaveMode.off)) {
                                 await vm.onSetQuickSave(context, false);
                                 if (context.mounted) {
-                                  await vm.onSetQuickSaveFromFavorites(context, false);
+                                  await vm.onSetQuickSaveFromFavorites(
+                                    context,
+                                    false,
+                                  );
                                 }
-                              } else if (selection.contains(_QuickSaveMode.favorites)) {
+                              } else if (selection.contains(
+                                _QuickSaveMode.favorites,
+                              )) {
                                 await vm.onSetQuickSave(context, false);
                                 if (context.mounted) {
-                                  await vm.onSetQuickSaveFromFavorites(context, true);
+                                  await vm.onSetQuickSaveFromFavorites(
+                                    context,
+                                    true,
+                                  );
                                 }
-                              } else if (selection.contains(_QuickSaveMode.on)) {
-                                await vm.onSetQuickSaveFromFavorites(context, false);
+                              } else if (selection.contains(
+                                _QuickSaveMode.on,
+                              )) {
+                                await vm.onSetQuickSaveFromFavorites(
+                                  context,
+                                  false,
+                                );
                                 if (context.mounted) {
                                   await vm.onSetQuickSave(context, true);
                                 }
                               }
                             },
                             selected: {
-                              if (!vm.quickSaveSettings && !vm.quickSaveFromFavoritesSettings) _QuickSaveMode.off,
-                              if (vm.quickSaveFromFavoritesSettings) _QuickSaveMode.favorites,
+                              if (!vm.quickSaveSettings &&
+                                  !vm.quickSaveFromFavoritesSettings)
+                                _QuickSaveMode.off,
+                              if (vm.quickSaveFromFavoritesSettings)
+                                _QuickSaveMode.favorites,
                               if (vm.quickSaveSettings) _QuickSaveMode.on,
                             },
                             segments: [
@@ -206,7 +238,9 @@ class _InfoBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
-      crossFadeState: vm.showAdvanced ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+      crossFadeState: vm.showAdvanced
+          ? CrossFadeState.showSecond
+          : CrossFadeState.showFirst,
       duration: const Duration(milliseconds: 200),
       firstChild: Container(),
       secondChild: Align(

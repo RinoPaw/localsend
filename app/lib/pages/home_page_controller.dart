@@ -14,9 +14,10 @@ class HomePageVm {
   });
 }
 
-final homePageControllerProvider = ReduxProvider<HomePageController, HomePageVm>(
-  (ref) => HomePageController(),
-);
+final homePageControllerProvider =
+    ReduxProvider<HomePageController, HomePageVm>(
+      (ref) => HomePageController(),
+    );
 
 class HomePageController extends ReduxNotifier<HomePageVm> {
   @override

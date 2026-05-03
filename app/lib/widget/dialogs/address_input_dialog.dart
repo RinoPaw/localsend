@@ -39,13 +39,20 @@ class AddressInputDialog extends StatefulWidget {
 }
 
 class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
-  final _selected = List.generate(_InputMode.values.length, (index) => index == 0);
+  final _selected = List.generate(
+    _InputMode.values.length,
+    (index) => index == 0,
+  );
   _InputMode _mode = _InputMode.hashtag;
   String _input = '';
   bool _fetching = false;
   String? _error;
 
-  Future<void> _submit(List<String> localIps, int port, [String? candidate]) async {
+  Future<void> _submit(
+    List<String> localIps,
+    int port, [
+    String? candidate,
+  ]) async {
     final List<String> candidates;
     final String input = _input.trim();
     if (candidate != null) {
@@ -82,7 +89,12 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
                   payload: payload,
                 );
 
-            foundDevice = response.body.toDevice(ip, port, https, HttpDiscovery(ip: ip));
+            foundDevice = response.body.toDevice(
+              ip,
+              port,
+              https,
+              HttpDiscovery(ip: ip),
+            );
             deviceCompleter.complete();
           } catch (e) {
             error = e.toString();
@@ -95,10 +107,7 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
     // - a device is found
     // - all candidates are checked
     try {
-      await Future.any([
-        deviceCompleter.future,
-        Future.wait(futures),
-      ]);
+      await Future.any([deviceCompleter.future, Future.wait(futures)]);
     } catch (_) {}
 
     if (!mounted) {
@@ -106,7 +115,9 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
     }
 
     if (foundDevice != null) {
-      ref.redux(lastDevicesProvider).dispatch(AddLastDeviceAction(foundDevice!));
+      ref
+          .redux(lastDevicesProvider)
+          .dispatch(AddLastDeviceAction(foundDevice!));
       context.pop(foundDevice);
     } else {
       setState(() {
@@ -118,7 +129,9 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
 
   @override
   Widget build(BuildContext context) {
-    final localIps = (ref.watch(localIpProvider.select((info) => info.localIps))).uniqueIpPrefix;
+    final localIps = (ref.watch(
+      localIpProvider.select((info) => info.localIps),
+    )).uniqueIpPrefix;
     final settings = ref.watch(settingsProvider);
     final lastDevices = ref.watch(lastDevicesProvider);
 
@@ -143,7 +156,10 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
             constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
             children: _InputMode.values.map((mode) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 child: Text(mode.label),
               );
             }).toList(),
@@ -153,7 +169,9 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
             key: ValueKey('input-$_mode'),
             autofocus: true,
             enabled: !_fetching,
-            keyboardType: _mode == _InputMode.hashtag ? TextInputType.number : TextInputType.text,
+            keyboardType: _mode == _InputMode.hashtag
+                ? TextInputType.number
+                : TextInputType.text,
             decoration: InputDecoration(
               prefixText: _mode == _InputMode.hashtag ? '# ' : 'IP: ',
             ),
@@ -201,8 +219,12 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
                             if (index != 0) const TextSpan(text: ', '),
                             TextSpan(
                               text: device.ip,
-                              style: TextStyle(color: Theme.of(context).colorScheme.primary),
-                              recognizer: TapGestureRecognizer()..onTap = () async => _submit(localIps, settings.port, device.ip),
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async =>
+                                    _submit(localIps, settings.port, device.ip),
                             ),
                           ];
                         })
@@ -216,7 +238,12 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
               padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
-                  Text(t.general.error, style: TextStyle(color: Theme.of(context).colorScheme.warning)),
+                  Text(
+                    t.general.error,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.warning,
+                    ),
+                  ),
                   if (_error != null) ...[
                     const SizedBox(width: 5),
                     InkWell(
@@ -228,7 +255,11 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Icon(Icons.info, color: Theme.of(context).colorScheme.warning, size: 20),
+                        child: Icon(
+                          Icons.info,
+                          color: Theme.of(context).colorScheme.warning,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ],
@@ -243,7 +274,9 @@ class _AddressInputDialogState extends State<AddressInputDialog> with Refena {
           child: Text(t.general.cancel),
         ),
         FilledButton(
-          onPressed: _fetching ? null : () async => _submit(localIps, settings.port),
+          onPressed: _fetching
+              ? null
+              : () async => _submit(localIps, settings.port),
           child: Text(t.general.confirm),
         ),
       ],

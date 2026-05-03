@@ -75,7 +75,10 @@ void main() {
   test('Should remove the 30th entry when adding another', () async {
     final service = ReduxNotifier.test(
       redux: ReceiveHistoryService(persistenceService),
-      initialState: List.generate(30, (index) => _createEntry(index.toString())),
+      initialState: List.generate(
+        30,
+        (index) => _createEntry(index.toString()),
+      ),
     );
 
     expect(service.state.length, 30);
@@ -108,11 +111,7 @@ void main() {
   test('Should remove an entry', () async {
     final service = ReduxNotifier.test(
       redux: ReceiveHistoryService(persistenceService),
-      initialState: [
-        _createEntry('1'),
-        _createEntry('2'),
-        _createEntry('3'),
-      ],
+      initialState: [_createEntry('1'), _createEntry('2'), _createEntry('3')],
     );
 
     expect(service.state.length, 3);
@@ -120,10 +119,7 @@ void main() {
     await service.dispatchAsync(RemoveHistoryEntryAction('2'));
 
     expect(service.state.length, 2);
-    expect(service.state, [
-      _createEntry('1'),
-      _createEntry('3'),
-    ]);
+    expect(service.state, [_createEntry('1'), _createEntry('3')]);
     verify(
       persistenceService.setReceiveHistory([
         _createEntry('1'),
@@ -135,11 +131,7 @@ void main() {
   test('Should not remove an entry if not found', () async {
     final service = ReduxNotifier.test(
       redux: ReceiveHistoryService(persistenceService),
-      initialState: [
-        _createEntry('1'),
-        _createEntry('2'),
-        _createEntry('3'),
-      ],
+      initialState: [_createEntry('1'), _createEntry('2'), _createEntry('3')],
     );
 
     expect(service.state.length, 3);
@@ -158,11 +150,7 @@ void main() {
   test('Should remove all entries', () async {
     final service = ReduxNotifier.test(
       redux: ReceiveHistoryService(persistenceService),
-      initialState: [
-        _createEntry('1'),
-        _createEntry('2'),
-        _createEntry('3'),
-      ],
+      initialState: [_createEntry('1'), _createEntry('2'), _createEntry('3')],
     );
 
     expect(service.state.length, 3);

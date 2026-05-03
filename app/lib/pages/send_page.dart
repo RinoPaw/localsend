@@ -73,13 +73,13 @@ class _SendPageState extends State<SendPage> with Refena {
       },
     );
     if (sendState == null && _myDevice == null && _targetDevice == null) {
-      return Scaffold(
-        body: Container(),
-      );
+      return Scaffold(body: Container());
     }
     final myDevice = ref.watch(deviceFullInfoProvider);
     final targetDevice = sendState?.target ?? _targetDevice!;
-    final targetFavoriteEntry = ref.watch(favoritesProvider.select((state) => state.findDevice(targetDevice)));
+    final targetFavoriteEntry = ref.watch(
+      favoritesProvider.select((state) => state.findDevice(targetDevice)),
+    );
     final waiting = sendState?.status == SessionStatus.waiting;
 
     return PopScope(
@@ -94,9 +94,14 @@ class _SendPageState extends State<SendPage> with Refena {
         body: SafeArea(
           child: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: ResponsiveListView.defaultMaxWidth),
+              constraints: const BoxConstraints(
+                maxWidth: ResponsiveListView.defaultMaxWidth,
+              ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 30,
+                ),
                 child: Column(
                   children: [
                     Expanded(
@@ -105,9 +110,7 @@ class _SendPageState extends State<SendPage> with Refena {
                           InitialSlideTransition(
                             origin: const Offset(0, -1),
                             duration: const Duration(milliseconds: 400),
-                            child: DeviceListTile(
-                              device: myDevice,
-                            ),
+                            child: DeviceListTile(device: myDevice),
                           ),
                           const SizedBox(height: 20),
                           const InitialFadeTransition(
@@ -135,13 +138,20 @@ class _SendPageState extends State<SendPage> with Refena {
                             switch (sendState.status) {
                               SessionStatus.waiting => Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
-                                child: Text(t.sendPage.waiting, textAlign: TextAlign.center),
+                                child: Text(
+                                  t.sendPage.waiting,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                               SessionStatus.declined => Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: Text(
                                   t.sendPage.rejected,
-                                  style: TextStyle(color: Theme.of(context).colorScheme.warning),
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.warning,
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -149,7 +159,11 @@ class _SendPageState extends State<SendPage> with Refena {
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: Text(
                                   t.sendPage.tooManyAttempts,
-                                  style: TextStyle(color: Theme.of(context).colorScheme.warning),
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.warning,
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -157,7 +171,11 @@ class _SendPageState extends State<SendPage> with Refena {
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: Text(
                                   t.sendPage.busy,
-                                  style: TextStyle(color: Theme.of(context).colorScheme.warning),
+                                  style: TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.warning,
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
                               ),
@@ -166,15 +184,26 @@ class _SendPageState extends State<SendPage> with Refena {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(t.general.error, style: TextStyle(color: Theme.of(context).colorScheme.warning)),
+                                    Text(
+                                      t.general.error,
+                                      style: TextStyle(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.warning,
+                                      ),
+                                    ),
                                     if (sendState.errorMessage != null)
                                       TextButton(
                                         style: TextButton.styleFrom(
-                                          foregroundColor: Theme.of(context).colorScheme.warning,
+                                          foregroundColor: Theme.of(
+                                            context,
+                                          ).colorScheme.warning,
                                         ),
                                         onPressed: () async => showDialog(
                                           context: context,
-                                          builder: (_) => ErrorDialog(error: sendState.errorMessage!),
+                                          builder: (_) => ErrorDialog(
+                                            error: sendState.errorMessage!,
+                                          ),
                                         ),
                                         child: const Icon(Icons.info),
                                       ),
@@ -189,8 +218,12 @@ class _SendPageState extends State<SendPage> with Refena {
                                   _cancel();
                                   context.pop();
                                 },
-                                icon: Icon(waiting ? Icons.close : Icons.check_circle),
-                                label: Text(waiting ? t.general.cancel : t.general.close),
+                                icon: Icon(
+                                  waiting ? Icons.close : Icons.check_circle,
+                                ),
+                                label: Text(
+                                  waiting ? t.general.cancel : t.general.close,
+                                ),
                               ),
                             ),
                           ],

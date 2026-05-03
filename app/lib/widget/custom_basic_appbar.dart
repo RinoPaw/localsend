@@ -16,7 +16,9 @@ class CustomBackButton extends StatelessWidget {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
     return IconButton(
       icon: Icon(
-        isRtl ? Icons.arrow_forward_ios_rounded : Icons.arrow_back_ios_new_rounded,
+        isRtl
+            ? Icons.arrow_forward_ios_rounded
+            : Icons.arrow_back_ios_new_rounded,
         color: color ?? IconTheme.of(context).color,
       ),
       tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -36,10 +38,7 @@ PreferredSizeWidget basicLocalSendAppbar(String title) {
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: ClipRRect(
             child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 20.0,
-                sigmaY: 20.0,
-              ),
+              filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
               child: MoveWindow(
                 child: Container(
                   color: Colors.transparent,
@@ -47,7 +46,8 @@ PreferredSizeWidget basicLocalSendAppbar(String title) {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Padding space for macOS traffic lights
-                      if (!kIsWeb && Platform.isMacOS) const SizedBox(width: 60),
+                      if (!kIsWeb && Platform.isMacOS)
+                        const SizedBox(width: 60),
                       // Originally leading Icon
                       CustomBackButton(),
                       // Center Title
@@ -57,7 +57,13 @@ PreferredSizeWidget basicLocalSendAppbar(String title) {
                           child: Center(
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
-                              child: Text(title, style: TextStyle(fontSize: 100, fontWeight: FontWeight.normal)),
+                              child: Text(
+                                title,
+                                style: TextStyle(
+                                  fontSize: 100,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
                             ),
                           ),
                         ),

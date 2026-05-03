@@ -5,9 +5,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('Should add a device', () {
-    final service = ReduxNotifier.test(
-      redux: LastDevicesService(),
-    );
+    final service = ReduxNotifier.test(redux: LastDevicesService());
 
     expect(service.state, []);
 
@@ -18,9 +16,7 @@ void main() {
   });
 
   test('Should remove the 5th device', () {
-    final service = ReduxNotifier.test(
-      redux: LastDevicesService(),
-    );
+    final service = ReduxNotifier.test(redux: LastDevicesService());
 
     service.dispatch(AddLastDeviceAction(_createDevice('1')));
     service.dispatch(AddLastDeviceAction(_createDevice('2')));

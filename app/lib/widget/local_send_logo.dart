@@ -13,10 +13,7 @@ class LocalSendLogo extends StatelessWidget {
         Theme.of(context).colorScheme.primary,
         BlendMode.srcATop,
       ),
-      child: Assets.img.logo512.image(
-        width: 200,
-        height: 200,
-      ),
+      child: Assets.img.logo512.image(width: 200, height: 200),
     );
 
     if (withText) {

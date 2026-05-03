@@ -4,9 +4,11 @@ import 'package:refena_flutter/refena_flutter.dart';
 
 /// This provider stores the list of favorite devices.
 /// It automatically saves the list to the device's storage.
-final favoritesProvider = ReduxProvider<FavoritesService, List<FavoriteDevice>>((ref) {
-  return FavoritesService(ref.read(persistenceProvider));
-});
+final favoritesProvider = ReduxProvider<FavoritesService, List<FavoriteDevice>>(
+  (ref) {
+    return FavoritesService(ref.read(persistenceProvider));
+  },
+);
 
 class FavoritesService extends ReduxNotifier<List<FavoriteDevice>> {
   final PersistenceService _persistence;
@@ -18,24 +20,23 @@ class FavoritesService extends ReduxNotifier<List<FavoriteDevice>> {
 }
 
 /// Adds a favorite device.
-class AddFavoriteAction extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
+class AddFavoriteAction
+    extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
   final FavoriteDevice device;
 
   AddFavoriteAction(this.device);
 
   @override
   Future<List<FavoriteDevice>> reduce() async {
-    final updated = List<FavoriteDevice>.unmodifiable([
-      ...state,
-      device,
-    ]);
+    final updated = List<FavoriteDevice>.unmodifiable([...state, device]);
     await notifier._persistence.setFavorites(updated);
     return updated;
   }
 }
 
 /// Updates a favorite device.
-class UpdateFavoriteAction extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
+class UpdateFavoriteAction
+    extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
   final FavoriteDevice device;
 
   UpdateFavoriteAction(this.device);
@@ -49,9 +50,7 @@ class UpdateFavoriteAction extends AsyncReduxAction<FavoritesService, List<Favor
       return state;
     }
     final updated = List<FavoriteDevice>.unmodifiable(
-      <FavoriteDevice>[
-        ...state,
-      ]..replaceRange(index, index + 1, [device]),
+      <FavoriteDevice>[...state]..replaceRange(index, index + 1, [device]),
     );
     await notifier._persistence.setFavorites(updated);
     return updated;
@@ -59,12 +58,11 @@ class UpdateFavoriteAction extends AsyncReduxAction<FavoritesService, List<Favor
 }
 
 /// Removes a favorite device.
-class RemoveFavoriteAction extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
+class RemoveFavoriteAction
+    extends AsyncReduxAction<FavoritesService, List<FavoriteDevice>> {
   final String deviceFingerprint;
 
-  RemoveFavoriteAction({
-    required this.deviceFingerprint,
-  });
+  RemoveFavoriteAction({required this.deviceFingerprint});
 
   @override
   Future<List<FavoriteDevice>> reduce() async {
@@ -74,9 +72,7 @@ class RemoveFavoriteAction extends AsyncReduxAction<FavoritesService, List<Favor
       return state;
     }
     final updated = List<FavoriteDevice>.unmodifiable(
-      <FavoriteDevice>[
-        ...state,
-      ]..removeAt(index),
+      <FavoriteDevice>[...state]..removeAt(index),
     );
     await notifier._persistence.setFavorites(updated);
     return updated;

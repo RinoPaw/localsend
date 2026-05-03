@@ -22,7 +22,9 @@ Future<PickDirectoryResult?> pickDirectoryAndroid() async {
 
   return PickDirectoryResultMapper.fromJson({
     'directoryUri': result['directoryUri'],
-    'files': (result['files'] as List).map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>())).toList(),
+    'files': (result['files'] as List)
+        .map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>()))
+        .toList(),
   });
 }
 
@@ -37,7 +39,9 @@ Future<List<FileInfo>?> pickFilesAndroid() async {
     return null;
   }
 
-  return result.map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>())).toList();
+  return result
+      .map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>()))
+      .toList();
 }
 
 Future<bool> getSystemAnimationsStatusAndroid() async {
@@ -78,13 +82,9 @@ Future<void> createMissingDirectoriesAndroid({
   }
 }
 
-Future<void> openContentUri({
-  required String uri,
-}) async {
+Future<void> openContentUri({required String uri}) async {
   _logger.info('Opening content URI: $uri');
-  await _methodChannel.invokeMethod('openContentUri', {
-    'uri': uri,
-  });
+  await _methodChannel.invokeMethod('openContentUri', {'uri': uri});
 }
 
 Future<void> openGallery() async {
@@ -97,10 +97,7 @@ class PickDirectoryResult with PickDirectoryResultMappable {
   final String directoryUri;
   final List<FileInfo> files;
 
-  PickDirectoryResult({
-    required this.directoryUri,
-    required this.files,
-  });
+  PickDirectoryResult({required this.directoryUri, required this.files});
 }
 
 @MappableClass()

@@ -42,10 +42,7 @@ class SendModeHelpDialog extends StatelessWidget {
 class _SendModeItem extends StatelessWidget {
   final String mode;
   final String explanation;
-  const _SendModeItem({
-    required this.mode,
-    required this.explanation,
-  });
+  const _SendModeItem({required this.mode, required this.explanation});
 
   @override
   Widget build(BuildContext context) {

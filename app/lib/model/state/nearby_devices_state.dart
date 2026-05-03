@@ -51,10 +51,7 @@ extension on Device {
       deviceModel: deviceModel,
       deviceType: deviceType,
       download: download,
-      discoveryMethods: {
-        ...discoveryMethods,
-        ...other.discoveryMethods,
-      },
+      discoveryMethods: {...discoveryMethods, ...other.discoveryMethods},
     );
   }
 }

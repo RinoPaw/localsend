@@ -15,7 +15,9 @@ abstract class SessionState {
 }
 
 @MappableClass()
-class ReceiveSessionState with ReceiveSessionStateMappable implements SessionState {
+class ReceiveSessionState
+    with ReceiveSessionStateMappable
+    implements SessionState {
   final String sessionId;
 
   @override
@@ -64,7 +66,9 @@ class ReceiveSessionState with ReceiveSessionStateMappable implements SessionSta
   /// Message requests must contain a single text file with preview included.
   String? get message {
     final firstFile = files.values.first.file;
-    return files.length == 1 && firstFile.fileType == FileType.text ? firstFile.preview : null;
+    return files.length == 1 && firstFile.fileType == FileType.text
+        ? firstFile.preview
+        : null;
   }
 
   /// Returns true if this request contains files having a directory path.

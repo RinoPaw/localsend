@@ -20,18 +20,22 @@ class DebugPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appArguments = context.watch(appArgumentsProvider);
-    final portableMode = context.watch(persistenceProvider.select((state) => state.isPortableMode()));
+    final portableMode = context.watch(
+      persistenceProvider.select((state) => state.isPortableMode()),
+    );
     final store = SharedPreferencesStorePlatform.instance;
 
     return Scaffold(
       appBar: basicLocalSendAppbar('Debugging'),
       body: ListView(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 30),
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 30,
+        ),
         children: [
-          DebugEntry(
-            name: 'Debug Mode',
-            value: kDebugMode.toString(),
-          ),
+          DebugEntry(name: 'Debug Mode', value: kDebugMode.toString()),
           DebugEntry(
             name: 'Portable Mode',
             value: portableMode ? 'true' : 'false',
@@ -40,23 +44,16 @@ class DebugPage extends StatelessWidget {
             name: 'Executable Path',
             value: Platform.resolvedExecutable,
           ),
-          DebugEntry(
-            name: 'Working Directory',
-            value: Directory.current.path,
-          ),
+          DebugEntry(name: 'Working Directory', value: Directory.current.path),
           if (store is SharedPreferencesFile)
-            DebugEntry(
-              name: 'Settings Path',
-              value: store.getPath(),
-            ),
+            DebugEntry(name: 'Settings Path', value: store.getPath()),
           DebugEntry(
             name: 'App Arguments',
-            value: appArguments.isEmpty ? null : appArguments.map((e) => '"$e"').join(' '),
+            value: appArguments.isEmpty
+                ? null
+                : appArguments.map((e) => '"$e"').join(' '),
           ),
-          DebugEntry(
-            name: 'Dart SDK',
-            value: Platform.version,
-          ),
+          DebugEntry(name: 'Dart SDK', value: Platform.version),
           const SizedBox(height: 20),
           const Text('More', style: DebugEntry.headerStyle),
           const SizedBox(height: 5),
@@ -65,11 +62,13 @@ class DebugPage extends StatelessWidget {
             runSpacing: 10,
             children: [
               FilledButton(
-                onPressed: () async => context.push(() => const SecurityDebugPage()),
+                onPressed: () async =>
+                    context.push(() => const SecurityDebugPage()),
                 child: const Text('Security'),
               ),
               FilledButton(
-                onPressed: () async => context.push(() => const DiscoveryDebugPage()),
+                onPressed: () async =>
+                    context.push(() => const DiscoveryDebugPage()),
                 child: const Text('Discovery'),
               ),
               FilledButton(
@@ -78,11 +77,13 @@ class DebugPage extends StatelessWidget {
               ),
               if (kDebugMode)
                 FilledButton(
-                  onPressed: () async => context.push(() => const RefenaTracingPage()),
+                  onPressed: () async =>
+                      context.push(() => const RefenaTracingPage()),
                   child: const Text('Refena Tracing'),
                 ),
               FilledButton(
-                onPressed: () async => await context.ref.read(persistenceProvider).clear(),
+                onPressed: () async =>
+                    await context.ref.read(persistenceProvider).clear(),
                 child: const Text('Clear settings'),
               ),
             ],

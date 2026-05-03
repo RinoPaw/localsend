@@ -17,9 +17,7 @@ class DevicePlaceholderListTile extends StatelessWidget {
       icon: OpacitySlideshow(
         durationMillis: 3000,
         running: animations,
-        children: [
-          ...DeviceType.values.map((d) => Icon(d.icon, size: 46)),
-        ],
+        children: [...DeviceType.values.map((d) => Icon(d.icon, size: 46))],
       ),
       title: const Visibility(
         visible: false,
@@ -34,12 +32,16 @@ class DevicePlaceholderListTile extends StatelessWidget {
         spacing: 10,
         children: [
           DeviceBadge(
-            backgroundColor: Theme.of(context).colorScheme.onSecondaryContainer.withValues(alpha: 0.5),
+            backgroundColor: Theme.of(
+              context,
+            ).colorScheme.onSecondaryContainer.withValues(alpha: 0.5),
             foregroundColor: Colors.transparent,
             label: '       ',
           ),
           DeviceBadge(
-            backgroundColor: Theme.of(context).colorScheme.onSecondaryContainer.withValues(alpha: 0.5),
+            backgroundColor: Theme.of(
+              context,
+            ).colorScheme.onSecondaryContainer.withValues(alpha: 0.5),
             foregroundColor: Colors.transparent,
             label: '              ',
           ),

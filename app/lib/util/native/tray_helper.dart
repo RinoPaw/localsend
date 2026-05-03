@@ -13,10 +13,7 @@ import 'package:window_manager/window_manager.dart';
 
 final _logger = Logger('TrayHelper');
 
-enum TrayEntry {
-  open,
-  close,
-}
+enum TrayEntry { open, close }
 
 Future<void> initTray() async {
   if (!checkPlatformHasTray()) {
@@ -43,13 +40,12 @@ Future<void> initTray() async {
     }
 
     final items = [
-      tm.MenuItem(
-        key: TrayEntry.open.name,
-        label: t.tray.open,
-      ),
+      tm.MenuItem(key: TrayEntry.open.name, label: t.tray.open),
       tm.MenuItem(
         key: TrayEntry.close.name,
-        label: defaultTargetPlatform == TargetPlatform.windows ? t.tray.closeWindows : t.tray.close,
+        label: defaultTargetPlatform == TargetPlatform.windows
+            ? t.tray.closeWindows
+            : t.tray.close,
       ),
     ];
     await tm.trayManager.setContextMenu(tm.Menu(items: items));
@@ -75,7 +71,10 @@ Future<void> hideToTray() async {
   try {
     RefenaScope.defaultRef.notifier(sleepProvider).setState((_) => true);
   } catch (e) {
-    _logger.warning('Failed to update sleep state (Refena not yet initialized)', e);
+    _logger.warning(
+      'Failed to update sleep state (Refena not yet initialized)',
+      e,
+    );
   }
 }
 
@@ -93,7 +92,10 @@ Future<void> showFromTray() async {
   try {
     RefenaScope.defaultRef.notifier(sleepProvider).setState((_) => false);
   } catch (e) {
-    _logger.warning('Failed to update sleep state (Refena not yet initialized)', e);
+    _logger.warning(
+      'Failed to update sleep state (Refena not yet initialized)',
+      e,
+    );
   }
 }
 

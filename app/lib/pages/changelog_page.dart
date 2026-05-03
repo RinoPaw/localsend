@@ -14,7 +14,9 @@ class ChangelogPage extends StatelessWidget {
     return Scaffold(
       appBar: basicLocalSendAppbar(t.changelogPage.title),
       body: FutureBuilder(
-        future: rootBundle.loadString(Assets.changelog), // ignore: discarded_futures
+        future: rootBundle.loadString(
+          Assets.changelog,
+        ), // ignore: discarded_futures
         builder: (context, data) {
           if (!data.hasData) {
             return Container();

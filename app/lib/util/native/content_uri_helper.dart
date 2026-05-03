@@ -84,7 +84,9 @@ class ContentUriHelper {
       return uri;
     }
 
-    final encodedPath = Uri.encodeComponent(Uri.decodeComponent(uri.substring(treeIndex + 6)));
+    final encodedPath = Uri.encodeComponent(
+      Uri.decodeComponent(uri.substring(treeIndex + 6)),
+    );
     return uri.substring(0, treeIndex + 6) + encodedPath;
   }
 }
@@ -94,7 +96,9 @@ class AndroidUriContentStreamResolver implements UriContentStreamResolver {
 
   @override
   void init({required Object? rootIsolateToken}) {
-    BackgroundIsolateBinaryMessenger.ensureInitialized(rootIsolateToken as RootIsolateToken);
+    BackgroundIsolateBinaryMessenger.ensureInitialized(
+      rootIsolateToken as RootIsolateToken,
+    );
     _uriContent = UriContent();
   }
 

@@ -22,9 +22,7 @@ class CustomListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: Theme.of(context).colorScheme.secondaryContainerIfDark,
       child: InkWell(
         onTap: onTap,
@@ -33,18 +31,13 @@ class CustomListTile extends StatelessWidget {
           padding: padding,
           child: Row(
             children: [
-              if (icon != null) ...[
-                icon!,
-                const SizedBox(width: 15),
-              ],
+              if (icon != null) ...[icon!, const SizedBox(width: 15)],
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    FittedBox(
-                      child: title,
-                    ),
+                    FittedBox(child: title),
                     const SizedBox(height: 5),
                     subTitle,
                   ],

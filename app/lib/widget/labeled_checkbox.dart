@@ -20,16 +20,10 @@ class LabeledCheckbox extends StatelessWidget {
           ? [
               Text(label),
               const SizedBox(width: 5),
-              Checkbox(
-                value: value,
-                onChanged: onChanged,
-              ),
+              Checkbox(value: value, onChanged: onChanged),
             ]
           : [
-              Checkbox(
-                value: value,
-                onChanged: onChanged,
-              ),
+              Checkbox(value: value, onChanged: onChanged),
               const SizedBox(width: 5),
               Text(label),
             ],

@@ -19,7 +19,9 @@ class ResponsiveListView extends StatelessWidget {
     EdgeInsets? tabletPadding,
     required Widget this.child,
     super.key,
-  }) : desktopPadding = tabletPadding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+  }) : desktopPadding =
+           tabletPadding ??
+           const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
        children = null;
 
   const ResponsiveListView({
@@ -29,7 +31,9 @@ class ResponsiveListView extends StatelessWidget {
     EdgeInsets? tabletPadding,
     required List<Widget> this.children,
     super.key,
-  }) : desktopPadding = tabletPadding ?? const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+  }) : desktopPadding =
+           tabletPadding ??
+           const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
        child = null;
 
   @override
@@ -42,11 +46,13 @@ class ResponsiveListView extends StatelessWidget {
             constraints: BoxConstraints(maxWidth: maxWidth),
             child: ResponsiveBuilder(
               builder: (sizingInformation) {
-                final bottom = sizingInformation.isDesktop ? desktopPadding.bottom : padding.bottom;
+                final bottom = sizingInformation.isDesktop
+                    ? desktopPadding.bottom
+                    : padding.bottom;
                 return Padding(
-                  padding: (sizingInformation.isDesktop ? desktopPadding : padding).copyWith(
-                    bottom: bottom + getNavBarPadding(context),
-                  ),
+                  padding:
+                      (sizingInformation.isDesktop ? desktopPadding : padding)
+                          .copyWith(bottom: bottom + getNavBarPadding(context)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: children!,

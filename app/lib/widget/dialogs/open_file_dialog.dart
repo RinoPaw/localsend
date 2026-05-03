@@ -5,7 +5,8 @@ import 'package:common/model/file_type.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:localsend_app/gen/strings.g.dart';
-import 'package:localsend_app/util/native/channel/android_channel.dart' as android_channel;
+import 'package:localsend_app/util/native/channel/android_channel.dart'
+    as android_channel;
 import 'package:localsend_app/util/native/open_file.dart';
 import 'package:localsend_app/util/native/open_folder.dart';
 import 'package:path/path.dart' as path;
@@ -79,7 +80,8 @@ class _OpenFileDialogState extends State<OpenFileDialog> {
       actions: [
         TextButton(
           onPressed: () async {
-            if (widget.openGallery && defaultTargetPlatform == TargetPlatform.android) {
+            if (widget.openGallery &&
+                defaultTargetPlatform == TargetPlatform.android) {
               await android_channel.openGallery();
             } else {
               await openFile(context, widget.fileType, widget.filePath);

@@ -32,9 +32,11 @@ enum _EntryOption {
   String get label {
     return switch (this) {
       _EntryOption.open => t.receiveHistoryPage.entryActions.open,
-      _EntryOption.showInFolder => t.receiveHistoryPage.entryActions.showInFolder,
+      _EntryOption.showInFolder =>
+        t.receiveHistoryPage.entryActions.showInFolder,
       _EntryOption.info => t.receiveHistoryPage.entryActions.info,
-      _EntryOption.delete => t.receiveHistoryPage.entryActions.deleteFromHistory,
+      _EntryOption.delete =>
+        t.receiveHistoryPage.entryActions.deleteFromHistory,
     };
   }
 }
@@ -55,7 +57,8 @@ class ReceiveHistoryPage extends StatelessWidget {
         context,
         entry.fileType,
         entry.path!,
-        onDeleteTap: () => dispatcher.dispatchAsync(RemoveHistoryEntryAction(entry.id)),
+        onDeleteTap: () =>
+            dispatcher.dispatchAsync(RemoveHistoryEntryAction(entry.id)),
       );
     }
   }
@@ -75,14 +78,20 @@ class ReceiveHistoryPage extends StatelessWidget {
                 const SizedBox(width: 15),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.secondaryContainerIfDark,
-                    foregroundColor: Theme.of(context).colorScheme.onSecondaryContainerIfDark,
+                    backgroundColor: Theme.of(
+                      context,
+                    ).colorScheme.secondaryContainerIfDark,
+                    foregroundColor: Theme.of(
+                      context,
+                    ).colorScheme.onSecondaryContainerIfDark,
                   ),
                   onPressed: checkPlatform([TargetPlatform.iOS])
                       ? null
                       : () async {
                           // ignore: use_build_context_synchronously
-                          final destination = context.read(settingsProvider).destination ?? await getDefaultDestinationDirectory();
+                          final destination =
+                              context.read(settingsProvider).destination ??
+                              await getDefaultDestinationDirectory();
                           await openFolder(folderPath: destination);
                         },
                   icon: const Icon(Icons.folder),
@@ -91,8 +100,12 @@ class ReceiveHistoryPage extends StatelessWidget {
                 const SizedBox(width: 20),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.secondaryContainerIfDark,
-                    foregroundColor: Theme.of(context).colorScheme.onSecondaryContainerIfDark,
+                    backgroundColor: Theme.of(
+                      context,
+                    ).colorScheme.secondaryContainerIfDark,
+                    foregroundColor: Theme.of(
+                      context,
+                    ).colorScheme.onSecondaryContainerIfDark,
                   ),
                   onPressed: entries.isEmpty
                       ? null
@@ -103,7 +116,9 @@ class ReceiveHistoryPage extends StatelessWidget {
                           );
 
                           if (context.mounted && result == true) {
-                            await context.redux(receiveHistoryProvider).dispatchAsync(RemoveAllHistoryEntriesAction());
+                            await context
+                                .redux(receiveHistoryProvider)
+                                .dispatchAsync(RemoveAllHistoryEntriesAction());
                           }
                         },
                   icon: const Icon(Icons.delete),
@@ -116,12 +131,20 @@ class ReceiveHistoryPage extends StatelessWidget {
           if (entries.isEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 100),
-              child: Center(child: Text(t.receiveHistoryPage.empty, style: Theme.of(context).textTheme.headlineMedium)),
+              child: Center(
+                child: Text(
+                  t.receiveHistoryPage.empty,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
             )
           else
             ...entries.map((entry) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 8,
+                ),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   splashFactory: NoSplash.splashFactory,
@@ -160,7 +183,11 @@ class ReceiveHistoryPage extends StatelessWidget {
                             return;
                           }
 
-                          await _openFile(context, entry, context.redux(receiveHistoryProvider));
+                          await _openFile(
+                            context,
+                            entry,
+                            context.redux(receiveHistoryProvider),
+                          );
                         }
                       : null,
                   child: Row(
@@ -198,7 +225,11 @@ class ReceiveHistoryPage extends StatelessWidget {
                         onSelected: (_EntryOption item) async {
                           switch (item) {
                             case _EntryOption.open:
-                              await _openFile(context, entry, context.redux(receiveHistoryProvider));
+                              await _openFile(
+                                context,
+                                entry,
+                                context.redux(receiveHistoryProvider),
+                              );
                               break;
                             case _EntryOption.showInFolder:
                               if (entry.path != null) {
@@ -217,17 +248,25 @@ class ReceiveHistoryPage extends StatelessWidget {
                               break;
                             case _EntryOption.delete:
                               // ignore: use_build_context_synchronously
-                              await context.redux(receiveHistoryProvider).dispatchAsync(RemoveHistoryEntryAction(entry.id));
+                              await context
+                                  .redux(receiveHistoryProvider)
+                                  .dispatchAsync(
+                                    RemoveHistoryEntryAction(entry.id),
+                                  );
                               break;
                           }
                         },
                         itemBuilder: (BuildContext context) {
-                          return (entry.path != null ? _optionsAll : _optionsWithoutOpen).map((e) {
-                            return PopupMenuItem<_EntryOption>(
-                              value: e,
-                              child: Text(e.label),
-                            );
-                          }).toList();
+                          return (entry.path != null
+                                  ? _optionsAll
+                                  : _optionsWithoutOpen)
+                              .map((e) {
+                                return PopupMenuItem<_EntryOption>(
+                                  value: e,
+                                  child: Text(e.label),
+                                );
+                              })
+                              .toList();
                         },
                       ),
                     ],

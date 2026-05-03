@@ -12,10 +12,8 @@ class SharedPreferencesFile extends SharedPreferencesStorePlatform {
   final File _file;
   final bool beautify;
 
-  SharedPreferencesFile({
-    required String filePath,
-    this.beautify = false,
-  }) : _file = File(filePath);
+  SharedPreferencesFile({required String filePath, this.beautify = false})
+    : _file = File(filePath);
 
   late final Map<String, Object> _cache = _getAll();
 
@@ -69,6 +67,8 @@ class SharedPreferencesFile extends SharedPreferencesStorePlatform {
       _file.createSync(recursive: true);
     }
 
-    _file.writeAsStringSync((beautify ? _beautyEncoder : _encoder).convert(data));
+    _file.writeAsStringSync(
+      (beautify ? _beautyEncoder : _encoder).convert(data),
+    );
   }
 }

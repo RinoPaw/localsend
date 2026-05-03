@@ -29,7 +29,13 @@ final serverProvider = NotifierProvider<ServerService, ServerState?>(
   onChanged: (_, next, ref) {
     final settings = ref.read(settingsProvider);
     final syncState = ref.read(parentIsolateProvider).syncState;
-    final syncStatePrev = (syncState.alias, syncState.port, syncState.protocol, syncState.serverRunning, syncState.download);
+    final syncStatePrev = (
+      syncState.alias,
+      syncState.port,
+      syncState.protocol,
+      syncState.serverRunning,
+      syncState.download,
+    );
     final syncStateNext = (
       next?.alias ?? settings.alias,
       next?.port ?? settings.port,
@@ -134,10 +140,7 @@ class ServerService extends Notifier<ServerState?> {
       );
       _logger.info('Server started. (Port: $port, HTTPS only)');
     } else {
-      httpServer = await HttpServer.bind(
-        '0.0.0.0',
-        port,
-      );
+      httpServer = await HttpServer.bind('0.0.0.0', port);
       _logger.info('Server started. (Port: $port, HTTP only)');
     }
 
@@ -169,7 +172,11 @@ class ServerService extends Notifier<ServerState?> {
     return await startServerFromSettings();
   }
 
-  Future<ServerState?> restartServer({required String alias, required int port, required bool https}) async {
+  Future<ServerState?> restartServer({
+    required String alias,
+    required int port,
+    required bool https,
+  }) async {
     await stopServer();
     return await startServer(alias: alias, port: port, https: https);
   }
@@ -210,18 +217,14 @@ class ServerService extends Notifier<ServerState?> {
   /// Updates the web send pin.
   void setWebSendPin(String? pin) {
     state = state?.copyWith(
-      webSendState: state?.webSendState?.copyWith(
-        pin: pin,
-      ),
+      webSendState: state?.webSendState?.copyWith(pin: pin),
     );
   }
 
   /// Updates the auto accept setting for web send.
   void setWebSendAutoAccept(bool autoAccept) {
     state = state?.copyWith(
-      webSendState: state?.webSendState?.copyWith(
-        autoAccept: autoAccept,
-      ),
+      webSendState: state?.webSendState?.copyWith(autoAccept: autoAccept),
     );
   }
 

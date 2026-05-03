@@ -37,12 +37,7 @@ class ResponsiveWrapView extends StatelessWidget {
             return Wrap(
               runSpacing: childPadding,
               children: children
-                  .map(
-                    (child) => SizedBox(
-                      width: availableWidth,
-                      child: child,
-                    ),
-                  )
+                  .map((child) => SizedBox(width: availableWidth, child: child))
                   .toList(),
             );
           }
@@ -50,23 +45,22 @@ class ResponsiveWrapView extends StatelessWidget {
           // Calculate how many items *can* fit in a row at their minimum size.
           //  Formula: n * minChildWidth + (n - 1) * childPadding <= availableWidth
           //  This simplifies to: n <= (availableWidth + childPadding) / (minChildWidth + childPadding)
-          final int numItemsPerRow = ((availableWidth + childPadding) / (minChildWidth + childPadding)).floor();
+          final int numItemsPerRow =
+              ((availableWidth + childPadding) / (minChildWidth + childPadding))
+                  .floor();
 
           // Calculate the *actual* width to make `numItemsPerRow` items
           // fill the `availableWidth` perfectly.
           //  Formula: numItemsPerRow * actualWidth + (numItemsPerRow - 1) * childPadding = availableWidth
-          final double actualChildWidth = (availableWidth - (numItemsPerRow - 1) * childPadding) / numItemsPerRow;
+          final double actualChildWidth =
+              (availableWidth - (numItemsPerRow - 1) * childPadding) /
+              numItemsPerRow;
 
           return Wrap(
             spacing: childPadding,
             runSpacing: childPadding,
             children: children
-                .map(
-                  (child) => SizedBox(
-                    width: actualChildWidth,
-                    child: child,
-                  ),
-                )
+                .map((child) => SizedBox(width: actualChildWidth, child: child))
                 .toList(),
           );
         },

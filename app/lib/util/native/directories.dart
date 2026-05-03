@@ -17,7 +17,9 @@ Future<String> getDefaultDestinationDirectory() async {
       var downloadDir = await path.getDownloadsDirectory();
       if (downloadDir == null) {
         if (defaultTargetPlatform == TargetPlatform.windows) {
-          downloadDir = Directory('${Platform.environment['HOMEPATH']}/Downloads');
+          downloadDir = Directory(
+            '${Platform.environment['HOMEPATH']}/Downloads',
+          );
           if (!downloadDir.existsSync()) {
             downloadDir = Directory(Platform.environment['HOMEPATH']!);
           }

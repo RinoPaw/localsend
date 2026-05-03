@@ -6,7 +6,8 @@ import 'package:common/model/file_type.dart';
 import 'package:localsend_app/model/cross_file.dart';
 import 'package:localsend_app/util/file_path_helper.dart';
 import 'package:localsend_app/util/native/cache_helper.dart';
-import 'package:localsend_app/util/native/channel/android_channel.dart' as android_channel;
+import 'package:localsend_app/util/native/channel/android_channel.dart'
+    as android_channel;
 import 'package:localsend_app/util/native/content_uri_helper.dart';
 import 'package:localsend_app/util/native/cross_file_converters.dart';
 import 'package:localsend_app/util/send_ignore.dart';
@@ -21,9 +22,10 @@ const _uuid = Uuid();
 
 /// Manages files selected for sending.
 /// Will stay alive even after a session has been completed to send the same files to another device.
-final selectedSendingFilesProvider = ReduxProvider<SelectedSendingFilesNotifier, List<CrossFile>>((ref) {
-  return SelectedSendingFilesNotifier();
-});
+final selectedSendingFilesProvider =
+    ReduxProvider<SelectedSendingFilesNotifier, List<CrossFile>>((ref) {
+      return SelectedSendingFilesNotifier();
+    });
 
 class SelectedSendingFilesNotifier extends ReduxNotifier<List<CrossFile>> {
   @override
@@ -31,14 +33,12 @@ class SelectedSendingFilesNotifier extends ReduxNotifier<List<CrossFile>> {
 }
 
 /// Adds a message.
-class AddMessageAction extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
+class AddMessageAction
+    extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final String message;
   final int? index;
 
-  AddMessageAction({
-    required this.message,
-    this.index,
-  });
+  AddMessageAction({required this.message, this.index});
 
   @override
   List<CrossFile> reduce() {
@@ -55,23 +55,17 @@ class AddMessageAction extends ReduxAction<SelectedSendingFilesNotifier, List<Cr
       lastAccessed: null,
     );
 
-    return List.unmodifiable(
-      [
-        ...state,
-      ]..insert(index ?? state.length, file),
-    );
+    return List.unmodifiable([...state]..insert(index ?? state.length, file));
   }
 }
 
 /// Updates a message.
-class UpdateMessageAction extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
+class UpdateMessageAction
+    extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final String message;
   final int index;
 
-  UpdateMessageAction({
-    required this.message,
-    required this.index,
-  });
+  UpdateMessageAction({required this.message, required this.index});
 
   @override
   List<CrossFile> reduce() {
@@ -83,7 +77,8 @@ class UpdateMessageAction extends ReduxAction<SelectedSendingFilesNotifier, List
 
 /// Adds a binary file to the list.
 /// During the sending process, the file will be read from the memory.
-class AddBinaryAction extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
+class AddBinaryAction
+    extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final Uint8List bytes;
   final FileType fileType;
   final String fileName;
@@ -108,22 +103,17 @@ class AddBinaryAction extends ReduxAction<SelectedSendingFilesNotifier, List<Cro
       lastAccessed: null,
     );
 
-    return List.unmodifiable([
-      ...state,
-      file,
-    ]);
+    return List.unmodifiable([...state, file]);
   }
 }
 
 /// Adds one or more files to the list.
-class AddFilesAction<T> extends AsyncReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
+class AddFilesAction<T>
+    extends AsyncReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final Iterable<T> files;
   final Future<CrossFile> Function(T) converter;
 
-  AddFilesAction({
-    required this.files,
-    required this.converter,
-  });
+  AddFilesAction({required this.files, required this.converter});
 
   @override
   Future<List<CrossFile>> reduce() async {
@@ -133,20 +123,20 @@ class AddFilesAction<T> extends AsyncReduxAction<SelectedSendingFilesNotifier, L
       //  https://github.com/fluttercandies/flutter_photo_manager/issues/589
 
       final crossFile = await converter(file);
-      final isAlreadySelect = state.any((element) => element.isSameFile(otherFile: crossFile));
+      final isAlreadySelect = state.any(
+        (element) => element.isSameFile(otherFile: crossFile),
+      );
       if (!isAlreadySelect) {
         newFiles.add(crossFile);
       }
     }
-    return List.unmodifiable([
-      ...state,
-      ...newFiles,
-    ]);
+    return List.unmodifiable([...state, ...newFiles]);
   }
 }
 
 /// Adds files inside the directory recursively.
-class AddDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
+class AddDirectoryAction
+    extends AsyncReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final String directoryPath;
 
   AddDirectoryAction(this.directoryPath);
@@ -159,11 +149,15 @@ class AddDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNotifier, 
     final sendIgnore = SendIgnore();
     await for (final entity in Directory(directoryPath).list(recursive: true)) {
       if (entity is File) {
-        final innerRelative = p.relative(entity.path, from: directoryPath).replaceAll('\\', '/');
+        final innerRelative = p
+            .relative(entity.path, from: directoryPath)
+            .replaceAll('\\', '/');
         final relative = '$directoryName/$innerRelative';
         if (sendIgnore.isIgnoreFile(p.basename(entity.path))) {
           sendIgnore.loadIgnoreContent(
-            parentPath: innerRelative.contains('/') ? p.dirname(innerRelative) : null,
+            parentPath: innerRelative.contains('/')
+                ? p.dirname(innerRelative)
+                : null,
             ignoreContents: await entity.readAsLines(),
           );
           _logger.info('Loaded ignore file: $innerRelative');
@@ -187,22 +181,22 @@ class AddDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNotifier, 
           lastAccessed: entity.lastAccessedSync().toUtc(),
         );
 
-        final isAlreadySelect = state.any((element) => element.isSameFile(otherFile: file));
+        final isAlreadySelect = state.any(
+          (element) => element.isSameFile(otherFile: file),
+        );
         if (!isAlreadySelect) {
           newFiles.add(file);
         }
       }
     }
 
-    return List.unmodifiable([
-      ...state,
-      ...newFiles,
-    ]);
+    return List.unmodifiable([...state, ...newFiles]);
   }
 }
 
 /// A special [AddDirectoryAction] specifically for Android.
-class AddAndroidDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
+class AddAndroidDirectoryAction
+    extends AsyncReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final android_channel.PickDirectoryResult result;
 
   AddAndroidDirectoryAction(this.result);
@@ -224,12 +218,13 @@ class AddAndroidDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNot
     }
 
     for (final file in result.files) {
-      final relative = ContentUriHelper.guessRelativePathFromPickedFileContentUri(
-        folderContentUri: result.directoryUri,
-        basePath: basePath,
-        folderName: folderName,
-        uri: file.uri,
-      );
+      final relative =
+          ContentUriHelper.guessRelativePathFromPickedFileContentUri(
+            folderContentUri: result.directoryUri,
+            basePath: basePath,
+            folderName: folderName,
+            uri: file.uri,
+          );
       if (relative == null) {
         _logger.warning('Could not get relative path from ${file.uri}');
         continue;
@@ -244,25 +239,29 @@ class AddAndroidDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNot
         asset: null,
         path: file.uri,
         bytes: null,
-        lastModified: DateTime.fromMillisecondsSinceEpoch(file.lastModified, isUtc: true),
+        lastModified: DateTime.fromMillisecondsSinceEpoch(
+          file.lastModified,
+          isUtc: true,
+        ),
         lastAccessed: null,
       );
 
-      final isAlreadySelect = state.any((element) => element.isSameFile(otherFile: crossFile));
+      final isAlreadySelect = state.any(
+        (element) => element.isSameFile(otherFile: crossFile),
+      );
       if (!isAlreadySelect) {
         newFiles.add(crossFile);
       }
     }
 
-    return List.unmodifiable([
-      ...state,
-      ...newFiles,
-    ]);
+    return List.unmodifiable([...state, ...newFiles]);
   }
 }
 
 /// Removes a file at the given [index].
-class RemoveSelectedFileAction extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> with GlobalActions {
+class RemoveSelectedFileAction
+    extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>>
+    with GlobalActions {
   final int index;
 
   RemoveSelectedFileAction(this.index);
@@ -282,7 +281,13 @@ class RemoveSelectedFileAction extends ReduxAction<SelectedSendingFilesNotifier,
 
 /// Loads the selection from the arguments of the app start.
 /// Returns `true` if files were added.
-class LoadSelectionFromArgsAction extends AsyncReduxActionWithResult<SelectedSendingFilesNotifier, List<CrossFile>, bool> {
+class LoadSelectionFromArgsAction
+    extends
+        AsyncReduxActionWithResult<
+          SelectedSendingFilesNotifier,
+          List<CrossFile>,
+          bool
+        > {
   final List<String> args;
 
   LoadSelectionFromArgsAction(this.args);
@@ -311,7 +316,11 @@ class LoadSelectionFromArgsAction extends AsyncReduxActionWithResult<SelectedSen
         }
         await dispatchAsync(
           AddFilesAction(
-            files: payload.attachments?.where((a) => a != null).cast<SharedAttachment>() ?? <SharedAttachment>[],
+            files:
+                payload.attachments
+                    ?.where((a) => a != null)
+                    .cast<SharedAttachment>() ??
+                <SharedAttachment>[],
             converter: CrossFileConverters.convertSharedAttachment,
           ),
         );
@@ -352,7 +361,9 @@ class LoadSelectionFromArgsAction extends AsyncReduxActionWithResult<SelectedSen
 }
 
 /// Removes all files from the list.
-class ClearSelectionAction extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> with GlobalActions {
+class ClearSelectionAction
+    extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>>
+    with GlobalActions {
   @override
   List<CrossFile> reduce() {
     return const [];

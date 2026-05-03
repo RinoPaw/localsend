@@ -26,16 +26,15 @@ class _LanguagePageState extends State<LanguagePage> {
   @override
   Widget build(BuildContext context) {
     final t = Translations.of(context);
-    final activeLocale = context.ref.watch(settingsProvider.select((s) => s.locale));
+    final activeLocale = context.ref.watch(
+      settingsProvider.select((s) => s.locale),
+    );
     return Scaffold(
       appBar: basicLocalSendAppbar(t.sendTab.selection.title),
       body: ResponsiveListView(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         children: [
-          ...[
-            null,
-            ...AppLocale.values,
-          ].map((locale) {
+          ...[null, ...AppLocale.values].map((locale) {
             return ListTile(
               onTap: () async {
                 await context.ref.notifier(settingsProvider).setLocale(locale);
@@ -48,7 +47,10 @@ class _LanguagePageState extends State<LanguagePage> {
               title: Row(
                 children: [
                   Flexible(
-                    child: Text(locale?.humanName ?? t.settingsTab.general.languageOptions.system),
+                    child: Text(
+                      locale?.humanName ??
+                          t.settingsTab.general.languageOptions.system,
+                    ),
                   ),
                   if (locale == activeLocale) ...[
                     const SizedBox(width: 10),

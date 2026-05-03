@@ -30,7 +30,9 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
     getNetworkInterfaces(whitelist: null, blacklist: null).then((value) {
       if (mounted) {
         setState(() {
-          rawInterfaces = value.map((e) => (e.name, e.addresses.map((a) => a.address).toList())).toList();
+          rawInterfaces = value
+              .map((e) => (e.name, e.addresses.map((a) => a.address).toList()))
+              .toList();
         });
       }
     });
@@ -39,8 +41,10 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
   @override
   Widget build(BuildContext context) {
     final settings = context.watch(settingsProvider);
-    final currList = settings.networkWhitelist ?? settings.networkBlacklist ?? [];
-    final Future<void> Function(List<String>?) updateFunction = settings.networkWhitelist != null
+    final currList =
+        settings.networkWhitelist ?? settings.networkBlacklist ?? [];
+    final Future<void> Function(List<String>?) updateFunction =
+        settings.networkWhitelist != null
         ? context.notifier(settingsProvider).setNetworkWhitelist
         : context.notifier(settingsProvider).setNetworkBlacklist;
     return Scaffold(
@@ -51,18 +55,13 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
         child: ResponsiveListView(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           children: [
-            Text(
-              t.networkInterfacesPage.info,
-              textAlign: TextAlign.center,
-            ),
+            Text(t.networkInterfacesPage.info, textAlign: TextAlign.center),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
                 t.networkInterfacesPage.preview,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
             ScrollConfiguration(
@@ -120,14 +119,20 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                   value: settings.networkWhitelist != null,
                   onChanged: (value) async {
                     if (value == false) {
-                      await context.notifier(settingsProvider).setNetworkWhitelist(null);
+                      await context
+                          .notifier(settingsProvider)
+                          .setNetworkWhitelist(null);
                     } else {
-                      await context.notifier(settingsProvider).setNetworkWhitelist(switch (currList) {
-                        [] => [''],
-                        _ => [...currList],
-                      });
+                      await context
+                          .notifier(settingsProvider)
+                          .setNetworkWhitelist(switch (currList) {
+                            [] => [''],
+                            _ => [...currList],
+                          });
                       if (context.mounted) {
-                        await context.notifier(settingsProvider).setNetworkBlacklist(null);
+                        await context
+                            .notifier(settingsProvider)
+                            .setNetworkBlacklist(null);
                       }
                     }
                   },
@@ -137,14 +142,20 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                   value: settings.networkBlacklist != null,
                   onChanged: (value) async {
                     if (value == false) {
-                      await context.notifier(settingsProvider).setNetworkBlacklist(null);
+                      await context
+                          .notifier(settingsProvider)
+                          .setNetworkBlacklist(null);
                     } else {
-                      await context.notifier(settingsProvider).setNetworkBlacklist(switch (currList) {
-                        [] => [''],
-                        _ => [...currList],
-                      });
+                      await context
+                          .notifier(settingsProvider)
+                          .setNetworkBlacklist(switch (currList) {
+                            [] => [''],
+                            _ => [...currList],
+                          });
                       if (context.mounted) {
-                        await context.notifier(settingsProvider).setNetworkWhitelist(null);
+                        await context
+                            .notifier(settingsProvider)
+                            .setNetworkWhitelist(null);
                       }
                     }
                   },
@@ -183,7 +194,8 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                 ),
               );
             }),
-            if (settings.networkWhitelist != null || settings.networkBlacklist != null)
+            if (settings.networkWhitelist != null ||
+                settings.networkBlacklist != null)
               LocalHero(
                 tag: 'network_interfaces_bottom',
                 child: Row(
@@ -193,9 +205,7 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${t.general.example}:',
-                          ),
+                          Text('${t.general.example}:'),
                           Text('123.123.123.123'),
                           Text('123.123.123.*'),
                         ],
@@ -204,10 +214,7 @@ class _NetworkInterfacesPageState extends State<NetworkInterfacesPage> {
                     const Spacer(),
                     FilledButton.icon(
                       onPressed: () async {
-                        await updateFunction([
-                          ...currList,
-                          '',
-                        ]);
+                        await updateFunction([...currList, '']);
                       },
                       icon: const Icon(Icons.add),
                       label: Text(t.general.add),

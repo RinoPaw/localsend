@@ -13,7 +13,9 @@ class QuickSaveFromFavoritesNotice extends StatelessWidget {
         context: context,
         builder: (_) => AlertDialog(
           title: Text(t.dialogs.quickSaveFromFavoritesNotice.title),
-          content: Text(t.dialogs.quickSaveFromFavoritesNotice.content.join('\n')),
+          content: Text(
+            t.dialogs.quickSaveFromFavoritesNotice.content.join('\n'),
+          ),
           actions: [
             TextButton(
               onPressed: () => context.pop(),

@@ -21,15 +21,13 @@ enum PurchaseItem {
     iosId: 'localsend_ios_donate_50',
   );
 
-  const PurchaseItem({
-    required this.androidId,
-    required this.iosId,
-  });
+  const PurchaseItem({required this.androidId, required this.iosId});
 
   final String androidId;
   final String iosId;
 
-  String get platformProductId => defaultTargetPlatform == TargetPlatform.android ? androidId : iosId;
+  String get platformProductId =>
+      defaultTargetPlatform == TargetPlatform.android ? androidId : iosId;
 }
 
 @MappableClass()

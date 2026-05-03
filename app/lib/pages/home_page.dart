@@ -44,11 +44,7 @@ class HomePage extends StatefulWidget {
   /// because the first init clears the cache
   final bool appStart;
 
-  const HomePage({
-    required this.initialTab,
-    required this.appStart,
-    super.key,
-  });
+  const HomePage({required this.initialTab, required this.appStart, super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -62,7 +58,9 @@ class _HomePageState extends State<HomePage> with Refena {
     super.initState();
 
     ensureRef((ref) async {
-      ref.redux(homePageControllerProvider).dispatch(ChangeTabAction(widget.initialTab));
+      ref
+          .redux(homePageControllerProvider)
+          .dispatch(ChangeTabAction(widget.initialTab));
       await postInit(context, ref, widget.appStart);
     });
   }
@@ -84,9 +82,12 @@ class _HomePageState extends State<HomePage> with Refena {
         });
       },
       onDragDone: (event) async {
-        if (event.files.length == 1 && Directory(event.files.first.path).existsSync()) {
+        if (event.files.length == 1 &&
+            Directory(event.files.first.path).existsSync()) {
           // user dropped a directory
-          await ref.redux(selectedSendingFilesProvider).dispatchAsync(AddDirectoryAction(event.files.first.path));
+          await ref
+              .redux(selectedSendingFilesProvider)
+              .dispatchAsync(AddDirectoryAction(event.files.first.path));
         } else {
           // user dropped one or more files
           await ref
@@ -110,9 +111,12 @@ class _HomePageState extends State<HomePage> with Refena {
                     children: [
                       NavigationRail(
                         selectedIndex: vm.currentTab.index,
-                        onDestinationSelected: (index) => vm.changeTab(HomeTab.values[index]),
+                        onDestinationSelected: (index) =>
+                            vm.changeTab(HomeTab.values[index]),
                         extended: sizingInformation.isDesktop,
-                        backgroundColor: Theme.of(context).cardColorWithElevation,
+                        backgroundColor: Theme.of(
+                          context,
+                        ).cardColorWithElevation,
                         leading: sizingInformation.isDesktop
                             ? Column(
                                 children: [
@@ -122,16 +126,17 @@ class _HomePageState extends State<HomePage> with Refena {
                                       : SizedBox(height: 20),
                                   const Text(
                                     'LocalSend',
-                                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                     textAlign: TextAlign.center,
                                   ),
                                   SizedBox(height: 20),
                                 ],
                               )
                             : checkPlatform([TargetPlatform.macOS])
-                            ? SizedBox(
-                                height: 20,
-                              )
+                            ? SizedBox(height: 20)
                             : null,
                         destinations: HomeTab.values.map((tab) {
                           return NavigationRailDestination(
@@ -173,7 +178,10 @@ class _HomePageState extends State<HomePage> with Refena {
                             children: [
                               const Icon(Icons.file_download, size: 128),
                               const SizedBox(height: 30),
-                              Text(t.sendTab.placeItems, style: Theme.of(context).textTheme.titleLarge),
+                              Text(
+                                t.sendTab.placeItems,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
                             ],
                           ),
                         ),
@@ -185,9 +193,13 @@ class _HomePageState extends State<HomePage> with Refena {
             bottomNavigationBar: sizingInformation.isMobile
                 ? NavigationBar(
                     selectedIndex: vm.currentTab.index,
-                    onDestinationSelected: (index) => vm.changeTab(HomeTab.values[index]),
+                    onDestinationSelected: (index) =>
+                        vm.changeTab(HomeTab.values[index]),
                     destinations: HomeTab.values.map((tab) {
-                      return NavigationDestination(icon: Icon(tab.icon), label: tab.label);
+                      return NavigationDestination(
+                        icon: Icon(tab.icon),
+                        label: tab.label,
+                      );
                     }).toList(),
                   )
                 : null,

@@ -7,9 +7,7 @@ class LoadingDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return const PopScope(
       canPop: false,
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 }

@@ -18,7 +18,10 @@ class TranslationsNe extends Translations {
     PluralResolver? cardinalResolver,
     PluralResolver? ordinalResolver,
     TranslationMetadata<AppLocale, Translations>? meta,
-  }) : assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
+  }) : assert(
+         overrides == null,
+         'Set "translation_overrides: true" in order to enable this feature.',
+       ),
        $meta =
            meta ??
            TranslationMetadata(
@@ -27,7 +30,10 @@ class TranslationsNe extends Translations {
              cardinalResolver: cardinalResolver,
              ordinalResolver: ordinalResolver,
            ),
-       super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver);
+       super(
+         cardinalResolver: cardinalResolver,
+         ordinalResolver: ordinalResolver,
+       );
 
   /// Metadata for the translations of <ne>.
   @override
@@ -36,7 +42,9 @@ class TranslationsNe extends Translations {
   late final TranslationsNe _root = this; // ignore: unused_field
 
   @override
-  TranslationsNe $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsNe(meta: meta ?? this.$meta);
+  TranslationsNe $copyWith({
+    TranslationMetadata<AppLocale, Translations>? meta,
+  }) => TranslationsNe(meta: meta ?? this.$meta);
 
   // Translations
   @override
@@ -46,35 +54,52 @@ class TranslationsNe extends Translations {
   @override
   late final _TranslationsGeneralNe general = _TranslationsGeneralNe._(_root);
   @override
-  late final _TranslationsReceiveTabNe receiveTab = _TranslationsReceiveTabNe._(_root);
+  late final _TranslationsReceiveTabNe receiveTab = _TranslationsReceiveTabNe._(
+    _root,
+  );
   @override
   late final _TranslationsSendTabNe sendTab = _TranslationsSendTabNe._(_root);
   @override
-  late final _TranslationsSettingsTabNe settingsTab = _TranslationsSettingsTabNe._(_root);
+  late final _TranslationsSettingsTabNe settingsTab =
+      _TranslationsSettingsTabNe._(_root);
   @override
-  late final _TranslationsTroubleshootPageNe troubleshootPage = _TranslationsTroubleshootPageNe._(_root);
+  late final _TranslationsTroubleshootPageNe troubleshootPage =
+      _TranslationsTroubleshootPageNe._(_root);
   @override
-  late final _TranslationsReceiveHistoryPageNe receiveHistoryPage = _TranslationsReceiveHistoryPageNe._(_root);
+  late final _TranslationsReceiveHistoryPageNe receiveHistoryPage =
+      _TranslationsReceiveHistoryPageNe._(_root);
   @override
-  late final _TranslationsApkPickerPageNe apkPickerPage = _TranslationsApkPickerPageNe._(_root);
+  late final _TranslationsApkPickerPageNe apkPickerPage =
+      _TranslationsApkPickerPageNe._(_root);
   @override
-  late final _TranslationsSelectedFilesPageNe selectedFilesPage = _TranslationsSelectedFilesPageNe._(_root);
+  late final _TranslationsSelectedFilesPageNe selectedFilesPage =
+      _TranslationsSelectedFilesPageNe._(_root);
   @override
-  late final _TranslationsReceivePageNe receivePage = _TranslationsReceivePageNe._(_root);
+  late final _TranslationsReceivePageNe receivePage =
+      _TranslationsReceivePageNe._(_root);
   @override
-  late final _TranslationsReceiveOptionsPageNe receiveOptionsPage = _TranslationsReceiveOptionsPageNe._(_root);
+  late final _TranslationsReceiveOptionsPageNe receiveOptionsPage =
+      _TranslationsReceiveOptionsPageNe._(_root);
   @override
-  late final _TranslationsSendPageNe sendPage = _TranslationsSendPageNe._(_root);
+  late final _TranslationsSendPageNe sendPage = _TranslationsSendPageNe._(
+    _root,
+  );
   @override
-  late final _TranslationsProgressPageNe progressPage = _TranslationsProgressPageNe._(_root);
+  late final _TranslationsProgressPageNe progressPage =
+      _TranslationsProgressPageNe._(_root);
   @override
-  late final _TranslationsWebSharePageNe webSharePage = _TranslationsWebSharePageNe._(_root);
+  late final _TranslationsWebSharePageNe webSharePage =
+      _TranslationsWebSharePageNe._(_root);
   @override
-  late final _TranslationsAboutPageNe aboutPage = _TranslationsAboutPageNe._(_root);
+  late final _TranslationsAboutPageNe aboutPage = _TranslationsAboutPageNe._(
+    _root,
+  );
   @override
-  late final _TranslationsChangelogPageNe changelogPage = _TranslationsChangelogPageNe._(_root);
+  late final _TranslationsChangelogPageNe changelogPage =
+      _TranslationsChangelogPageNe._(_root);
   @override
-  late final _TranslationsAliasGeneratorNe aliasGenerator = _TranslationsAliasGeneratorNe._(_root);
+  late final _TranslationsAliasGeneratorNe aliasGenerator =
+      _TranslationsAliasGeneratorNe._(_root);
   @override
   late final _TranslationsDialogsNe dialogs = _TranslationsDialogsNe._(_root);
   @override
@@ -82,18 +107,24 @@ class TranslationsNe extends Translations {
   @override
   late final _TranslationsWebNe web = _TranslationsWebNe._(_root);
   @override
-  late final _TranslationsAssetPickerNe assetPicker = _TranslationsAssetPickerNe._(_root);
+  late final _TranslationsAssetPickerNe assetPicker =
+      _TranslationsAssetPickerNe._(_root);
   @override
-  late final _TranslationsNetworkInterfacesPageNe networkInterfacesPage = _TranslationsNetworkInterfacesPageNe._(_root);
+  late final _TranslationsNetworkInterfacesPageNe networkInterfacesPage =
+      _TranslationsNetworkInterfacesPageNe._(_root);
   @override
-  late final _TranslationsDonationPageNe donationPage = _TranslationsDonationPageNe._(_root);
+  late final _TranslationsDonationPageNe donationPage =
+      _TranslationsDonationPageNe._(_root);
   @override
-  late final _TranslationsSanitizationNe sanitization = _TranslationsSanitizationNe._(_root);
+  late final _TranslationsSanitizationNe sanitization =
+      _TranslationsSanitizationNe._(_root);
 }
 
 // Path: general
 class _TranslationsGeneralNe extends TranslationsGeneralEn {
-  _TranslationsGeneralNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsGeneralNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -178,7 +209,9 @@ class _TranslationsGeneralNe extends TranslationsGeneralEn {
 
 // Path: receiveTab
 class _TranslationsReceiveTabNe extends TranslationsReceiveTabEn {
-  _TranslationsReceiveTabNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsReceiveTabNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -186,14 +219,18 @@ class _TranslationsReceiveTabNe extends TranslationsReceiveTabEn {
   @override
   String get title => 'प्राप्त गर्नुहोस्';
   @override
-  late final _TranslationsReceiveTabInfoBoxNe infoBox = _TranslationsReceiveTabInfoBoxNe._(_root);
+  late final _TranslationsReceiveTabInfoBoxNe infoBox =
+      _TranslationsReceiveTabInfoBoxNe._(_root);
   @override
-  late final _TranslationsReceiveTabQuickSaveNe quickSave = _TranslationsReceiveTabQuickSaveNe._(_root);
+  late final _TranslationsReceiveTabQuickSaveNe quickSave =
+      _TranslationsReceiveTabQuickSaveNe._(_root);
 }
 
 // Path: sendTab
 class _TranslationsSendTabNe extends TranslationsSendTabEn {
-  _TranslationsSendTabNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSendTabNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -201,11 +238,14 @@ class _TranslationsSendTabNe extends TranslationsSendTabEn {
   @override
   String get title => 'पठाउनुहोस्';
   @override
-  late final _TranslationsSendTabSelectionNe selection = _TranslationsSendTabSelectionNe._(_root);
+  late final _TranslationsSendTabSelectionNe selection =
+      _TranslationsSendTabSelectionNe._(_root);
   @override
-  late final _TranslationsSendTabPickerNe picker = _TranslationsSendTabPickerNe._(_root);
+  late final _TranslationsSendTabPickerNe picker =
+      _TranslationsSendTabPickerNe._(_root);
   @override
-  String get shareIntentInfo => 'तपाईले आफ्नो मोबाइल उपकरणको "साझेदारी" सुविधा पनि प्रयोग गर्न सक्नुहुन्छ फाइलहरू थप सजिलै चयन गर्न।';
+  String get shareIntentInfo =>
+      'तपाईले आफ्नो मोबाइल उपकरणको "साझेदारी" सुविधा पनि प्रयोग गर्न सक्नुहुन्छ फाइलहरू थप सजिलै चयन गर्न।';
   @override
   String get nearbyDevices => 'नजिकैका उपकरणहरू';
   @override
@@ -215,11 +255,13 @@ class _TranslationsSendTabNe extends TranslationsSendTabEn {
   @override
   String get sendMode => 'पठाउने मोड';
   @override
-  late final _TranslationsSendTabSendModesNe sendModes = _TranslationsSendTabSendModesNe._(_root);
+  late final _TranslationsSendTabSendModesNe sendModes =
+      _TranslationsSendTabSendModesNe._(_root);
   @override
   String get sendModeHelp => 'स्पष्टीकरण';
   @override
-  String get help => 'कृपया सुनिश्चित गर्नुहोस् कि इच्छित लक्ष्य पनि उही वाइफाइ नेटवर्कमा छ।';
+  String get help =>
+      'कृपया सुनिश्चित गर्नुहोस् कि इच्छित लक्ष्य पनि उही वाइफाइ नेटवर्कमा छ।';
   @override
   String get placeItems => 'साझेदारी गर्न वस्तुहरू राख्नुहोस्।';
   @override
@@ -228,7 +270,9 @@ class _TranslationsSendTabNe extends TranslationsSendTabEn {
 
 // Path: settingsTab
 class _TranslationsSettingsTabNe extends TranslationsSettingsTabEn {
-  _TranslationsSettingsTabNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSettingsTabNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -236,22 +280,29 @@ class _TranslationsSettingsTabNe extends TranslationsSettingsTabEn {
   @override
   String get title => 'सेटिङहरू';
   @override
-  late final _TranslationsSettingsTabGeneralNe general = _TranslationsSettingsTabGeneralNe._(_root);
+  late final _TranslationsSettingsTabGeneralNe general =
+      _TranslationsSettingsTabGeneralNe._(_root);
   @override
-  late final _TranslationsSettingsTabReceiveNe receive = _TranslationsSettingsTabReceiveNe._(_root);
+  late final _TranslationsSettingsTabReceiveNe receive =
+      _TranslationsSettingsTabReceiveNe._(_root);
   @override
-  late final _TranslationsSettingsTabNetworkNe network = _TranslationsSettingsTabNetworkNe._(_root);
+  late final _TranslationsSettingsTabNetworkNe network =
+      _TranslationsSettingsTabNetworkNe._(_root);
   @override
   String get advancedSettings => 'उन्नत सेटिङहरू';
   @override
-  late final _TranslationsSettingsTabSendNe send = _TranslationsSettingsTabSendNe._(_root);
+  late final _TranslationsSettingsTabSendNe send =
+      _TranslationsSettingsTabSendNe._(_root);
   @override
-  late final _TranslationsSettingsTabOtherNe other = _TranslationsSettingsTabOtherNe._(_root);
+  late final _TranslationsSettingsTabOtherNe other =
+      _TranslationsSettingsTabOtherNe._(_root);
 }
 
 // Path: troubleshootPage
 class _TranslationsTroubleshootPageNe extends TranslationsTroubleshootPageEn {
-  _TranslationsTroubleshootPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsTroubleshootPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -259,22 +310,29 @@ class _TranslationsTroubleshootPageNe extends TranslationsTroubleshootPageEn {
   @override
   String get title => 'समस्या निवारण गर्नुहोस्';
   @override
-  String get subTitle => 'के एपले अपेक्षा गरेअनुसार काम गर्दैन? यहाँ तपाईंले समस्याहरूको केही सामान्य समाधानहरू फेला पार्न सक्नुहुन्छ।';
+  String get subTitle =>
+      'के एपले अपेक्षा गरेअनुसार काम गर्दैन? यहाँ तपाईंले समस्याहरूको केही सामान्य समाधानहरू फेला पार्न सक्नुहुन्छ।';
   @override
   String get solution => 'समाधान:';
   @override
   String get fixButton => 'स्वतः समाधान गर्नुहोस्';
   @override
-  late final _TranslationsTroubleshootPageFirewallNe firewall = _TranslationsTroubleshootPageFirewallNe._(_root);
+  late final _TranslationsTroubleshootPageFirewallNe firewall =
+      _TranslationsTroubleshootPageFirewallNe._(_root);
   @override
-  late final _TranslationsTroubleshootPageNoConnectionNe noConnection = _TranslationsTroubleshootPageNoConnectionNe._(_root);
+  late final _TranslationsTroubleshootPageNoConnectionNe noConnection =
+      _TranslationsTroubleshootPageNoConnectionNe._(_root);
   @override
-  late final _TranslationsTroubleshootPageNoDiscoveryNe noDiscovery = _TranslationsTroubleshootPageNoDiscoveryNe._(_root);
+  late final _TranslationsTroubleshootPageNoDiscoveryNe noDiscovery =
+      _TranslationsTroubleshootPageNoDiscoveryNe._(_root);
 }
 
 // Path: receiveHistoryPage
-class _TranslationsReceiveHistoryPageNe extends TranslationsReceiveHistoryPageEn {
-  _TranslationsReceiveHistoryPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsReceiveHistoryPageNe
+    extends TranslationsReceiveHistoryPageEn {
+  _TranslationsReceiveHistoryPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -288,12 +346,15 @@ class _TranslationsReceiveHistoryPageNe extends TranslationsReceiveHistoryPageEn
   @override
   String get empty => 'इतिहास खाली छ।';
   @override
-  late final _TranslationsReceiveHistoryPageEntryActionsNe entryActions = _TranslationsReceiveHistoryPageEntryActionsNe._(_root);
+  late final _TranslationsReceiveHistoryPageEntryActionsNe entryActions =
+      _TranslationsReceiveHistoryPageEntryActionsNe._(_root);
 }
 
 // Path: apkPickerPage
 class _TranslationsApkPickerPageNe extends TranslationsApkPickerPageEn {
-  _TranslationsApkPickerPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsApkPickerPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -303,14 +364,17 @@ class _TranslationsApkPickerPageNe extends TranslationsApkPickerPageEn {
   @override
   String get excludeSystemApps => 'प्रणाली एपहरू समावेश नगर्नुहोस्';
   @override
-  String get excludeAppsWithoutLaunchIntent => 'सुरु गर्न नसकिने एपहरू बहिष्कार गर्नुहोस्';
+  String get excludeAppsWithoutLaunchIntent =>
+      'सुरु गर्न नसकिने एपहरू बहिष्कार गर्नुहोस्';
   @override
   String apps({required Object n}) => '${n} अनुप्रयोग';
 }
 
 // Path: selectedFilesPage
 class _TranslationsSelectedFilesPageNe extends TranslationsSelectedFilesPageEn {
-  _TranslationsSelectedFilesPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSelectedFilesPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -321,17 +385,20 @@ class _TranslationsSelectedFilesPageNe extends TranslationsSelectedFilesPageEn {
 
 // Path: receivePage
 class _TranslationsReceivePageNe extends TranslationsReceivePageEn {
-  _TranslationsReceivePageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsReceivePageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
   // Translations
   @override
-  String subTitle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('ne'))(
-    n,
-    one: 'तपाईंलाई एउटा फाइल पठाउन चाहन्छ',
-    other: 'तपाईलाई ${n} फाइलहरू पठाउन चाहन्छ',
-  );
+  String subTitle({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('ne'))(
+        n,
+        one: 'तपाईंलाई एउटा फाइल पठाउन चाहन्छ',
+        other: 'तपाईलाई ${n} फाइलहरू पठाउन चाहन्छ',
+      );
   @override
   String get subTitleMessage => 'तपाईलाई सन्देश पठाइयो:';
   @override
@@ -341,8 +408,11 @@ class _TranslationsReceivePageNe extends TranslationsReceivePageEn {
 }
 
 // Path: receiveOptionsPage
-class _TranslationsReceiveOptionsPageNe extends TranslationsReceiveOptionsPageEn {
-  _TranslationsReceiveOptionsPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsReceiveOptionsPageNe
+    extends TranslationsReceiveOptionsPageEn {
+  _TranslationsReceiveOptionsPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -361,7 +431,9 @@ class _TranslationsReceiveOptionsPageNe extends TranslationsReceiveOptionsPageEn
 
 // Path: sendPage
 class _TranslationsSendPageNe extends TranslationsSendPageEn {
-  _TranslationsSendPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSendPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -378,7 +450,9 @@ class _TranslationsSendPageNe extends TranslationsSendPageEn {
 
 // Path: progressPage
 class _TranslationsProgressPageNe extends TranslationsProgressPageEn {
-  _TranslationsProgressPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsProgressPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -390,12 +464,15 @@ class _TranslationsProgressPageNe extends TranslationsProgressPageEn {
   @override
   String get savedToGallery => 'फोटोहरूमा सुरक्षित गरियो';
   @override
-  late final _TranslationsProgressPageTotalNe total = _TranslationsProgressPageTotalNe._(_root);
+  late final _TranslationsProgressPageTotalNe total =
+      _TranslationsProgressPageTotalNe._(_root);
 }
 
 // Path: webSharePage
 class _TranslationsWebSharePageNe extends TranslationsWebSharePageEn {
-  _TranslationsWebSharePageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsWebSharePageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -409,11 +486,12 @@ class _TranslationsWebSharePageNe extends TranslationsWebSharePageEn {
   @override
   String get error => 'सर्भर सुरु गर्दा एउटा त्रुटि भयो।';
   @override
-  String openLink({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('ne'))(
-    n,
-    one: 'यो लिङ्क आफ्नो ब्राउजरमा खोल्नुहोस्:',
-    other: 'आफ्नो ब्राउजरमा यी मध्ये एउटा लिङ्क खोल्नुहोस्:',
-  );
+  String openLink({required num n}) =>
+      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('ne'))(
+        n,
+        one: 'यो लिङ्क आफ्नो ब्राउजरमा खोल्नुहोस्:',
+        other: 'आफ्नो ब्राउजरमा यी मध्ये एउटा लिङ्क खोल्नुहोस्:',
+      );
   @override
   String get requests => 'अनुरोध';
   @override
@@ -421,7 +499,8 @@ class _TranslationsWebSharePageNe extends TranslationsWebSharePageEn {
   @override
   String get encryption => _root.settingsTab.network.encryption;
   @override
-  String get encryptionHint => 'LocalSend एक स्वयंसिग्ध प्रमाणपत्र प्रयोग गर्दछ। तपाईंले ब्राउजरमा यसलाई स्वीकार्नु पर्दछ।';
+  String get encryptionHint =>
+      'LocalSend एक स्वयंसिग्ध प्रमाणपत्र प्रयोग गर्दछ। तपाईंले ब्राउजरमा यसलाई स्वीकार्नु पर्दछ।';
   @override
   String pendingRequests({required Object n}) => 'लंबित अनुरोध: ${n}';
   @override
@@ -434,7 +513,9 @@ class _TranslationsWebSharePageNe extends TranslationsWebSharePageEn {
 
 // Path: aboutPage
 class _TranslationsAboutPageNe extends TranslationsAboutPageEn {
-  _TranslationsAboutPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsAboutPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -458,7 +539,9 @@ class _TranslationsAboutPageNe extends TranslationsAboutPageEn {
 
 // Path: changelogPage
 class _TranslationsChangelogPageNe extends TranslationsChangelogPageEn {
-  _TranslationsChangelogPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsChangelogPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -469,7 +552,9 @@ class _TranslationsChangelogPageNe extends TranslationsChangelogPageEn {
 
 // Path: aliasGenerator
 class _TranslationsAliasGeneratorNe extends TranslationsAliasGeneratorEn {
-  _TranslationsAliasGeneratorNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsAliasGeneratorNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -547,73 +632,107 @@ class _TranslationsAliasGeneratorNe extends TranslationsAliasGeneratorEn {
 
   /// In some languages, the adjective must be last.
   @override
-  String combination({required Object adjective, required Object fruit}) => '${adjective} ${fruit}';
+  String combination({required Object adjective, required Object fruit}) =>
+      '${adjective} ${fruit}';
 }
 
 // Path: dialogs
 class _TranslationsDialogsNe extends TranslationsDialogsEn {
-  _TranslationsDialogsNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
   // Translations
   @override
-  late final _TranslationsDialogsAddFileNe addFile = _TranslationsDialogsAddFileNe._(_root);
+  late final _TranslationsDialogsAddFileNe addFile =
+      _TranslationsDialogsAddFileNe._(_root);
   @override
-  late final _TranslationsDialogsAddressInputNe addressInput = _TranslationsDialogsAddressInputNe._(_root);
+  late final _TranslationsDialogsAddressInputNe addressInput =
+      _TranslationsDialogsAddressInputNe._(_root);
   @override
-  late final _TranslationsDialogsCancelSessionNe cancelSession = _TranslationsDialogsCancelSessionNe._(_root);
+  late final _TranslationsDialogsCancelSessionNe cancelSession =
+      _TranslationsDialogsCancelSessionNe._(_root);
   @override
-  late final _TranslationsDialogsCannotOpenFileNe cannotOpenFile = _TranslationsDialogsCannotOpenFileNe._(_root);
+  late final _TranslationsDialogsCannotOpenFileNe cannotOpenFile =
+      _TranslationsDialogsCannotOpenFileNe._(_root);
   @override
-  late final _TranslationsDialogsEncryptionDisabledNoticeNe encryptionDisabledNotice = _TranslationsDialogsEncryptionDisabledNoticeNe._(_root);
-  @override
-  late final _TranslationsDialogsErrorDialogNe errorDialog = _TranslationsDialogsErrorDialogNe._(_root);
-  @override
-  late final _TranslationsDialogsFileInfoNe fileInfo = _TranslationsDialogsFileInfoNe._(_root);
-  @override
-  late final _TranslationsDialogsFileNameInputNe fileNameInput = _TranslationsDialogsFileNameInputNe._(_root);
-  @override
-  late final _TranslationsDialogsLocalNetworkUnauthorizedNe localNetworkUnauthorized = _TranslationsDialogsLocalNetworkUnauthorizedNe._(_root);
-  @override
-  late final _TranslationsDialogsMessageInputNe messageInput = _TranslationsDialogsMessageInputNe._(_root);
-  @override
-  late final _TranslationsDialogsNoFilesNe noFiles = _TranslationsDialogsNoFilesNe._(_root);
-  @override
-  late final _TranslationsDialogsNoPermissionNe noPermission = _TranslationsDialogsNoPermissionNe._(_root);
-  @override
-  late final _TranslationsDialogsNotAvailableOnPlatformNe notAvailableOnPlatform = _TranslationsDialogsNotAvailableOnPlatformNe._(_root);
-  @override
-  late final _TranslationsDialogsQrNe qr = _TranslationsDialogsQrNe._(_root);
-  @override
-  late final _TranslationsDialogsQuickActionsNe quickActions = _TranslationsDialogsQuickActionsNe._(_root);
-  @override
-  late final _TranslationsDialogsQuickSaveNoticeNe quickSaveNotice = _TranslationsDialogsQuickSaveNoticeNe._(_root);
-  @override
-  late final _TranslationsDialogsSendModeHelpNe sendModeHelp = _TranslationsDialogsSendModeHelpNe._(_root);
-  @override
-  late final _TranslationsDialogsOpenFileNe openFile = _TranslationsDialogsOpenFileNe._(_root);
-  @override
-  late final _TranslationsDialogsFavoriteDeleteDialogNe favoriteDeleteDialog = _TranslationsDialogsFavoriteDeleteDialogNe._(_root);
-  @override
-  late final _TranslationsDialogsFavoriteDialogNe favoriteDialog = _TranslationsDialogsFavoriteDialogNe._(_root);
-  @override
-  late final _TranslationsDialogsFavoriteEditDialogNe favoriteEditDialog = _TranslationsDialogsFavoriteEditDialogNe._(_root);
-  @override
-  late final _TranslationsDialogsHistoryClearDialogNe historyClearDialog = _TranslationsDialogsHistoryClearDialogNe._(_root);
-  @override
-  late final _TranslationsDialogsQuickSaveFromFavoritesNoticeNe quickSaveFromFavoritesNotice = _TranslationsDialogsQuickSaveFromFavoritesNoticeNe._(
+  late final _TranslationsDialogsEncryptionDisabledNoticeNe
+  encryptionDisabledNotice = _TranslationsDialogsEncryptionDisabledNoticeNe._(
     _root,
   );
   @override
+  late final _TranslationsDialogsErrorDialogNe errorDialog =
+      _TranslationsDialogsErrorDialogNe._(_root);
+  @override
+  late final _TranslationsDialogsFileInfoNe fileInfo =
+      _TranslationsDialogsFileInfoNe._(_root);
+  @override
+  late final _TranslationsDialogsFileNameInputNe fileNameInput =
+      _TranslationsDialogsFileNameInputNe._(_root);
+  @override
+  late final _TranslationsDialogsLocalNetworkUnauthorizedNe
+  localNetworkUnauthorized = _TranslationsDialogsLocalNetworkUnauthorizedNe._(
+    _root,
+  );
+  @override
+  late final _TranslationsDialogsMessageInputNe messageInput =
+      _TranslationsDialogsMessageInputNe._(_root);
+  @override
+  late final _TranslationsDialogsNoFilesNe noFiles =
+      _TranslationsDialogsNoFilesNe._(_root);
+  @override
+  late final _TranslationsDialogsNoPermissionNe noPermission =
+      _TranslationsDialogsNoPermissionNe._(_root);
+  @override
+  late final _TranslationsDialogsNotAvailableOnPlatformNe
+  notAvailableOnPlatform = _TranslationsDialogsNotAvailableOnPlatformNe._(
+    _root,
+  );
+  @override
+  late final _TranslationsDialogsQrNe qr = _TranslationsDialogsQrNe._(_root);
+  @override
+  late final _TranslationsDialogsQuickActionsNe quickActions =
+      _TranslationsDialogsQuickActionsNe._(_root);
+  @override
+  late final _TranslationsDialogsQuickSaveNoticeNe quickSaveNotice =
+      _TranslationsDialogsQuickSaveNoticeNe._(_root);
+  @override
+  late final _TranslationsDialogsSendModeHelpNe sendModeHelp =
+      _TranslationsDialogsSendModeHelpNe._(_root);
+  @override
+  late final _TranslationsDialogsOpenFileNe openFile =
+      _TranslationsDialogsOpenFileNe._(_root);
+  @override
+  late final _TranslationsDialogsFavoriteDeleteDialogNe favoriteDeleteDialog =
+      _TranslationsDialogsFavoriteDeleteDialogNe._(_root);
+  @override
+  late final _TranslationsDialogsFavoriteDialogNe favoriteDialog =
+      _TranslationsDialogsFavoriteDialogNe._(_root);
+  @override
+  late final _TranslationsDialogsFavoriteEditDialogNe favoriteEditDialog =
+      _TranslationsDialogsFavoriteEditDialogNe._(_root);
+  @override
+  late final _TranslationsDialogsHistoryClearDialogNe historyClearDialog =
+      _TranslationsDialogsHistoryClearDialogNe._(_root);
+  @override
+  late final _TranslationsDialogsQuickSaveFromFavoritesNoticeNe
+  quickSaveFromFavoritesNotice =
+      _TranslationsDialogsQuickSaveFromFavoritesNoticeNe._(_root);
+  @override
   late final _TranslationsDialogsPinNe pin = _TranslationsDialogsPinNe._(_root);
   @override
-  late final _TranslationsDialogsZoomNe zoom = _TranslationsDialogsZoomNe._(_root);
+  late final _TranslationsDialogsZoomNe zoom = _TranslationsDialogsZoomNe._(
+    _root,
+  );
 }
 
 // Path: tray
 class _TranslationsTrayNe extends TranslationsTrayEn {
-  _TranslationsTrayNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsTrayNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -628,7 +747,9 @@ class _TranslationsTrayNe extends TranslationsTrayEn {
 
 // Path: web
 class _TranslationsWebNe extends TranslationsWebEn {
-  _TranslationsWebNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsWebNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -653,7 +774,9 @@ class _TranslationsWebNe extends TranslationsWebEn {
 
 // Path: assetPicker
 class _TranslationsAssetPickerNe extends TranslationsAssetPickerEn {
-  _TranslationsAssetPickerNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsAssetPickerNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -679,11 +802,14 @@ class _TranslationsAssetPickerNe extends TranslationsAssetPickerEn {
   @override
   String get unSupportedAssetType => 'असमर्थित फाईल प्रकार।';
   @override
-  String get unableToAccessAll => 'यस उपकरणमा सबै फाईलहरूमा पहुँच प्राप्त गर्न सकिएन';
+  String get unableToAccessAll =>
+      'यस उपकरणमा सबै फाईलहरूमा पहुँच प्राप्त गर्न सकिएन';
   @override
-  String get viewingLimitedAssetsTip => 'केवल फाईलहरू र एल्बमहरूलाई अनुप्रयोगको लागि पहुँचयोग्य हेर्नुहोस्।';
+  String get viewingLimitedAssetsTip =>
+      'केवल फाईलहरू र एल्बमहरूलाई अनुप्रयोगको लागि पहुँचयोग्य हेर्नुहोस्।';
   @override
-  String get changeAccessibleLimitedAssets => 'पहुँचयोग्य फाईलहरू अद्यावधिक गर्न क्लिक गर्नुहोस्';
+  String get changeAccessibleLimitedAssets =>
+      'पहुँचयोग्य फाईलहरू अद्यावधिक गर्न क्लिक गर्नुहोस्';
   @override
   String get accessAllTip =>
       'अनुप्रयोगमा केहि फाईलहरूलाई मात्र पहुँच गर्न सक्दछ। प्रणाली सेटिङ्समा जानुहोस् र उपकरणमा सबै मिडिया मा अनुप्रयोगलाई पहुँच दिनुहोस्।';
@@ -718,8 +844,11 @@ class _TranslationsAssetPickerNe extends TranslationsAssetPickerEn {
 }
 
 // Path: networkInterfacesPage
-class _TranslationsNetworkInterfacesPageNe extends TranslationsNetworkInterfacesPageEn {
-  _TranslationsNetworkInterfacesPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsNetworkInterfacesPageNe
+    extends TranslationsNetworkInterfacesPageEn {
+  _TranslationsNetworkInterfacesPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -739,7 +868,9 @@ class _TranslationsNetworkInterfacesPageNe extends TranslationsNetworkInterfaces
 
 // Path: donationPage
 class _TranslationsDonationPageNe extends TranslationsDonationPageEn {
-  _TranslationsDonationPageNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDonationPageNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -759,7 +890,9 @@ class _TranslationsDonationPageNe extends TranslationsDonationPageEn {
 
 // Path: sanitization
 class _TranslationsSanitizationNe extends TranslationsSanitizationEn {
-  _TranslationsSanitizationNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSanitizationNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -772,7 +905,9 @@ class _TranslationsSanitizationNe extends TranslationsSanitizationEn {
 
 // Path: receiveTab.infoBox
 class _TranslationsReceiveTabInfoBoxNe extends TranslationsReceiveTabInfoBoxEn {
-  _TranslationsReceiveTabInfoBoxNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsReceiveTabInfoBoxNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -786,8 +921,11 @@ class _TranslationsReceiveTabInfoBoxNe extends TranslationsReceiveTabInfoBoxEn {
 }
 
 // Path: receiveTab.quickSave
-class _TranslationsReceiveTabQuickSaveNe extends TranslationsReceiveTabQuickSaveEn {
-  _TranslationsReceiveTabQuickSaveNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsReceiveTabQuickSaveNe
+    extends TranslationsReceiveTabQuickSaveEn {
+  _TranslationsReceiveTabQuickSaveNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -802,7 +940,9 @@ class _TranslationsReceiveTabQuickSaveNe extends TranslationsReceiveTabQuickSave
 
 // Path: sendTab.selection
 class _TranslationsSendTabSelectionNe extends TranslationsSendTabSelectionEn {
-  _TranslationsSendTabSelectionNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSendTabSelectionNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -817,7 +957,9 @@ class _TranslationsSendTabSelectionNe extends TranslationsSendTabSelectionEn {
 
 // Path: sendTab.picker
 class _TranslationsSendTabPickerNe extends TranslationsSendTabPickerEn {
-  _TranslationsSendTabPickerNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSendTabPickerNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -838,7 +980,9 @@ class _TranslationsSendTabPickerNe extends TranslationsSendTabPickerEn {
 
 // Path: sendTab.sendModes
 class _TranslationsSendTabSendModesNe extends TranslationsSendTabSendModesEn {
-  _TranslationsSendTabSendModesNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSendTabSendModesNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -852,8 +996,11 @@ class _TranslationsSendTabSendModesNe extends TranslationsSendTabSendModesEn {
 }
 
 // Path: settingsTab.general
-class _TranslationsSettingsTabGeneralNe extends TranslationsSettingsTabGeneralEn {
-  _TranslationsSettingsTabGeneralNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsSettingsTabGeneralNe
+    extends TranslationsSettingsTabGeneralEn {
+  _TranslationsSettingsTabGeneralNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -863,17 +1010,23 @@ class _TranslationsSettingsTabGeneralNe extends TranslationsSettingsTabGeneralEn
   @override
   String get brightness => 'थीम';
   @override
-  late final _TranslationsSettingsTabGeneralBrightnessOptionsNe brightnessOptions = _TranslationsSettingsTabGeneralBrightnessOptionsNe._(_root);
+  late final _TranslationsSettingsTabGeneralBrightnessOptionsNe
+  brightnessOptions = _TranslationsSettingsTabGeneralBrightnessOptionsNe._(
+    _root,
+  );
   @override
   String get color => 'रंग';
   @override
-  late final _TranslationsSettingsTabGeneralColorOptionsNe colorOptions = _TranslationsSettingsTabGeneralColorOptionsNe._(_root);
+  late final _TranslationsSettingsTabGeneralColorOptionsNe colorOptions =
+      _TranslationsSettingsTabGeneralColorOptionsNe._(_root);
   @override
   String get language => 'भाषा';
   @override
-  late final _TranslationsSettingsTabGeneralLanguageOptionsNe languageOptions = _TranslationsSettingsTabGeneralLanguageOptionsNe._(_root);
+  late final _TranslationsSettingsTabGeneralLanguageOptionsNe languageOptions =
+      _TranslationsSettingsTabGeneralLanguageOptionsNe._(_root);
   @override
-  String get saveWindowPlacement => 'बन्द गरेपछि विन्डोको स्थिति सुरक्षित गर्नुहोस्';
+  String get saveWindowPlacement =>
+      'बन्द गरेपछि विन्डोको स्थिति सुरक्षित गर्नुहोस्';
   @override
   String get minimizeToTray => 'छोड्नुहोस्: ट्रेमा न्यूनतम गर्नुहोस्';
   @override
@@ -883,14 +1036,18 @@ class _TranslationsSettingsTabGeneralNe extends TranslationsSettingsTabGeneralEn
   @override
   String get animations => 'एनिमेसनहरू';
   @override
-  String get saveWindowPlacementWindows => 'बाहिर निस्किएपछि विन्डोको स्थिति सुरक्षित गर्नुहोस्';
+  String get saveWindowPlacementWindows =>
+      'बाहिर निस्किएपछि विन्डोको स्थिति सुरक्षित गर्नुहोस्';
   @override
   String get showInContextMenu => 'कन्टेक्स्ट मेनुमा LocalSend देखाउनुहोस्';
 }
 
 // Path: settingsTab.receive
-class _TranslationsSettingsTabReceiveNe extends TranslationsSettingsTabReceiveEn {
-  _TranslationsSettingsTabReceiveNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsSettingsTabReceiveNe
+    extends TranslationsSettingsTabReceiveEn {
+  _TranslationsSettingsTabReceiveNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -914,8 +1071,11 @@ class _TranslationsSettingsTabReceiveNe extends TranslationsSettingsTabReceiveEn
 }
 
 // Path: settingsTab.network
-class _TranslationsSettingsTabNetworkNe extends TranslationsSettingsTabNetworkEn {
-  _TranslationsSettingsTabNetworkNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsSettingsTabNetworkNe
+    extends TranslationsSettingsTabNetworkEn {
+  _TranslationsSettingsTabNetworkNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -953,12 +1113,15 @@ class _TranslationsSettingsTabNetworkNe extends TranslationsSettingsTabNetworkEn
   @override
   String get network => 'नेटवर्क';
   @override
-  late final _TranslationsSettingsTabNetworkNetworkOptionsNe networkOptions = _TranslationsSettingsTabNetworkNetworkOptionsNe._(_root);
+  late final _TranslationsSettingsTabNetworkNetworkOptionsNe networkOptions =
+      _TranslationsSettingsTabNetworkNetworkOptionsNe._(_root);
 }
 
 // Path: settingsTab.send
 class _TranslationsSettingsTabSendNe extends TranslationsSettingsTabSendEn {
-  _TranslationsSettingsTabSendNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSettingsTabSendNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -966,12 +1129,15 @@ class _TranslationsSettingsTabSendNe extends TranslationsSettingsTabSendEn {
   @override
   String get title => 'पठाउनुहोस्';
   @override
-  String get shareViaLinkAutoAccept => '"लिङ्क मार्फत साझेदारी" मोडमा स्वचालित रूपमा अनुरोधहरू स्वीकार गर्नुहोस्';
+  String get shareViaLinkAutoAccept =>
+      '"लिङ्क मार्फत साझेदारी" मोडमा स्वचालित रूपमा अनुरोधहरू स्वीकार गर्नुहोस्';
 }
 
 // Path: settingsTab.other
 class _TranslationsSettingsTabOtherNe extends TranslationsSettingsTabOtherEn {
-  _TranslationsSettingsTabOtherNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsSettingsTabOtherNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -989,14 +1155,18 @@ class _TranslationsSettingsTabOtherNe extends TranslationsSettingsTabOtherEn {
 }
 
 // Path: troubleshootPage.firewall
-class _TranslationsTroubleshootPageFirewallNe extends TranslationsTroubleshootPageFirewallEn {
-  _TranslationsTroubleshootPageFirewallNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsTroubleshootPageFirewallNe
+    extends TranslationsTroubleshootPageFirewallEn {
+  _TranslationsTroubleshootPageFirewallNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
   // Translations
   @override
-  String get symptom => 'यो यन्त्रले अन्य यन्त्रहरूमा फाइलहरू पठाउन सक्छ तर अन्य यन्त्रहरूले यस यन्त्रमा फाइलहरू पठाउन सक्दैनन्।';
+  String get symptom =>
+      'यो यन्त्रले अन्य यन्त्रहरूमा फाइलहरू पठाउन सक्छ तर अन्य यन्त्रहरूले यस यन्त्रमा फाइलहरू पठाउन सक्दैनन्।';
   @override
   String solution({required Object port}) =>
       'यो सम्भवतः फायरवाल समस्या हो। तपाईंले पोर्ट ${port} मा आगमन जडानहरू (UDP र TCP) लाई अनुमति दिएर यो समाधान गर्न सक्नुहुन्छ।';
@@ -1005,22 +1175,29 @@ class _TranslationsTroubleshootPageFirewallNe extends TranslationsTroubleshootPa
 }
 
 // Path: troubleshootPage.noConnection
-class _TranslationsTroubleshootPageNoConnectionNe extends TranslationsTroubleshootPageNoConnectionEn {
-  _TranslationsTroubleshootPageNoConnectionNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsTroubleshootPageNoConnectionNe
+    extends TranslationsTroubleshootPageNoConnectionEn {
+  _TranslationsTroubleshootPageNoConnectionNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
   // Translations
   @override
-  String get symptom => 'दुबै उपकरणहरूले एकअर्कालाई पत्ता लगाउन सक्दैनन् न त फाइलहरू साझेदारी गर्न सक्छन्।';
+  String get symptom =>
+      'दुबै उपकरणहरूले एकअर्कालाई पत्ता लगाउन सक्दैनन् न त फाइलहरू साझेदारी गर्न सक्छन्।';
   @override
   String get solution =>
       'के समस्या दुवै तर्फ छ? यदि त्यसो हो भने, तपाईंले दुवै यन्त्रहरू एउटै Wi-Fi नेटवर्कमा छन् र एउटै कन्फिगरेसन (पोर्ट, मल्टिकास्ट ठेगाना, इन्क्रिप्शन) साझा गर्छन् भनी सुनिश्चित गर्नुपर्छ। पहुँच बिन्दु (AP) आइसोलेसनको कारणले Wi-Fi नेटवर्कले सहभागीहरू बीच सञ्चारलाई अनुमति नदिन सक्छ। यस अवस्थामा, यो विकल्प राउटरमा असक्षम पारिएको हुनुपर्छ।';
 }
 
 // Path: troubleshootPage.noDiscovery
-class _TranslationsTroubleshootPageNoDiscoveryNe extends TranslationsTroubleshootPageNoDiscoveryEn {
-  _TranslationsTroubleshootPageNoDiscoveryNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsTroubleshootPageNoDiscoveryNe
+    extends TranslationsTroubleshootPageNoDiscoveryEn {
+  _TranslationsTroubleshootPageNoDiscoveryNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1033,8 +1210,11 @@ class _TranslationsTroubleshootPageNoDiscoveryNe extends TranslationsTroubleshoo
 }
 
 // Path: receiveHistoryPage.entryActions
-class _TranslationsReceiveHistoryPageEntryActionsNe extends TranslationsReceiveHistoryPageEntryActionsEn {
-  _TranslationsReceiveHistoryPageEntryActionsNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsReceiveHistoryPageEntryActionsNe
+    extends TranslationsReceiveHistoryPageEntryActionsEn {
+  _TranslationsReceiveHistoryPageEntryActionsNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1051,24 +1231,31 @@ class _TranslationsReceiveHistoryPageEntryActionsNe extends TranslationsReceiveH
 
 // Path: progressPage.total
 class _TranslationsProgressPageTotalNe extends TranslationsProgressPageTotalEn {
-  _TranslationsProgressPageTotalNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsProgressPageTotalNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
   // Translations
   @override
-  late final _TranslationsProgressPageTotalTitleNe title = _TranslationsProgressPageTotalTitleNe._(_root);
+  late final _TranslationsProgressPageTotalTitleNe title =
+      _TranslationsProgressPageTotalTitleNe._(_root);
   @override
-  String count({required Object curr, required Object n}) => 'फाइलहरू: ${curr} / ${n}';
+  String count({required Object curr, required Object n}) =>
+      'फाइलहरू: ${curr} / ${n}';
   @override
-  String size({required Object curr, required Object n}) => 'आकार: ${curr} / ${n}';
+  String size({required Object curr, required Object n}) =>
+      'आकार: ${curr} / ${n}';
   @override
   String speed({required Object speed}) => 'गति: ${speed}/s';
 }
 
 // Path: dialogs.addFile
 class _TranslationsDialogsAddFileNe extends TranslationsDialogsAddFileEn {
-  _TranslationsDialogsAddFileNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsAddFileNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1080,8 +1267,11 @@ class _TranslationsDialogsAddFileNe extends TranslationsDialogsAddFileEn {
 }
 
 // Path: dialogs.addressInput
-class _TranslationsDialogsAddressInputNe extends TranslationsDialogsAddressInputEn {
-  _TranslationsDialogsAddressInputNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsAddressInputNe
+    extends TranslationsDialogsAddressInputEn {
+  _TranslationsDialogsAddressInputNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1097,8 +1287,11 @@ class _TranslationsDialogsAddressInputNe extends TranslationsDialogsAddressInput
 }
 
 // Path: dialogs.cancelSession
-class _TranslationsDialogsCancelSessionNe extends TranslationsDialogsCancelSessionEn {
-  _TranslationsDialogsCancelSessionNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsCancelSessionNe
+    extends TranslationsDialogsCancelSessionEn {
+  _TranslationsDialogsCancelSessionNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1106,12 +1299,16 @@ class _TranslationsDialogsCancelSessionNe extends TranslationsDialogsCancelSessi
   @override
   String get title => 'फाइल स्थानान्तरण रद्द गर्नुहोस्';
   @override
-  String get content => 'के तपाइँ साँच्चै फाइल स्थानान्तरण रद्द गर्न चाहनुहुन्छ?';
+  String get content =>
+      'के तपाइँ साँच्चै फाइल स्थानान्तरण रद्द गर्न चाहनुहुन्छ?';
 }
 
 // Path: dialogs.cannotOpenFile
-class _TranslationsDialogsCannotOpenFileNe extends TranslationsDialogsCannotOpenFileEn {
-  _TranslationsDialogsCannotOpenFileNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsCannotOpenFileNe
+    extends TranslationsDialogsCannotOpenFileEn {
+  _TranslationsDialogsCannotOpenFileNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1124,8 +1321,11 @@ class _TranslationsDialogsCannotOpenFileNe extends TranslationsDialogsCannotOpen
 }
 
 // Path: dialogs.encryptionDisabledNotice
-class _TranslationsDialogsEncryptionDisabledNoticeNe extends TranslationsDialogsEncryptionDisabledNoticeEn {
-  _TranslationsDialogsEncryptionDisabledNoticeNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsEncryptionDisabledNoticeNe
+    extends TranslationsDialogsEncryptionDisabledNoticeEn {
+  _TranslationsDialogsEncryptionDisabledNoticeNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1138,8 +1338,11 @@ class _TranslationsDialogsEncryptionDisabledNoticeNe extends TranslationsDialogs
 }
 
 // Path: dialogs.errorDialog
-class _TranslationsDialogsErrorDialogNe extends TranslationsDialogsErrorDialogEn {
-  _TranslationsDialogsErrorDialogNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsErrorDialogNe
+    extends TranslationsDialogsErrorDialogEn {
+  _TranslationsDialogsErrorDialogNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1150,7 +1353,9 @@ class _TranslationsDialogsErrorDialogNe extends TranslationsDialogsErrorDialogEn
 
 // Path: dialogs.fileInfo
 class _TranslationsDialogsFileInfoNe extends TranslationsDialogsFileInfoEn {
-  _TranslationsDialogsFileInfoNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsFileInfoNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1170,8 +1375,11 @@ class _TranslationsDialogsFileInfoNe extends TranslationsDialogsFileInfoEn {
 }
 
 // Path: dialogs.fileNameInput
-class _TranslationsDialogsFileNameInputNe extends TranslationsDialogsFileNameInputEn {
-  _TranslationsDialogsFileNameInputNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsFileNameInputNe
+    extends TranslationsDialogsFileNameInputEn {
+  _TranslationsDialogsFileNameInputNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1183,8 +1391,11 @@ class _TranslationsDialogsFileNameInputNe extends TranslationsDialogsFileNameInp
 }
 
 // Path: dialogs.localNetworkUnauthorized
-class _TranslationsDialogsLocalNetworkUnauthorizedNe extends TranslationsDialogsLocalNetworkUnauthorizedEn {
-  _TranslationsDialogsLocalNetworkUnauthorizedNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsLocalNetworkUnauthorizedNe
+    extends TranslationsDialogsLocalNetworkUnauthorizedEn {
+  _TranslationsDialogsLocalNetworkUnauthorizedNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1199,8 +1410,11 @@ class _TranslationsDialogsLocalNetworkUnauthorizedNe extends TranslationsDialogs
 }
 
 // Path: dialogs.messageInput
-class _TranslationsDialogsMessageInputNe extends TranslationsDialogsMessageInputEn {
-  _TranslationsDialogsMessageInputNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsMessageInputNe
+    extends TranslationsDialogsMessageInputEn {
+  _TranslationsDialogsMessageInputNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1213,7 +1427,9 @@ class _TranslationsDialogsMessageInputNe extends TranslationsDialogsMessageInput
 
 // Path: dialogs.noFiles
 class _TranslationsDialogsNoFilesNe extends TranslationsDialogsNoFilesEn {
-  _TranslationsDialogsNoFilesNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsNoFilesNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1225,8 +1441,11 @@ class _TranslationsDialogsNoFilesNe extends TranslationsDialogsNoFilesEn {
 }
 
 // Path: dialogs.noPermission
-class _TranslationsDialogsNoPermissionNe extends TranslationsDialogsNoPermissionEn {
-  _TranslationsDialogsNoPermissionNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsNoPermissionNe
+    extends TranslationsDialogsNoPermissionEn {
+  _TranslationsDialogsNoPermissionNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1234,12 +1453,16 @@ class _TranslationsDialogsNoPermissionNe extends TranslationsDialogsNoPermission
   @override
   String get title => 'अनुमति नहीं है';
   @override
-  String get content => 'तपाईंले आवश्यक अनुमतिहरूको प्रदान गर्न दिएको छैन। कृपया सेटिङहरूमा तिनीहरूलाई प्रदान गर्नुहोस्।';
+  String get content =>
+      'तपाईंले आवश्यक अनुमतिहरूको प्रदान गर्न दिएको छैन। कृपया सेटिङहरूमा तिनीहरूलाई प्रदान गर्नुहोस्।';
 }
 
 // Path: dialogs.notAvailableOnPlatform
-class _TranslationsDialogsNotAvailableOnPlatformNe extends TranslationsDialogsNotAvailableOnPlatformEn {
-  _TranslationsDialogsNotAvailableOnPlatformNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsNotAvailableOnPlatformNe
+    extends TranslationsDialogsNotAvailableOnPlatformEn {
+  _TranslationsDialogsNotAvailableOnPlatformNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1252,7 +1475,9 @@ class _TranslationsDialogsNotAvailableOnPlatformNe extends TranslationsDialogsNo
 
 // Path: dialogs.qr
 class _TranslationsDialogsQrNe extends TranslationsDialogsQrEn {
-  _TranslationsDialogsQrNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsQrNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1262,8 +1487,11 @@ class _TranslationsDialogsQrNe extends TranslationsDialogsQrEn {
 }
 
 // Path: dialogs.quickActions
-class _TranslationsDialogsQuickActionsNe extends TranslationsDialogsQuickActionsEn {
-  _TranslationsDialogsQuickActionsNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsQuickActionsNe
+    extends TranslationsDialogsQuickActionsEn {
+  _TranslationsDialogsQuickActionsNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1283,8 +1511,11 @@ class _TranslationsDialogsQuickActionsNe extends TranslationsDialogsQuickActions
 }
 
 // Path: dialogs.quickSaveNotice
-class _TranslationsDialogsQuickSaveNoticeNe extends TranslationsDialogsQuickSaveNoticeEn {
-  _TranslationsDialogsQuickSaveNoticeNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsQuickSaveNoticeNe
+    extends TranslationsDialogsQuickSaveNoticeEn {
+  _TranslationsDialogsQuickSaveNoticeNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1297,8 +1528,11 @@ class _TranslationsDialogsQuickSaveNoticeNe extends TranslationsDialogsQuickSave
 }
 
 // Path: dialogs.sendModeHelp
-class _TranslationsDialogsSendModeHelpNe extends TranslationsDialogsSendModeHelpEn {
-  _TranslationsDialogsSendModeHelpNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsSendModeHelpNe
+    extends TranslationsDialogsSendModeHelpEn {
+  _TranslationsDialogsSendModeHelpNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1306,16 +1540,21 @@ class _TranslationsDialogsSendModeHelpNe extends TranslationsDialogsSendModeHelp
   @override
   String get title => 'पठाउने मोडहरू';
   @override
-  String get single => 'एउटा प्राप्तकर्तालाई फाइलहरू पठाउँछ। फाइलहरू स्थानान्तरण सम्पन्न भएपछि चयन खाली गरिनेछ।';
+  String get single =>
+      'एउटा प्राप्तकर्तालाई फाइलहरू पठाउँछ। फाइलहरू स्थानान्तरण सम्पन्न भएपछि चयन खाली गरिनेछ।';
   @override
-  String get multiple => 'धेरै प्राप्तकर्ताहरूलाई फाइलहरू पठाउँछ। फाइलहरू स्थानान्तरण समाप्त भएपछि चयन खाली गरिने छैन।';
+  String get multiple =>
+      'धेरै प्राप्तकर्ताहरूलाई फाइलहरू पठाउँछ। फाइलहरू स्थानान्तरण समाप्त भएपछि चयन खाली गरिने छैन।';
   @override
-  String get link => 'LocalSend इन्स्टल नगरेका प्राप्तकर्ताहरूले आफ्नो ब्राउजरमा लिङ्क खोलेर चयन गरिएका फाइलहरू डाउनलोड गर्न सक्छन्।';
+  String get link =>
+      'LocalSend इन्स्टल नगरेका प्राप्तकर्ताहरूले आफ्नो ब्राउजरमा लिङ्क खोलेर चयन गरिएका फाइलहरू डाउनलोड गर्न सक्छन्।';
 }
 
 // Path: dialogs.openFile
 class _TranslationsDialogsOpenFileNe extends TranslationsDialogsOpenFileEn {
-  _TranslationsDialogsOpenFileNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsOpenFileNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1327,21 +1566,28 @@ class _TranslationsDialogsOpenFileNe extends TranslationsDialogsOpenFileEn {
 }
 
 // Path: dialogs.favoriteDeleteDialog
-class _TranslationsDialogsFavoriteDeleteDialogNe extends TranslationsDialogsFavoriteDeleteDialogEn {
-  _TranslationsDialogsFavoriteDeleteDialogNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsFavoriteDeleteDialogNe
+    extends TranslationsDialogsFavoriteDeleteDialogEn {
+  _TranslationsDialogsFavoriteDeleteDialogNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
   // Translations
   @override
-  String content({required Object name}) => 'के तपाईं साँच्चै मनपर्ने "${name}" बाट मेटाउन चाहनुहुन्छ?';
+  String content({required Object name}) =>
+      'के तपाईं साँच्चै मनपर्ने "${name}" बाट मेटाउन चाहनुहुन्छ?';
   @override
   String get title => 'मनपर्नेहरूबाट हटाउनुहोस्';
 }
 
 // Path: dialogs.favoriteDialog
-class _TranslationsDialogsFavoriteDialogNe extends TranslationsDialogsFavoriteDialogEn {
-  _TranslationsDialogsFavoriteDialogNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsFavoriteDialogNe
+    extends TranslationsDialogsFavoriteDialogEn {
+  _TranslationsDialogsFavoriteDialogNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1355,8 +1601,11 @@ class _TranslationsDialogsFavoriteDialogNe extends TranslationsDialogsFavoriteDi
 }
 
 // Path: dialogs.favoriteEditDialog
-class _TranslationsDialogsFavoriteEditDialogNe extends TranslationsDialogsFavoriteEditDialogEn {
-  _TranslationsDialogsFavoriteEditDialogNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsFavoriteEditDialogNe
+    extends TranslationsDialogsFavoriteEditDialogEn {
+  _TranslationsDialogsFavoriteEditDialogNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1376,8 +1625,11 @@ class _TranslationsDialogsFavoriteEditDialogNe extends TranslationsDialogsFavori
 }
 
 // Path: dialogs.historyClearDialog
-class _TranslationsDialogsHistoryClearDialogNe extends TranslationsDialogsHistoryClearDialogEn {
-  _TranslationsDialogsHistoryClearDialogNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsHistoryClearDialogNe
+    extends TranslationsDialogsHistoryClearDialogEn {
+  _TranslationsDialogsHistoryClearDialogNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1389,8 +1641,11 @@ class _TranslationsDialogsHistoryClearDialogNe extends TranslationsDialogsHistor
 }
 
 // Path: dialogs.quickSaveFromFavoritesNotice
-class _TranslationsDialogsQuickSaveFromFavoritesNoticeNe extends TranslationsDialogsQuickSaveFromFavoritesNoticeEn {
-  _TranslationsDialogsQuickSaveFromFavoritesNoticeNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsDialogsQuickSaveFromFavoritesNoticeNe
+    extends TranslationsDialogsQuickSaveFromFavoritesNoticeEn {
+  _TranslationsDialogsQuickSaveFromFavoritesNoticeNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1405,7 +1660,9 @@ class _TranslationsDialogsQuickSaveFromFavoritesNoticeNe extends TranslationsDia
 
 // Path: dialogs.pin
 class _TranslationsDialogsPinNe extends TranslationsDialogsPinEn {
-  _TranslationsDialogsPinNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsPinNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1416,7 +1673,9 @@ class _TranslationsDialogsPinNe extends TranslationsDialogsPinEn {
 
 // Path: dialogs.zoom
 class _TranslationsDialogsZoomNe extends TranslationsDialogsZoomEn {
-  _TranslationsDialogsZoomNe._(TranslationsNe root) : this._root = root, super.internal(root);
+  _TranslationsDialogsZoomNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1426,8 +1685,11 @@ class _TranslationsDialogsZoomNe extends TranslationsDialogsZoomEn {
 }
 
 // Path: settingsTab.general.brightnessOptions
-class _TranslationsSettingsTabGeneralBrightnessOptionsNe extends TranslationsSettingsTabGeneralBrightnessOptionsEn {
-  _TranslationsSettingsTabGeneralBrightnessOptionsNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsSettingsTabGeneralBrightnessOptionsNe
+    extends TranslationsSettingsTabGeneralBrightnessOptionsEn {
+  _TranslationsSettingsTabGeneralBrightnessOptionsNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1441,8 +1703,11 @@ class _TranslationsSettingsTabGeneralBrightnessOptionsNe extends TranslationsSet
 }
 
 // Path: settingsTab.general.colorOptions
-class _TranslationsSettingsTabGeneralColorOptionsNe extends TranslationsSettingsTabGeneralColorOptionsEn {
-  _TranslationsSettingsTabGeneralColorOptionsNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsSettingsTabGeneralColorOptionsNe
+    extends TranslationsSettingsTabGeneralColorOptionsEn {
+  _TranslationsSettingsTabGeneralColorOptionsNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1454,8 +1719,11 @@ class _TranslationsSettingsTabGeneralColorOptionsNe extends TranslationsSettings
 }
 
 // Path: settingsTab.general.languageOptions
-class _TranslationsSettingsTabGeneralLanguageOptionsNe extends TranslationsSettingsTabGeneralLanguageOptionsEn {
-  _TranslationsSettingsTabGeneralLanguageOptionsNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsSettingsTabGeneralLanguageOptionsNe
+    extends TranslationsSettingsTabGeneralLanguageOptionsEn {
+  _TranslationsSettingsTabGeneralLanguageOptionsNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1465,8 +1733,11 @@ class _TranslationsSettingsTabGeneralLanguageOptionsNe extends TranslationsSetti
 }
 
 // Path: settingsTab.network.networkOptions
-class _TranslationsSettingsTabNetworkNetworkOptionsNe extends TranslationsSettingsTabNetworkNetworkOptionsEn {
-  _TranslationsSettingsTabNetworkNetworkOptionsNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsSettingsTabNetworkNetworkOptionsNe
+    extends TranslationsSettingsTabNetworkNetworkOptionsEn {
+  _TranslationsSettingsTabNetworkNetworkOptionsNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 
@@ -1478,8 +1749,11 @@ class _TranslationsSettingsTabNetworkNetworkOptionsNe extends TranslationsSettin
 }
 
 // Path: progressPage.total.title
-class _TranslationsProgressPageTotalTitleNe extends TranslationsProgressPageTotalTitleEn {
-  _TranslationsProgressPageTotalTitleNe._(TranslationsNe root) : this._root = root, super.internal(root);
+class _TranslationsProgressPageTotalTitleNe
+    extends TranslationsProgressPageTotalTitleEn {
+  _TranslationsProgressPageTotalTitleNe._(TranslationsNe root)
+    : this._root = root,
+      super.internal(root);
 
   final TranslationsNe _root; // ignore: unused_field
 

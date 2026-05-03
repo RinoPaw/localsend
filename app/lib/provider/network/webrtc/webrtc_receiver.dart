@@ -64,7 +64,8 @@ class WebRTCReceiveService extends ReduxNotifier<WebRTCReceiveState> {
   }
 }
 
-class AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class AcceptOfferAction
+    extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   @override
   Future<WebRTCReceiveState> reduce() async {
     final controller = await state.connection.acceptOffer(
@@ -77,9 +78,7 @@ class AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCRec
       dispatch(_SetStatusAction(status));
     });
 
-    return state.copyWith(
-      controller: controller,
-    );
+    return state.copyWith(controller: controller);
   }
 
   @override
@@ -89,7 +88,8 @@ class AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCRec
   }
 }
 
-class _AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class _AcceptOfferAction
+    extends AsyncReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   @override
   Future<WebRTCReceiveState> reduce() async {
     final controller = state.controller;
@@ -102,7 +102,10 @@ class _AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCRe
     dispatch(_InitSessionState(convertedFiles));
 
     final vm = ViewProvider((ref) {
-      final state = ref.watch(notifier.provider as ReduxProvider<WebRTCReceiveService, WebRTCReceiveState>);
+      final state = ref.watch(
+        notifier.provider
+            as ReduxProvider<WebRTCReceiveService, WebRTCReceiveState>,
+      );
       return ReceivePageVm(
         status: switch (state.status) {
           null => SessionStatus.waiting,
@@ -118,7 +121,9 @@ class _AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCRe
         sender: state.offer.peer.toDevice(notifier._signalingServer),
         showSenderInfo: true,
         files: convertedFiles,
-        message: files.length == 1 && files[0].fileType.startsWith('text/') ? files[0].preview : null,
+        message: files.length == 1 && files[0].fileType.startsWith('text/')
+            ? files[0].preview
+            : null,
         onAccept: () {},
         onDecline: () {},
         onClose: () {},
@@ -128,13 +133,12 @@ class _AcceptOfferAction extends AsyncReduxAction<WebRTCReceiveService, WebRTCRe
     // ignore: unawaited_futures, use_build_context_synchronously
     Routerino.context.push(() => ReceivePage(vm));
 
-    return state.copyWith(
-      controller: controller,
-    );
+    return state.copyWith(controller: controller);
   }
 }
 
-class _InitSessionState extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class _InitSessionState
+    extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   final List<dart_model.FileDto> files;
 
   _InitSessionState(this.files);
@@ -173,16 +177,15 @@ class _InitSessionState extends ReduxAction<WebRTCReceiveService, WebRTCReceiveS
   }
 }
 
-class _SetStatusAction extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
+class _SetStatusAction
+    extends ReduxAction<WebRTCReceiveService, WebRTCReceiveState> {
   final RTCStatus status;
 
   _SetStatusAction(this.status);
 
   @override
   WebRTCReceiveState reduce() {
-    return state.copyWith(
-      status: status,
-    );
+    return state.copyWith(status: status);
   }
 }
 

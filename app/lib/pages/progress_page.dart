@@ -50,7 +50,8 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
   int _totalBytes = double.maxFinite.toInt();
   int _lastRemainingTimeUpdate = 0; // millis since epoch
   String? _remainingTime;
-  List<FileDto> _files = []; // also contains declined files (files without token)
+  List<FileDto> _files =
+      []; // also contains declined files (files without token)
   Set<String> _selectedFiles = {};
   SessionStatus? _lastStatus;
 
@@ -74,8 +75,19 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
       // Periodically call WakelockPlus.enable() to keep the screen awake
       _wakelockPlusTimer = Timer.periodic(const Duration(seconds: 30), (timer) {
         final finished =
-            ref.read(serverProvider)?.session?.files.values.map((e) => e.status).isFinishedOrSkipped ??
-            ref.read(sendProvider)[widget.sessionId]?.files.values.map((e) => e.status).isFinishedOrSkipped ??
+            ref
+                .read(serverProvider)
+                ?.session
+                ?.files
+                .values
+                .map((e) => e.status)
+                .isFinishedOrSkipped ??
+            ref
+                .read(sendProvider)[widget.sessionId]
+                ?.files
+                .values
+                .map((e) => e.status)
+                .isFinishedOrSkipped ??
             true;
         if (finished) {
           timer.cancel();
@@ -92,8 +104,19 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
       if (ref.read(settingsProvider).autoFinish) {
         _finishTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
           final finished =
-              ref.read(serverProvider)?.session?.files.values.map((e) => e.status).isFinishedOrSkipped ??
-              ref.read(sendProvider)[widget.sessionId]?.files.values.map((e) => e.status).isFinishedOrSkipped ??
+              ref
+                  .read(serverProvider)
+                  ?.session
+                  ?.files
+                  .values
+                  .map((e) => e.status)
+                  .isFinishedOrSkipped ??
+              ref
+                  .read(sendProvider)[widget.sessionId]
+                  ?.files
+                  .values
+                  .map((e) => e.status)
+                  .isFinishedOrSkipped ??
               true;
           if (finished) {
             if (_finishCounter == 1) {
@@ -114,16 +137,24 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
           _files = receiveSession.files.values.map((f) => f.file).toList();
 
           // We previously used f.token != null here, but this may not work on very fast networks.
-          _selectedFiles = receiveSession.files.values.where((f) => f.status != FileStatus.skipped).map((f) => f.file.id).toSet();
+          _selectedFiles = receiveSession.files.values
+              .where((f) => f.status != FileStatus.skipped)
+              .map((f) => f.file.id)
+              .toSet();
         } else {
           final sendSession = ref.read(sendProvider)[widget.sessionId];
           if (sendSession != null) {
             _files = sendSession.files.values.map((f) => f.file).toList();
-            _selectedFiles = sendSession.files.values.where((f) => f.status != FileStatus.skipped).map((f) => f.file.id).toSet();
+            _selectedFiles = sendSession.files.values
+                .where((f) => f.status != FileStatus.skipped)
+                .map((f) => f.file.id)
+                .toSet();
           }
         }
 
-        _totalBytes = _files.where((f) => _selectedFiles.contains(f.id)).fold(0, (prev, curr) => prev + curr.size);
+        _totalBytes = _files
+            .where((f) => _selectedFiles.contains(f.id))
+            .fold(0, (prev, curr) => prev + curr.size);
       });
     });
   }
@@ -132,8 +163,12 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
     final receiveSession = ref.read(serverProvider.select((s) => s?.session));
     final sendSession = ref.read(sendProvider)[widget.sessionId];
     final SessionStatus? status = receiveSession?.status ?? sendSession?.status;
-    final keepSession = !closeSession && (status == SessionStatus.sending || status == SessionStatus.finishedWithErrors);
-    final result = status == null || keepSession || await _askCancelConfirmation(status);
+    final keepSession =
+        !closeSession &&
+        (status == SessionStatus.sending ||
+            status == SessionStatus.finishedWithErrors);
+    final result =
+        status == null || keepSession || await _askCancelConfirmation(status);
 
     if (result && mounted) {
       // ignore: unawaited_futures
@@ -143,7 +178,9 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
 
   Future<bool> _askCancelConfirmation(SessionStatus status) async {
     final bool result = switch (status == SessionStatus.sending) {
-      true => (await context.pushBottomSheet(() => const CancelSessionDialog())) == true,
+      true =>
+        (await context.pushBottomSheet(() => const CancelSessionDialog())) ==
+            true,
       false => true,
     };
     if (result) {
@@ -183,7 +220,14 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
     final progressNotifier = ref.watch(progressProvider);
     final currBytes = _files.fold<int>(
       0,
-      (prev, curr) => prev + ((progressNotifier.getProgress(sessionId: widget.sessionId, fileId: curr.id) * curr.size).round()),
+      (prev, curr) =>
+          prev +
+          ((progressNotifier.getProgress(
+                    sessionId: widget.sessionId,
+                    fileId: curr.id,
+                  ) *
+                  curr.size)
+              .round()),
     );
 
     final receiveSession = ref.watch(serverProvider.select((s) => s?.session));
@@ -192,9 +236,7 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
     final SessionState? commonSessionState = receiveSession ?? sendSession;
 
     if (commonSessionState == null) {
-      return Scaffold(
-        body: Container(),
-      );
+      return Scaffold(body: Container());
     }
 
     final status = commonSessionState.status;
@@ -208,24 +250,37 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
       TaskbarHelper.visualizeStatus(status);
     }
 
-    final title = receiveSession != null ? t.progressPage.titleReceiving : t.progressPage.titleSending;
+    final title = receiveSession != null
+        ? t.progressPage.titleReceiving
+        : t.progressPage.titleSending;
     final startTime = commonSessionState.startTime;
     final endTime = commonSessionState.endTime;
     final int? speedInBytes;
     if (startTime != null && currBytes >= 500 * 1024) {
-      speedInBytes = getFileSpeed(start: startTime, end: endTime ?? DateTime.now().millisecondsSinceEpoch, bytes: currBytes);
+      speedInBytes = getFileSpeed(
+        start: startTime,
+        end: endTime ?? DateTime.now().millisecondsSinceEpoch,
+        bytes: currBytes,
+      );
 
       final now = DateTime.now().millisecondsSinceEpoch;
       if (now - _lastRemainingTimeUpdate >= 1000) {
-        _remainingTime = getRemainingTime(bytesPerSeconds: speedInBytes, remainingBytes: _totalBytes - currBytes);
+        _remainingTime = getRemainingTime(
+          bytesPerSeconds: speedInBytes,
+          remainingBytes: _totalBytes - currBytes,
+        );
         _lastRemainingTimeUpdate = now;
       }
     } else {
       speedInBytes = null;
     }
 
-    final fileStatusMap = receiveSession?.files.map((k, f) => MapEntry(k, f.status)) ?? sendSession!.files.map((k, f) => MapEntry(k, f.status));
-    final finishedCount = fileStatusMap.values.where((s) => s == FileStatus.finished).length;
+    final fileStatusMap =
+        receiveSession?.files.map((k, f) => MapEntry(k, f.status)) ??
+        sendSession!.files.map((k, f) => MapEntry(k, f.status));
+    final finishedCount = fileStatusMap.values
+        .where((s) => s == FileStatus.finished)
+        .length;
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
@@ -261,27 +316,40 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(title, style: Theme.of(context).textTheme.titleLarge),
-                        if (checkPlatformWithFileSystem() && receiveSession != null)
+                        Text(
+                          title,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        if (checkPlatformWithFileSystem() &&
+                            receiveSession != null)
                           Padding(
                             padding: const EdgeInsets.only(bottom: 10),
                             child: Text.rich(
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: '${t.settingsTab.receive.destination}: ',
+                                    text:
+                                        '${t.settingsTab.receive.destination}: ',
                                     style: const TextStyle(color: Colors.grey),
                                   ),
                                   TextSpan(
                                     text: receiveSession.destinationDirectory,
                                     style: TextStyle(
-                                      color: checkPlatform([TargetPlatform.iOS]) ? Colors.grey : Theme.of(context).colorScheme.primary,
+                                      color: checkPlatform([TargetPlatform.iOS])
+                                          ? Colors.grey
+                                          : Theme.of(
+                                              context,
+                                            ).colorScheme.primary,
                                     ),
-                                    recognizer: checkPlatform([TargetPlatform.iOS])
+                                    recognizer:
+                                        checkPlatform([TargetPlatform.iOS])
                                         ? null
                                         : (TapGestureRecognizer()
                                             ..onTap = () async {
-                                              await openFolder(folderPath: receiveSession.destinationDirectory);
+                                              await openFolder(
+                                                folderPath: receiveSession
+                                                    .destinationDirectory,
+                                              );
                                             }),
                                   ),
                                 ],
@@ -300,17 +368,27 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                     return Container();
                   }
 
-                  return SelectableText(errorMessage, style: TextStyle(color: Theme.of(context).colorScheme.warning));
+                  return SelectableText(
+                    errorMessage,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.warning,
+                    ),
+                  );
                 }
 
                 final file = _files[index - 2];
-                final String fileName = receiveSession?.files[file.id]?.desiredName ?? file.fileName;
+                final String fileName =
+                    receiveSession?.files[file.id]?.desiredName ??
+                    file.fileName;
 
                 final fileStatus = fileStatusMap[file.id]!;
-                final savedToGallery = receiveSession?.files[file.id]?.savedToGallery ?? false;
+                final savedToGallery =
+                    receiveSession?.files[file.id]?.savedToGallery ?? false;
 
                 final String? filePath;
-                if (receiveSession != null && fileStatus == FileStatus.finished && !savedToGallery) {
+                if (receiveSession != null &&
+                    fileStatus == FileStatus.finished &&
+                    !savedToGallery) {
                   filePath = receiveSession.files[file.id]!.path;
                 } else if (sendSession != null) {
                   filePath = sendSession.files[file.id]!.path;
@@ -344,7 +422,10 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                     splashFactory: NoSplash.splashFactory,
                     highlightColor: Colors.transparent,
                     hoverColor: Colors.transparent,
-                    onTap: filePath != null && receiveSession != null ? () async => openFile(context, file.fileType, filePath!) : null,
+                    onTap: filePath != null && receiveSession != null
+                        ? () async =>
+                              openFile(context, file.fileType, filePath!)
+                        : null,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -364,13 +445,22 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                                   Flexible(
                                     child: Text(
                                       fileName,
-                                      style: const TextStyle(fontSize: 16, height: 1),
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        height: 1,
+                                      ),
                                       maxLines: 1,
                                       overflow: TextOverflow.fade,
                                       softWrap: false,
                                     ),
                                   ),
-                                  Text(' (${file.size.asReadableFileSize})', style: const TextStyle(fontSize: 16, height: 1)),
+                                  Text(
+                                    ' (${file.size.asReadableFileSize})',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      height: 1,
+                                    ),
+                                  ),
                                 ],
                               ),
                               const SizedBox(height: 5),
@@ -378,7 +468,10 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5),
                                   child: CustomProgressBar(
-                                    progress: progressNotifier.getProgress(sessionId: widget.sessionId, fileId: file.id),
+                                    progress: progressNotifier.getProgress(
+                                      sessionId: widget.sessionId,
+                                      fileId: file.id,
+                                    ),
                                   ),
                                 )
                               else
@@ -386,8 +479,13 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        savedToGallery ? t.progressPage.savedToGallery : fileStatus.label,
-                                        style: TextStyle(color: fileStatus.getColor(context), height: 1),
+                                        savedToGallery
+                                            ? t.progressPage.savedToGallery
+                                            : fileStatus.label,
+                                        style: TextStyle(
+                                          color: fileStatus.getColor(context),
+                                          height: 1,
+                                        ),
                                       ),
                                     ),
                                     if (errorMessage != null) ...[
@@ -396,12 +494,22 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                                         onTap: () async {
                                           await showDialog(
                                             context: context,
-                                            builder: (_) => ErrorDialog(error: errorMessage!),
+                                            builder: (_) => ErrorDialog(
+                                              error: errorMessage!,
+                                            ),
                                           );
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                                          child: Icon(Icons.info, color: Theme.of(context).colorScheme.warning, size: 20),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 5,
+                                          ),
+                                          child: Icon(
+                                            Icons.info,
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.warning,
+                                            size: 20,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -410,7 +518,8 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                             ],
                           ),
                         ),
-                        if (sendSession != null && fileStatus == FileStatus.failed)
+                        if (sendSession != null &&
+                            fileStatus == FileStatus.failed)
                           IconButton(
                             icon: const Icon(Icons.refresh),
                             onPressed: () async {
@@ -434,10 +543,19 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                    bottom: 10,
+                  ),
                   child: Card(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 5, top: 10),
+                      padding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
+                        bottom: 5,
+                        top: 10,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -450,7 +568,12 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                           ),
                           const SizedBox(height: 5),
                           TweenAnimationBuilder(
-                            tween: Tween<double>(begin: 0, end: _totalBytes == 0 ? 0 : currBytes / _totalBytes),
+                            tween: Tween<double>(
+                              begin: 0,
+                              end: _totalBytes == 0
+                                  ? 0
+                                  : currBytes / _totalBytes,
+                            ),
                             duration: const Duration(milliseconds: 200),
                             curve: Curves.easeOut,
                             builder: (context, value, child) {
@@ -461,12 +584,17 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                             },
                           ),
                           AnimatedCrossFade(
-                            crossFadeState: _advanced ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                            crossFadeState: _advanced
+                                ? CrossFadeState.showSecond
+                                : CrossFadeState.showFirst,
                             duration: const Duration(milliseconds: 200),
                             alignment: Alignment.topLeft,
                             firstChild: Container(),
                             secondChild: Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 5),
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                                bottom: 5,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -479,7 +607,9 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                                   Text(
                                     t.progressPage.total.size(
                                       curr: currBytes.asReadableFileSize,
-                                      n: _totalBytes == double.maxFinite.toInt() ? '-' : _totalBytes.asReadableFileSize,
+                                      n: _totalBytes == double.maxFinite.toInt()
+                                          ? '-'
+                                          : _totalBytes.asReadableFileSize,
                                     ),
                                   ),
                                   if (speedInBytes != null)
@@ -497,17 +627,33 @@ class _ProgressPageState extends State<ProgressPage> with Refena {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton.icon(
-                                style: TextButton.styleFrom(foregroundColor: Theme.of(context).colorScheme.onSurface),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                ),
                                 onPressed: () {
                                   setState(() => _advanced = !_advanced);
                                 },
                                 icon: const Icon(Icons.info),
-                                label: Text(_advanced ? t.general.hide : t.general.advanced),
+                                label: Text(
+                                  _advanced
+                                      ? t.general.hide
+                                      : t.general.advanced,
+                                ),
                               ),
                               TextButton.icon(
-                                style: TextButton.styleFrom(foregroundColor: Theme.of(context).colorScheme.onSurface),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                ),
                                 onPressed: () => _exit(closeSession: true),
-                                icon: Icon(status == SessionStatus.sending ? Icons.close : Icons.check_circle),
+                                icon: Icon(
+                                  status == SessionStatus.sending
+                                      ? Icons.close
+                                      : Icons.check_circle,
+                                ),
                                 label: Text(
                                   status == SessionStatus.sending
                                       ? t.general.cancel
@@ -577,9 +723,7 @@ extension on SessionStatus {
   String getLabel({required String remainingTime}) {
     switch (this) {
       case SessionStatus.sending:
-        return t.progressPage.total.title.sending(
-          time: remainingTime,
-        );
+        return t.progressPage.total.title.sending(time: remainingTime);
       case SessionStatus.finished:
         return t.general.finished;
       case SessionStatus.finishedWithErrors:

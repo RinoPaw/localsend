@@ -7,7 +7,10 @@ class RhttpWrapper implements CustomHttpClient {
 
   RhttpWrapper._(this._client);
 
-  factory RhttpWrapper.create(Duration timeout, StoredSecurityContext securityContext) {
+  factory RhttpWrapper.create(
+    Duration timeout,
+    StoredSecurityContext securityContext,
+  ) {
     final client = createRhttpClient(timeout, securityContext);
     return RhttpWrapper._(client);
   }
@@ -17,10 +20,7 @@ class RhttpWrapper implements CustomHttpClient {
     required String uri,
     required Map<String, String> query,
   }) async {
-    final response = await _client.get(
-      uri,
-      query: query,
-    );
+    final response = await _client.get(uri, query: query);
     return response.body;
   }
 
@@ -67,12 +67,14 @@ class RhttpWrapper implements CustomHttpClient {
   }
 }
 
-RhttpClient createRhttpClient(Duration timeout, StoredSecurityContext securityContext, {Interceptor? interceptor}) {
+RhttpClient createRhttpClient(
+  Duration timeout,
+  StoredSecurityContext securityContext, {
+  Interceptor? interceptor,
+}) {
   return RhttpClient.createSync(
     settings: ClientSettings(
-      timeoutSettings: TimeoutSettings(
-        timeout: timeout,
-      ),
+      timeoutSettings: TimeoutSettings(timeout: timeout),
       tlsSettings: TlsSettings(
         verifyCertificates: false,
         clientCertificate: ClientCertificate(

@@ -46,7 +46,10 @@ class ReceivePageVm {
     required this.onAccept,
     required this.onDecline,
     required this.onClose,
-  }) : isLink = message != null && !message.trim().contains(RegExp(r'\s')) && (Uri.tryParse(message.trim())?.isAbsolute ?? false);
+  }) : isLink =
+           message != null &&
+           !message.trim().contains(RegExp(r'\s')) &&
+           (Uri.tryParse(message.trim())?.isAbsolute ?? false);
 }
 
 class ReceivePage extends StatefulWidget {
@@ -74,12 +77,12 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
     );
 
     if (vm.status == null && vm.message == null) {
-      return const Scaffold(
-        body: SizedBox(),
-      );
+      return const Scaffold(body: SizedBox());
     }
 
-    final senderFavoriteEntry = ref.watch(favoritesProvider.select((state) => state.findDevice(vm.sender)));
+    final senderFavoriteEntry = ref.watch(
+      favoritesProvider.select((state) => state.findDevice(vm.sender)),
+    );
 
     return ViewModelBuilder(
       provider: (ref) => widget.vm,
@@ -102,13 +105,18 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
             body: SafeArea(
               child: Center(
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: ResponsiveListView.defaultMaxWidth),
+                  constraints: const BoxConstraints(
+                    maxWidth: ResponsiveListView.defaultMaxWidth,
+                  ),
                   child: Builder(
                     builder: (context) {
                       final height = MediaQuery.of(context).size.height;
                       final smallUi = vm.message != null && height < 600;
                       return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: smallUi ? 20 : 30),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: smallUi ? 20 : 30,
+                        ),
                         child: Column(
                           children: [
                             Expanded(
@@ -117,19 +125,33 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                 children: [
                                   if (vm.showSenderInfo && !smallUi)
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 10),
-                                      child: Icon(vm.sender.deviceType.icon, size: 64),
+                                      padding: const EdgeInsets.only(
+                                        bottom: 10,
+                                      ),
+                                      child: Icon(
+                                        vm.sender.deviceType.icon,
+                                        size: 64,
+                                      ),
                                     ),
                                   Builder(
                                     builder: (context) {
-                                      final alias = senderFavoriteEntry?.alias ?? vm.sender.alias;
+                                      final alias =
+                                          senderFavoriteEntry?.alias ??
+                                          vm.sender.alias;
                                       if (alias.isEmpty) {
-                                        return Text('', style: TextStyle(fontSize: smallUi ? 32 : 48));
+                                        return Text(
+                                          '',
+                                          style: TextStyle(
+                                            fontSize: smallUi ? 32 : 48,
+                                          ),
+                                        );
                                       }
                                       return FittedBox(
                                         child: Text(
                                           alias,
-                                          style: TextStyle(fontSize: smallUi ? 32 : 48),
+                                          style: TextStyle(
+                                            fontSize: smallUi ? 32 : 48,
+                                          ),
                                           textAlign: TextAlign.center,
                                         ),
                                       );
@@ -138,7 +160,8 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                   if (vm.showSenderInfo) ...[
                                     const SizedBox(height: 10),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         InkWell(
                                           onTap: () {
@@ -147,10 +170,17 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                             });
                                           },
                                           child: DeviceBadge(
-                                            backgroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-                                            foregroundColor: Theme.of(context).colorScheme.onInverseSurface,
+                                            backgroundColor: Theme.of(
+                                              context,
+                                            ).colorScheme.onSecondaryContainer,
+                                            foregroundColor: Theme.of(
+                                              context,
+                                            ).colorScheme.onInverseSurface,
                                             label: switch (vm.sender.ip) {
-                                              String ip => _showFullIp ? ip : '#${ip.visualId}',
+                                              String ip =>
+                                                _showFullIp
+                                                    ? ip
+                                                    : '#${ip.visualId}',
                                               null => 'WebRTC',
                                             },
                                           ),
@@ -158,8 +188,12 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                         if (vm.sender.deviceModel != null) ...[
                                           const SizedBox(width: 10),
                                           DeviceBadge(
-                                            backgroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-                                            foregroundColor: Theme.of(context).colorScheme.onInverseSurface,
+                                            backgroundColor: Theme.of(
+                                              context,
+                                            ).colorScheme.onSecondaryContainer,
+                                            foregroundColor: Theme.of(
+                                              context,
+                                            ).colorScheme.onInverseSurface,
                                             label: vm.sender.deviceModel!,
                                           ),
                                         ],
@@ -169,23 +203,36 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                   const SizedBox(height: 40),
                                   Text(
                                     vm.message != null
-                                        ? (vm.isLink ? t.receivePage.subTitleLink : t.receivePage.subTitleMessage)
-                                        : t.receivePage.subTitle(n: vm.files.length),
-                                    style: smallUi ? null : Theme.of(context).textTheme.titleLarge,
+                                        ? (vm.isLink
+                                              ? t.receivePage.subTitleLink
+                                              : t.receivePage.subTitleMessage)
+                                        : t.receivePage.subTitle(
+                                            n: vm.files.length,
+                                          ),
+                                    style: smallUi
+                                        ? null
+                                        : Theme.of(
+                                            context,
+                                          ).textTheme.titleLarge,
                                     textAlign: TextAlign.center,
                                   ),
                                   if (vm.message != null)
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 20),
+                                          padding: const EdgeInsets.only(
+                                            top: 20,
+                                          ),
                                           child: SizedBox(
                                             height: 100,
                                             child: Card(
                                               child: SingleChildScrollView(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(10),
+                                                  padding: const EdgeInsets.all(
+                                                    10,
+                                                  ),
                                                   child: SelectableText(
                                                     vm.message!,
                                                   ),
@@ -196,15 +243,22 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                         ),
                                         const SizedBox(height: 10),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             ElevatedButton(
                                               onPressed: () {
                                                 unawaited(
-                                                  Clipboard.setData(ClipboardData(text: vm.message!)),
+                                                  Clipboard.setData(
+                                                    ClipboardData(
+                                                      text: vm.message!,
+                                                    ),
+                                                  ),
                                                 );
                                                 if (checkPlatformIsDesktop()) {
-                                                  context.showSnackBar(t.general.copiedToClipboard);
+                                                  context.showSnackBar(
+                                                    t.general.copiedToClipboard,
+                                                  );
                                                 }
                                                 vm.onAccept();
                                                 context.pop();
@@ -213,15 +267,29 @@ class _ReceivePageState extends State<ReceivePage> with Refena {
                                             ),
                                             if (vm.isLink)
                                               Padding(
-                                                padding: const EdgeInsetsDirectional.only(start: 20),
+                                                padding:
+                                                    const EdgeInsetsDirectional.only(
+                                                      start: 20,
+                                                    ),
                                                 child: ElevatedButton(
-                                                  style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Theme.of(context).colorScheme.primary,
-                                                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                                                  ),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                        backgroundColor:
+                                                            Theme.of(context)
+                                                                .colorScheme
+                                                                .primary,
+                                                        foregroundColor:
+                                                            Theme.of(context)
+                                                                .colorScheme
+                                                                .onPrimary,
+                                                      ),
                                                   onPressed: () {
                                                     // ignore: discarded_futures
-                                                    launchUrl(Uri.parse(vm.message!), mode: LaunchMode.externalApplication);
+                                                    launchUrl(
+                                                      Uri.parse(vm.message!),
+                                                      mode: LaunchMode
+                                                          .externalApplication,
+                                                    );
                                                     vm.onAccept();
                                                     context.pop();
                                                   },
@@ -259,7 +327,9 @@ class _Actions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedFiles = context.watch(selectedReceivingFilesProvider);
-    final colorMode = context.watch(settingsProvider.select((state) => state.colorMode));
+    final colorMode = context.watch(
+      settingsProvider.select((state) => state.colorMode),
+    );
 
     if (vm.message != null) {
       return Center(
@@ -323,8 +393,12 @@ class _Actions extends StatelessWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 elevation: colorMode == ColorMode.yaru ? 0 : null,
-                backgroundColor: colorMode == ColorMode.yaru ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.error,
-                foregroundColor: colorMode == ColorMode.yaru ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onError,
+                backgroundColor: colorMode == ColorMode.yaru
+                    ? Theme.of(context).colorScheme.surface
+                    : Theme.of(context).colorScheme.error,
+                foregroundColor: colorMode == ColorMode.yaru
+                    ? Theme.of(context).colorScheme.onSurface
+                    : Theme.of(context).colorScheme.onError,
               ),
               onPressed: () {
                 vm.onDecline();

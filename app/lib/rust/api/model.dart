@@ -6,13 +6,7 @@
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:localsend_app/rust/frb_generated.dart';
 
-enum DeviceType {
-  mobile,
-  desktop,
-  web,
-  headless,
-  server,
-}
+enum DeviceType { mobile, desktop, web, headless, server }
 
 class FileDto {
   final String id;
@@ -34,7 +28,14 @@ class FileDto {
   });
 
   @override
-  int get hashCode => id.hashCode ^ fileName.hashCode ^ size.hashCode ^ fileType.hashCode ^ sha256.hashCode ^ preview.hashCode ^ metadata.hashCode;
+  int get hashCode =>
+      id.hashCode ^
+      fileName.hashCode ^
+      size.hashCode ^
+      fileType.hashCode ^
+      sha256.hashCode ^
+      preview.hashCode ^
+      metadata.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -54,34 +55,36 @@ class FileMetadata {
   final String? modified;
   final String? accessed;
 
-  const FileMetadata({
-    this.modified,
-    this.accessed,
-  });
+  const FileMetadata({this.modified, this.accessed});
 
   @override
   int get hashCode => modified.hashCode ^ accessed.hashCode;
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is FileMetadata && runtimeType == other.runtimeType && modified == other.modified && accessed == other.accessed;
+      identical(this, other) ||
+      other is FileMetadata &&
+          runtimeType == other.runtimeType &&
+          modified == other.modified &&
+          accessed == other.accessed;
 }
 
 class PrepareUploadRequestDto {
   final RegisterDto info;
   final Map<String, FileDto> files;
 
-  const PrepareUploadRequestDto({
-    required this.info,
-    required this.files,
-  });
+  const PrepareUploadRequestDto({required this.info, required this.files});
 
   @override
   int get hashCode => info.hashCode ^ files.hashCode;
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is PrepareUploadRequestDto && runtimeType == other.runtimeType && info == other.info && files == other.files;
+      identical(this, other) ||
+      other is PrepareUploadRequestDto &&
+          runtimeType == other.runtimeType &&
+          info == other.info &&
+          files == other.files;
 }
 
 class PrepareUploadResponseDto {
@@ -99,13 +102,13 @@ class PrepareUploadResponseDto {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PrepareUploadResponseDto && runtimeType == other.runtimeType && sessionId == other.sessionId && files == other.files;
+      other is PrepareUploadResponseDto &&
+          runtimeType == other.runtimeType &&
+          sessionId == other.sessionId &&
+          files == other.files;
 }
 
-enum ProtocolType {
-  http,
-  https,
-}
+enum ProtocolType { http, https }
 
 class RegisterDto {
   final String alias;
@@ -172,7 +175,13 @@ class RegisterResponseDto {
   });
 
   @override
-  int get hashCode => alias.hashCode ^ version.hashCode ^ deviceModel.hashCode ^ deviceType.hashCode ^ token.hashCode ^ hasWebInterface.hashCode;
+  int get hashCode =>
+      alias.hashCode ^
+      version.hashCode ^
+      deviceModel.hashCode ^
+      deviceType.hashCode ^
+      token.hashCode ^
+      hasWebInterface.hashCode;
 
   @override
   bool operator ==(Object other) =>

@@ -91,9 +91,7 @@ class _FileNameInputDialogState extends State<FileNameInputDialog> {
             visible: _errorMessage.isNotEmpty,
             child: Text(
               _errorMessage,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.warning,
-              ),
+              style: TextStyle(color: Theme.of(context).colorScheme.warning),
             ),
           ),
         ],
