@@ -4,9 +4,9 @@
 ; Copy app/assets/packaging/logo-256.ico to D:\inno\logo-256.ico
 
 #define MyAppName "LocalSend"
-#define MyAppVersion "1.17.0"
-#define MyAppPublisher "Tien Do Nam"
-#define MyAppURL "https://localsend.org"
+#define MyAppVersion "1.17.1"
+#define MyAppPublisher "RinoPaw"
+#define MyAppURL "https://github.com/RinoPaw/localsend"
 #define MyAppExeName "localsend_app.exe"
 #define MyAppMsixHelper "localsend_msix_helper.msix"
 

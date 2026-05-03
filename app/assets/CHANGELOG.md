@@ -1,5 +1,17 @@
 ## unreleased
 
+## 1.17.1 (2026-05-03)
+
+- fork: document the RinoPaw Windows-focused fork and release links.
+- fork: point package and Windows installer metadata at the RinoPaw fork.
+- fix: keep default discovery local by leaving signaling and STUN server lists empty unless explicitly configured.
+- fix: honor the configured signaling server URI instead of always connecting to the public default endpoint.
+- fix: filter this device out of signaling-discovered nearby devices.
+- fix: avoid missing upload sessions caused by a shadowed `sessionId` in the upload query.
+- ci: restore CI and Windows zip release builds for this fork.
+
+## upstream unreleased
+
 - feat(windows): add LocalSend to Windows Share Sheet (@chenxdust, https://github.com/localsend/localsend/pull/2555)
 - feat: enable starting text share via command line using `--text` or `-t` flags (@guilhermetiscoski, https://github.com/localsend/localsend/pull/2661)
 - feat(android): add quick settings tile for instant app launch (@Voltra, https://github.com/localsend/localsend/pull/2676)
