@@ -1,5 +1,10 @@
 ## unreleased
 
+## 1.17.2 (2026-06-29)
+
+- feat: productize folder mirror sync with host/replica pairing, destructive sync controls, richer sync results, and recovery states.
+- feat: support the same folder sync flow on Windows and Android with filesystem-specific path handling.
+
 ## 1.17.1 (2026-05-03)
 
 - fork: document the RinoPaw Windows-focused fork and release links.

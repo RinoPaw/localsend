@@ -3,7 +3,7 @@ description: An open source cross-platform alternative to AirDrop
 homepage: https://github.com/RinoPaw/localsend
 publish_to: "none"
 
-version: 1.17.1+59
+version: 1.17.2+60
 
 environment:
   flutter: ^3.25.0
