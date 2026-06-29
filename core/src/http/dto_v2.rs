@@ -238,7 +238,7 @@ mod tests {
             "alias": "Secret Banana",
             "version": "2.0",
             "deviceModel": "Windows",
-            "deviceType": "DESKTOP",
+            "deviceType": "desktop",
             "fingerprint": "random string",
             "port": 53317,
             "protocol": "https",
@@ -267,6 +267,27 @@ mod tests {
 
         let dto: RegisterResponseDtoV2 = serde_json::from_str(json).unwrap();
         assert_eq!(dto.alias, "Test Device");
+        assert!(!dto.download);
+    }
+
+    #[test]
+    fn test_register_response_with_lowercase_device_type() {
+        let json = r#"{
+            "alias": "Energetic Pumpkin",
+            "version": "2.1",
+            "deviceModel": "Redmi",
+            "deviceType": "mobile",
+            "fingerprint": "920DA94E0485ED5E2CD2B714130594CBF5615534D255852311B34EBEE82AAB22",
+            "download": false
+        }"#;
+
+        let dto: RegisterResponseDtoV2 = serde_json::from_str(json).unwrap();
+        assert_eq!(dto.alias, "Energetic Pumpkin");
+        assert_eq!(dto.device_type, Some(DeviceType::Mobile));
+        assert_eq!(
+            dto.fingerprint,
+            "920DA94E0485ED5E2CD2B714130594CBF5615534D255852311B34EBEE82AAB22"
+        );
         assert!(!dto.download);
     }
 
