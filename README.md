@@ -12,9 +12,9 @@ Windows：
 
 Android：
 
-- [arm64-v8a](https://github.com/RinoPaw/localsend/releases/latest/download/LocalSend-1.17.1-android-arm64v8.apk)：大多数现代 Android 手机和平板
-- [armeabi-v7a](https://github.com/RinoPaw/localsend/releases/latest/download/LocalSend-1.17.1-android-arm32v7.apk)：较旧的 32 位 Android 设备
-- [x86_64](https://github.com/RinoPaw/localsend/releases/latest/download/LocalSend-1.17.1-android-x64.apk)：模拟器或少数 x86 Android 设备
+- [arm64-v8a](https://github.com/RinoPaw/localsend/releases/latest/download/LocalSend-1.17.2-android-arm64v8.apk)：大多数现代 Android 手机和平板
+- [armeabi-v7a](https://github.com/RinoPaw/localsend/releases/latest/download/LocalSend-1.17.2-android-arm32v7.apk)：较旧的 32 位 Android 设备
+- [x86_64](https://github.com/RinoPaw/localsend/releases/latest/download/LocalSend-1.17.2-android-x64.apk)：模拟器或少数 x86 Android 设备
 
 更多版本见 [Releases](https://github.com/RinoPaw/localsend/releases/latest)。
 
