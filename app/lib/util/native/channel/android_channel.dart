@@ -31,6 +31,17 @@ Future<String?> pickDirectoryPathAndroid() async {
   return result;
 }
 
+Future<List<FileInfo>> listDirectoryAndroid(String directoryUri) async {
+  final result = await _methodChannel.invokeMethod<List>('listDirectory', {
+    'directoryUri': directoryUri,
+  });
+  if (result == null) {
+    return [];
+  }
+
+  return result.map((e) => FileInfoMapper.fromJson((e as Map).cast<String, dynamic>())).toList();
+}
+
 Future<List<FileInfo>?> pickFilesAndroid() async {
   final result = await _methodChannel.invokeMethod<List>('pickFiles');
   if (result == null) {
@@ -76,6 +87,28 @@ Future<void> createMissingDirectoriesAndroid({
     );
     createdDirectories.add(subDirPath);
   }
+}
+
+Future<bool> deleteDocumentAndroid(String documentUri) async {
+  return await _methodChannel.invokeMethod<bool>('deleteDocument', {
+        'documentUri': documentUri,
+      }) ??
+      false;
+}
+
+Future<bool> moveDocumentAndroid({
+  required String sourceUri,
+  required String sourceParentUri,
+  required String targetParentUri,
+  required String targetName,
+}) async {
+  return await _methodChannel.invokeMethod<bool>('moveDocument', {
+        'sourceUri': sourceUri,
+        'sourceParentUri': sourceParentUri,
+        'targetParentUri': targetParentUri,
+        'targetName': targetName,
+      }) ??
+      false;
 }
 
 Future<void> openContentUri({required String uri}) async {

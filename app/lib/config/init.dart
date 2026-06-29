@@ -20,6 +20,7 @@ import 'package:localsend_app/pages/home_page_controller.dart';
 import 'package:localsend_app/provider/animation_provider.dart';
 import 'package:localsend_app/provider/app_arguments_provider.dart';
 import 'package:localsend_app/provider/device_info_provider.dart';
+import 'package:localsend_app/provider/folder_sync_provider.dart';
 import 'package:localsend_app/provider/network/nearby_devices_provider.dart';
 import 'package:localsend_app/provider/network/server/server_provider.dart';
 import 'package:localsend_app/provider/network/webrtc/signaling_provider.dart';
@@ -216,6 +217,7 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
 
   try {
     await ref.notifier(serverProvider).startServerFromSettings();
+    ref.notifier(folderSyncProvider).startAutoSync();
   } catch (e) {
     if (context.mounted) {
       context.showSnackBar(e.toString());

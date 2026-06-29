@@ -56,7 +56,13 @@ class MainActivity : FlutterActivity() {
                     openDirectoryPicker(onlyPath = true)
                 }
 
+                "listDirectory" -> handleListDirectory(call, result)
+
                 "createDirectory" -> handleCreateDirectory(call, result)
+
+                "deleteDocument" -> handleDeleteDocument(call, result)
+
+                "moveDocument" -> handleMoveDocument(call, result)
 
                 "openContentUri" -> {
                     openUri(context, call.argument<String>("uri")!!)
@@ -84,7 +90,7 @@ class MainActivity : FlutterActivity() {
 
     private fun openDirectoryPicker(onlyPath: Boolean) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         startActivityForResult(
             intent,
             if (onlyPath) REQUEST_CODE_PICK_DIRECTORY_PATH else REQUEST_CODE_PICK_DIRECTORY
@@ -127,7 +133,7 @@ class MainActivity : FlutterActivity() {
                     contentResolver.takePersistableUriPermission(uri, takeFlags)
 
                     val files = mutableListOf<FileInfo>()
-                    listFiles(uri, files)
+                    listFiles(uri, files, null)
                     val resultData = PickDirectoryResult(uri.toString(), files)
                     pendingResult?.success(resultData.toMap())
                     pendingResult = null
@@ -196,17 +202,23 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    private fun listFiles(uri: Uri, files: MutableList<FileInfo>) {
+    private fun listFiles(uri: Uri, files: MutableList<FileInfo>, relativePath: String?) {
         val pickedDir: FastDocumentFile = FastDocumentFile.fromTreeUri(this, uri)
 
         for (file in pickedDir.listFiles()) {
+            val childRelativePath = if (relativePath == null || relativePath.isEmpty()) {
+                file.name
+            } else {
+                "$relativePath/${file.name}"
+            }
+
             if (file.isDirectory) {
                 // Recursive call
-                listFiles(file.uri, files)
+                listFiles(file.uri, files, childRelativePath)
             } else if (file.isFile) {
                 files.add(
                     FileInfo(
-                        name = file.name,
+                        name = childRelativePath,
                         size = file.size,
                         uri = file.uri.toString(),
                         lastModified = file.lastModified,
@@ -214,6 +226,13 @@ class MainActivity : FlutterActivity() {
                 )
             }
         }
+    }
+
+    private fun handleListDirectory(call: MethodCall, result: MethodChannel.Result) {
+        val directoryUri = Uri.parse(call.argument<String>("directoryUri")!!)
+        val files = mutableListOf<FileInfo>()
+        listFiles(directoryUri, files, "")
+        result.success(files.map { it.toMap() })
     }
 
     @SuppressLint("WrongConstant")
@@ -234,7 +253,62 @@ class MainActivity : FlutterActivity() {
         result.success(null)
     }
 
+    private fun handleDeleteDocument(call: MethodCall, result: MethodChannel.Result) {
+        val documentUri = Uri.parse(call.argument<String>("documentUri")!!)
+
+        try {
+            result.success(DocumentsContract.deleteDocument(context.contentResolver, documentUri))
+        } catch (_: Exception) {
+            result.success(false)
+        }
+    }
+
+    private fun handleMoveDocument(call: MethodCall, result: MethodChannel.Result) {
+        val sourceUri = Uri.parse(call.argument<String>("sourceUri")!!)
+        val sourceParentUri = Uri.parse(call.argument<String>("sourceParentUri")!!)
+        val targetParentUri = Uri.parse(call.argument<String>("targetParentUri")!!)
+        val targetName = call.argument<String>("targetName")!!
+
+        try {
+            val existingTarget = findChildDocument(targetParentUri, targetName)
+            if (existingTarget != null) {
+                val deleted = DocumentsContract.deleteDocument(context.contentResolver, existingTarget)
+                if (!deleted) {
+                    result.success(false)
+                    return
+                }
+            }
+
+            val movedUri = DocumentsContract.moveDocument(
+                context.contentResolver,
+                sourceUri,
+                sourceParentUri,
+                targetParentUri
+            ) ?: run {
+                result.success(false)
+                return
+            }
+
+            val movedFile = FastDocumentFile.fromDocumentUri(this, movedUri)
+            if (movedFile != null && movedFile.name != targetName) {
+                val renamedUri = DocumentsContract.renameDocument(context.contentResolver, movedUri, targetName)
+                if (renamedUri == null) {
+                    result.success(false)
+                    return
+                }
+            }
+
+            result.success(true)
+        } catch (_: Exception) {
+            result.success(false)
+        }
+    }
+
     private fun folderExists(documentUri: Uri, folderName: String): Boolean {
+        return findChildDocument(documentUri, folderName, DocumentsContract.Document.MIME_TYPE_DIR) != null
+    }
+
+    private fun findChildDocument(documentUri: Uri, childName: String, mimeTypeFilter: String? = null): Uri? {
         var cursor: Cursor? = null
         try {
             val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(documentUri, DocumentsContract.getDocumentId(documentUri))
@@ -242,7 +316,8 @@ class MainActivity : FlutterActivity() {
                 childrenUri,
                 arrayOf(
                     DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-                    DocumentsContract.Document.COLUMN_MIME_TYPE
+                    DocumentsContract.Document.COLUMN_MIME_TYPE,
+                    DocumentsContract.Document.COLUMN_DOCUMENT_ID,
                 ),
                 null,
                 null,
@@ -253,16 +328,17 @@ class MainActivity : FlutterActivity() {
                 while (cursor.moveToNext()) {
                     val displayName = cursor.getString(0)
                     val mimeType = cursor.getString(1)
+                    val documentId = cursor.getString(2)
 
-                    if (folderName == displayName && DocumentsContract.Document.MIME_TYPE_DIR == mimeType) {
-                        return true
+                    if (childName == displayName && (mimeTypeFilter == null || mimeTypeFilter == mimeType)) {
+                        return DocumentsContract.buildDocumentUriUsingTree(documentUri, documentId)
                     }
                 }
             }
         } finally {
             cursor?.close()
         }
-        return false
+        return null
     }
 
     private fun openGallery() {

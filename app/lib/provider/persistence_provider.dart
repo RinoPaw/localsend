@@ -8,6 +8,7 @@ import 'package:common/model/stored_security_context.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:localsend_app/gen/strings.g.dart';
+import 'package:localsend_app/model/folder_sync.dart';
 import 'package:localsend_app/model/persistence/color_mode.dart';
 import 'package:localsend_app/model/persistence/favorite_device.dart';
 import 'package:localsend_app/model/persistence/receive_history_entry.dart';
@@ -56,6 +57,9 @@ const _receiveHistory = 'ls_receive_history';
 
 // Favorites
 const _favorites = 'ls_favorites';
+
+// Folder sync
+const _folderSync = 'ls_folder_sync';
 
 // App Window Offset and Size info
 const _windowOffsetX = 'ls_window_offset_x';
@@ -291,6 +295,24 @@ class PersistenceService {
   Future<void> setFavorites(List<FavoriteDevice> entries) async {
     final favoritesRaw = entries.map((entry) => jsonEncode(entry.toJson())).toList();
     await _prefs.setStringList(_favorites, favoritesRaw);
+  }
+
+  FolderSyncState getFolderSyncState() {
+    final raw = _prefs.getString(_folderSync);
+    if (raw == null) {
+      return const FolderSyncState.empty();
+    }
+
+    try {
+      return FolderSyncState.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+    } catch (e) {
+      _logger.warning('Could not load folder sync state', e);
+      return const FolderSyncState.empty();
+    }
+  }
+
+  Future<void> setFolderSyncState(FolderSyncState state) async {
+    await _prefs.setString(_folderSync, jsonEncode(state.toJson()));
   }
 
   String getShowToken() {

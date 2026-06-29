@@ -14,8 +14,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   ///
   /// Usage:
   /// final t = Translations.of(context);
-  static Translations of(BuildContext context) =>
-      InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+  static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
 
   /// You can call this constructor and build your own translation instance of this locale.
   /// Constructing via the enum [AppLocale.build] is preferred.
@@ -24,10 +23,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
     PluralResolver? cardinalResolver,
     PluralResolver? ordinalResolver,
     TranslationMetadata<AppLocale, Translations>? meta,
-  }) : assert(
-         overrides == null,
-         'Set "translation_overrides: true" in order to enable this feature.',
-       ),
+  }) : assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
        $meta =
            meta ??
            TranslationMetadata(
@@ -43,9 +39,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
   late final Translations _root = this; // ignore: unused_field
 
-  Translations $copyWith({
-    TranslationMetadata<AppLocale, Translations>? meta,
-  }) => Translations(meta: meta ?? this.$meta);
+  Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
   // Translations
 
@@ -55,54 +49,30 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
   /// en: 'LocalSend'
   String get appName => 'LocalSend';
 
-  late final TranslationsGeneralEn general = TranslationsGeneralEn.internal(
-    _root,
-  );
-  late final TranslationsReceiveTabEn receiveTab =
-      TranslationsReceiveTabEn.internal(_root);
-  late final TranslationsSendTabEn sendTab = TranslationsSendTabEn.internal(
-    _root,
-  );
-  late final TranslationsSettingsTabEn settingsTab =
-      TranslationsSettingsTabEn.internal(_root);
-  late final TranslationsTroubleshootPageEn troubleshootPage =
-      TranslationsTroubleshootPageEn.internal(_root);
-  late final TranslationsNetworkInterfacesPageEn networkInterfacesPage =
-      TranslationsNetworkInterfacesPageEn.internal(_root);
-  late final TranslationsReceiveHistoryPageEn receiveHistoryPage =
-      TranslationsReceiveHistoryPageEn.internal(_root);
-  late final TranslationsApkPickerPageEn apkPickerPage =
-      TranslationsApkPickerPageEn.internal(_root);
-  late final TranslationsSelectedFilesPageEn selectedFilesPage =
-      TranslationsSelectedFilesPageEn.internal(_root);
-  late final TranslationsReceivePageEn receivePage =
-      TranslationsReceivePageEn.internal(_root);
-  late final TranslationsReceiveOptionsPageEn receiveOptionsPage =
-      TranslationsReceiveOptionsPageEn.internal(_root);
-  late final TranslationsSendPageEn sendPage = TranslationsSendPageEn.internal(
-    _root,
-  );
-  late final TranslationsProgressPageEn progressPage =
-      TranslationsProgressPageEn.internal(_root);
-  late final TranslationsWebSharePageEn webSharePage =
-      TranslationsWebSharePageEn.internal(_root);
-  late final TranslationsAboutPageEn aboutPage =
-      TranslationsAboutPageEn.internal(_root);
-  late final TranslationsDonationPageEn donationPage =
-      TranslationsDonationPageEn.internal(_root);
-  late final TranslationsChangelogPageEn changelogPage =
-      TranslationsChangelogPageEn.internal(_root);
-  late final TranslationsAliasGeneratorEn aliasGenerator =
-      TranslationsAliasGeneratorEn.internal(_root);
-  late final TranslationsDialogsEn dialogs = TranslationsDialogsEn.internal(
-    _root,
-  );
-  late final TranslationsSanitizationEn sanitization =
-      TranslationsSanitizationEn.internal(_root);
+  late final TranslationsGeneralEn general = TranslationsGeneralEn.internal(_root);
+  late final TranslationsReceiveTabEn receiveTab = TranslationsReceiveTabEn.internal(_root);
+  late final TranslationsSendTabEn sendTab = TranslationsSendTabEn.internal(_root);
+  late final TranslationsSyncTabEn syncTab = TranslationsSyncTabEn.internal(_root);
+  late final TranslationsSettingsTabEn settingsTab = TranslationsSettingsTabEn.internal(_root);
+  late final TranslationsTroubleshootPageEn troubleshootPage = TranslationsTroubleshootPageEn.internal(_root);
+  late final TranslationsNetworkInterfacesPageEn networkInterfacesPage = TranslationsNetworkInterfacesPageEn.internal(_root);
+  late final TranslationsReceiveHistoryPageEn receiveHistoryPage = TranslationsReceiveHistoryPageEn.internal(_root);
+  late final TranslationsApkPickerPageEn apkPickerPage = TranslationsApkPickerPageEn.internal(_root);
+  late final TranslationsSelectedFilesPageEn selectedFilesPage = TranslationsSelectedFilesPageEn.internal(_root);
+  late final TranslationsReceivePageEn receivePage = TranslationsReceivePageEn.internal(_root);
+  late final TranslationsReceiveOptionsPageEn receiveOptionsPage = TranslationsReceiveOptionsPageEn.internal(_root);
+  late final TranslationsSendPageEn sendPage = TranslationsSendPageEn.internal(_root);
+  late final TranslationsProgressPageEn progressPage = TranslationsProgressPageEn.internal(_root);
+  late final TranslationsWebSharePageEn webSharePage = TranslationsWebSharePageEn.internal(_root);
+  late final TranslationsAboutPageEn aboutPage = TranslationsAboutPageEn.internal(_root);
+  late final TranslationsDonationPageEn donationPage = TranslationsDonationPageEn.internal(_root);
+  late final TranslationsChangelogPageEn changelogPage = TranslationsChangelogPageEn.internal(_root);
+  late final TranslationsAliasGeneratorEn aliasGenerator = TranslationsAliasGeneratorEn.internal(_root);
+  late final TranslationsDialogsEn dialogs = TranslationsDialogsEn.internal(_root);
+  late final TranslationsSanitizationEn sanitization = TranslationsSanitizationEn.internal(_root);
   late final TranslationsTrayEn tray = TranslationsTrayEn.internal(_root);
   late final TranslationsWebEn web = TranslationsWebEn.internal(_root);
-  late final TranslationsAssetPickerEn assetPicker =
-      TranslationsAssetPickerEn.internal(_root);
+  late final TranslationsAssetPickerEn assetPicker = TranslationsAssetPickerEn.internal(_root);
 }
 
 // Path: general
@@ -239,10 +209,8 @@ class TranslationsReceiveTabEn {
   /// en: 'Receive'
   String get title => 'Receive';
 
-  late final TranslationsReceiveTabInfoBoxEn infoBox =
-      TranslationsReceiveTabInfoBoxEn.internal(_root);
-  late final TranslationsReceiveTabQuickSaveEn quickSave =
-      TranslationsReceiveTabQuickSaveEn.internal(_root);
+  late final TranslationsReceiveTabInfoBoxEn infoBox = TranslationsReceiveTabInfoBoxEn.internal(_root);
+  late final TranslationsReceiveTabQuickSaveEn quickSave = TranslationsReceiveTabQuickSaveEn.internal(_root);
 }
 
 // Path: sendTab
@@ -256,14 +224,11 @@ class TranslationsSendTabEn {
   /// en: 'Send'
   String get title => 'Send';
 
-  late final TranslationsSendTabSelectionEn selection =
-      TranslationsSendTabSelectionEn.internal(_root);
-  late final TranslationsSendTabPickerEn picker =
-      TranslationsSendTabPickerEn.internal(_root);
+  late final TranslationsSendTabSelectionEn selection = TranslationsSendTabSelectionEn.internal(_root);
+  late final TranslationsSendTabPickerEn picker = TranslationsSendTabPickerEn.internal(_root);
 
   /// en: 'You can also use the "Share" feature of your mobile device to select files more easily.'
-  String get shareIntentInfo =>
-      'You can also use the "Share" feature of your mobile device to select files more easily.';
+  String get shareIntentInfo => 'You can also use the "Share" feature of your mobile device to select files more easily.';
 
   /// en: 'Nearby devices'
   String get nearbyDevices => 'Nearby devices';
@@ -280,18 +245,145 @@ class TranslationsSendTabEn {
   /// en: 'Send mode'
   String get sendMode => 'Send mode';
 
-  late final TranslationsSendTabSendModesEn sendModes =
-      TranslationsSendTabSendModesEn.internal(_root);
+  late final TranslationsSendTabSendModesEn sendModes = TranslationsSendTabSendModesEn.internal(_root);
 
   /// en: 'Explanation'
   String get sendModeHelp => 'Explanation';
 
   /// en: 'Please ensure that the desired target is also on the same Wi-Fi network.'
-  String get help =>
-      'Please ensure that the desired target is also on the same Wi-Fi network.';
+  String get help => 'Please ensure that the desired target is also on the same Wi-Fi network.';
 
   /// en: 'Place items to share.'
   String get placeItems => 'Place items to share.';
+}
+
+// Path: syncTab
+class TranslationsSyncTabEn {
+  TranslationsSyncTabEn.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Sync'
+  String get title => 'Sync';
+
+  /// en: 'Host folder'
+  String get hostFolder => 'Host folder';
+
+  /// en: 'Replica folder'
+  String get replicaFolder => 'Replica folder';
+
+  /// en: 'Choose'
+  String get chooseFolder => 'Choose';
+
+  /// en: 'No folder selected'
+  String get noFolder => 'No folder selected';
+
+  /// en: 'Pairing'
+  String get pairing => 'Pairing';
+
+  /// en: 'Start pairing'
+  String get startPairing => 'Start pairing';
+
+  /// en: 'Replica favorite'
+  String get replicaFavorite => 'Replica favorite';
+
+  /// en: 'Paired folders'
+  String get pairedFolders => 'Paired folders';
+
+  /// en: 'No paired folders yet.'
+  String get noPairs => 'No paired folders yet.';
+
+  /// en: 'Ready'
+  String get ready => 'Ready';
+
+  /// en: 'Host'
+  String get roleHost => 'Host';
+
+  /// en: 'Replica'
+  String get roleReplica => 'Replica';
+
+  /// en: 'Last sync'
+  String get lastSync => 'Last sync';
+
+  /// en: 'Never'
+  String get never => 'Never';
+
+  /// en: 'Uploaded'
+  String get uploaded => 'Uploaded';
+
+  /// en: 'Moved files'
+  String get moves => 'Moved files';
+
+  /// en: 'Skipped'
+  String get skipped => 'Skipped';
+
+  /// en: 'Failed'
+  String get failed => 'Failed';
+
+  /// en: 'Sync now'
+  String get syncNow => 'Sync now';
+
+  /// en: 'Pair again'
+  String get repair => 'Pair again';
+
+  /// en: 'Mirror deletes and moves'
+  String get allowDestructiveSync => 'Mirror deletes and moves';
+
+  /// en: 'When enabled, the replica deletes and moves files to match the host.'
+  String get allowDestructiveSyncDescription => 'When enabled, the replica deletes and moves files to match the host.';
+
+  /// en: 'Full mirror'
+  String get fullMirror => 'Full mirror';
+
+  /// en: 'Upload new and changed files only'
+  String get uploadChangesOnly => 'Upload new and changed files only';
+
+  /// en: 'This folder mirrors to the peer folder.'
+  String get directionHostToReplica => 'This folder mirrors to the peer folder.';
+
+  /// en: 'This folder follows the peer host folder.'
+  String get directionReplicaFromHost => 'This folder follows the peer host folder.';
+
+  /// en: 'Pairing'
+  String get statusPairing => 'Pairing';
+
+  /// en: 'Scanning folders'
+  String get statusScanning => 'Scanning folders';
+
+  /// en: 'Syncing files'
+  String get statusSyncing => 'Syncing files';
+
+  /// en: 'Finished with failures'
+  String get statusCompletedWithFailures => 'Finished with failures';
+
+  /// en: 'Sync is already running.'
+  String get errorAlreadyRunning => 'Sync is already running.';
+
+  /// en: 'Choose a host folder first.'
+  String get errorHostFolderMissing => 'Choose a host folder first.';
+
+  /// en: 'Choose the local folder again.'
+  String get errorLocalFolderUnavailable => 'Choose the local folder again.';
+
+  /// en: 'Pair this folder again.'
+  String get errorNeedsPairing => 'Pair this folder again.';
+
+  /// en: 'The paired device is offline.'
+  String get errorPeerOffline => 'The paired device is offline.';
+
+  /// en: 'Pairing failed.'
+  String get errorPairingFailed => 'Pairing failed.';
+
+  /// en: 'This folder pair is disabled.'
+  String get errorProfileDisabled => 'This folder pair is disabled.';
+
+  /// en: 'The paired device rejected the sync request.'
+  String get errorRemoteRejected => 'The paired device rejected the sync request.';
+
+  /// en: 'Sync failed.'
+  String get errorUnknown => 'Sync failed.';
 }
 
 // Path: settingsTab
@@ -305,16 +397,11 @@ class TranslationsSettingsTabEn {
   /// en: 'Settings'
   String get title => 'Settings';
 
-  late final TranslationsSettingsTabGeneralEn general =
-      TranslationsSettingsTabGeneralEn.internal(_root);
-  late final TranslationsSettingsTabReceiveEn receive =
-      TranslationsSettingsTabReceiveEn.internal(_root);
-  late final TranslationsSettingsTabSendEn send =
-      TranslationsSettingsTabSendEn.internal(_root);
-  late final TranslationsSettingsTabNetworkEn network =
-      TranslationsSettingsTabNetworkEn.internal(_root);
-  late final TranslationsSettingsTabOtherEn other =
-      TranslationsSettingsTabOtherEn.internal(_root);
+  late final TranslationsSettingsTabGeneralEn general = TranslationsSettingsTabGeneralEn.internal(_root);
+  late final TranslationsSettingsTabReceiveEn receive = TranslationsSettingsTabReceiveEn.internal(_root);
+  late final TranslationsSettingsTabSendEn send = TranslationsSettingsTabSendEn.internal(_root);
+  late final TranslationsSettingsTabNetworkEn network = TranslationsSettingsTabNetworkEn.internal(_root);
+  late final TranslationsSettingsTabOtherEn other = TranslationsSettingsTabOtherEn.internal(_root);
 
   /// en: 'Advanced settings'
   String get advancedSettings => 'Advanced settings';
@@ -332,8 +419,7 @@ class TranslationsTroubleshootPageEn {
   String get title => 'Troubleshoot';
 
   /// en: 'Does the app not work as expected? Here you can find some common solutions to problems.'
-  String get subTitle =>
-      'Does the app not work as expected? Here you can find some common solutions to problems.';
+  String get subTitle => 'Does the app not work as expected? Here you can find some common solutions to problems.';
 
   /// en: 'Solution:'
   String get solution => 'Solution:';
@@ -341,12 +427,9 @@ class TranslationsTroubleshootPageEn {
   /// en: 'Fix automatically'
   String get fixButton => 'Fix automatically';
 
-  late final TranslationsTroubleshootPageFirewallEn firewall =
-      TranslationsTroubleshootPageFirewallEn.internal(_root);
-  late final TranslationsTroubleshootPageNoDiscoveryEn noDiscovery =
-      TranslationsTroubleshootPageNoDiscoveryEn.internal(_root);
-  late final TranslationsTroubleshootPageNoConnectionEn noConnection =
-      TranslationsTroubleshootPageNoConnectionEn.internal(_root);
+  late final TranslationsTroubleshootPageFirewallEn firewall = TranslationsTroubleshootPageFirewallEn.internal(_root);
+  late final TranslationsTroubleshootPageNoDiscoveryEn noDiscovery = TranslationsTroubleshootPageNoDiscoveryEn.internal(_root);
+  late final TranslationsTroubleshootPageNoConnectionEn noConnection = TranslationsTroubleshootPageNoConnectionEn.internal(_root);
 }
 
 // Path: networkInterfacesPage
@@ -394,8 +477,7 @@ class TranslationsReceiveHistoryPageEn {
   /// en: 'The history is empty.'
   String get empty => 'The history is empty.';
 
-  late final TranslationsReceiveHistoryPageEntryActionsEn entryActions =
-      TranslationsReceiveHistoryPageEntryActionsEn.internal(_root);
+  late final TranslationsReceiveHistoryPageEntryActionsEn entryActions = TranslationsReceiveHistoryPageEntryActionsEn.internal(_root);
 }
 
 // Path: apkPickerPage
@@ -440,12 +522,11 @@ class TranslationsReceivePageEn {
   // Translations
 
   /// en: '(one) {wants to send you a file} (other) {wants to send you {n} files}'
-  String subTitle({required num n}) =>
-      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
-        n,
-        one: 'wants to send you a file',
-        other: 'wants to send you ${n} files',
-      );
+  String subTitle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+    n,
+    one: 'wants to send you a file',
+    other: 'wants to send you ${n} files',
+  );
 
   /// en: 'sent you a message:'
   String get subTitleMessage => 'sent you a message:';
@@ -478,8 +559,7 @@ class TranslationsReceiveOptionsPageEn {
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
 
   /// en: 'Turned off automatically because there are folders.'
-  String get saveToGalleryOff =>
-      'Turned off automatically because there are folders.';
+  String get saveToGalleryOff => 'Turned off automatically because there are folders.';
 }
 
 // Path: sendPage
@@ -520,10 +600,8 @@ class TranslationsProgressPageEn {
   /// en: 'Saved in Photos'
   String get savedToGallery => 'Saved in Photos';
 
-  late final TranslationsProgressPageTotalEn total =
-      TranslationsProgressPageTotalEn.internal(_root);
-  late final TranslationsProgressPageRemainingTimeEn remainingTime =
-      TranslationsProgressPageRemainingTimeEn.internal(_root);
+  late final TranslationsProgressPageTotalEn total = TranslationsProgressPageTotalEn.internal(_root);
+  late final TranslationsProgressPageRemainingTimeEn remainingTime = TranslationsProgressPageRemainingTimeEn.internal(_root);
 }
 
 // Path: webSharePage
@@ -547,12 +625,11 @@ class TranslationsWebSharePageEn {
   String get error => 'An error occurred while starting the server.';
 
   /// en: '(one) {Open this link in your browser:} (other) {Open one of these links in your browser:}'
-  String openLink({required num n}) =>
-      (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
-        n,
-        one: 'Open this link in your browser:',
-        other: 'Open one of these links in your browser:',
-      );
+  String openLink({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+    n,
+    one: 'Open this link in your browser:',
+    other: 'Open one of these links in your browser:',
+  );
 
   /// en: 'Requests'
   String get requests => 'Requests';
@@ -573,8 +650,7 @@ class TranslationsWebSharePageEn {
   String pinHint({required Object pin}) => 'The PIN is "${pin}"';
 
   /// en: 'LocalSend uses a self-signed certificate. You need to accept it in your browser.'
-  String get encryptionHint =>
-      'LocalSend uses a self-signed certificate. You need to accept it in your browser.';
+  String get encryptionHint => 'LocalSend uses a self-signed certificate. You need to accept it in your browser.';
 
   /// en: 'Pending requests: {n}'
   String pendingRequests({required Object n}) => 'Pending requests: ${n}';
@@ -621,8 +697,7 @@ class TranslationsDonationPageEn {
   String get title => 'Donate';
 
   /// en: 'LocalSend is free, open-source and without any ads. If you like the app, you can support the development with a donation.'
-  String get info =>
-      'LocalSend is free, open-source and without any ads. If you like the app, you can support the development with a donation.';
+  String get info => 'LocalSend is free, open-source and without any ads. If you like the app, you can support the development with a donation.';
 
   /// en: 'Donate {amount}'
   String donate({required Object amount}) => 'Donate ${amount}';
@@ -725,8 +800,7 @@ class TranslationsAliasGeneratorEn {
   /// In some languages, the adjective must be last.
   ///
   /// en: '{adjective} {fruit}'
-  String combination({required Object adjective, required Object fruit}) =>
-      '${adjective} ${fruit}';
+  String combination({required Object adjective, required Object fruit}) => '${adjective} ${fruit}';
 }
 
 // Path: dialogs
@@ -736,63 +810,32 @@ class TranslationsDialogsEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final TranslationsDialogsAddFileEn addFile =
-      TranslationsDialogsAddFileEn.internal(_root);
-  late final TranslationsDialogsOpenFileEn openFile =
-      TranslationsDialogsOpenFileEn.internal(_root);
-  late final TranslationsDialogsAddressInputEn addressInput =
-      TranslationsDialogsAddressInputEn.internal(_root);
-  late final TranslationsDialogsCancelSessionEn cancelSession =
-      TranslationsDialogsCancelSessionEn.internal(_root);
-  late final TranslationsDialogsCannotOpenFileEn cannotOpenFile =
-      TranslationsDialogsCannotOpenFileEn.internal(_root);
-  late final TranslationsDialogsEncryptionDisabledNoticeEn
-  encryptionDisabledNotice =
-      TranslationsDialogsEncryptionDisabledNoticeEn.internal(_root);
-  late final TranslationsDialogsErrorDialogEn errorDialog =
-      TranslationsDialogsErrorDialogEn.internal(_root);
-  late final TranslationsDialogsFavoriteDialogEn favoriteDialog =
-      TranslationsDialogsFavoriteDialogEn.internal(_root);
-  late final TranslationsDialogsFavoriteDeleteDialogEn favoriteDeleteDialog =
-      TranslationsDialogsFavoriteDeleteDialogEn.internal(_root);
-  late final TranslationsDialogsFavoriteEditDialogEn favoriteEditDialog =
-      TranslationsDialogsFavoriteEditDialogEn.internal(_root);
-  late final TranslationsDialogsFileInfoEn fileInfo =
-      TranslationsDialogsFileInfoEn.internal(_root);
-  late final TranslationsDialogsFileNameInputEn fileNameInput =
-      TranslationsDialogsFileNameInputEn.internal(_root);
-  late final TranslationsDialogsHistoryClearDialogEn historyClearDialog =
-      TranslationsDialogsHistoryClearDialogEn.internal(_root);
-  late final TranslationsDialogsLocalNetworkUnauthorizedEn
-  localNetworkUnauthorized =
-      TranslationsDialogsLocalNetworkUnauthorizedEn.internal(_root);
-  late final TranslationsDialogsMessageInputEn messageInput =
-      TranslationsDialogsMessageInputEn.internal(_root);
-  late final TranslationsDialogsNoFilesEn noFiles =
-      TranslationsDialogsNoFilesEn.internal(_root);
-  late final TranslationsDialogsNoPermissionEn noPermission =
-      TranslationsDialogsNoPermissionEn.internal(_root);
-  late final TranslationsDialogsNotAvailableOnPlatformEn
-  notAvailableOnPlatform = TranslationsDialogsNotAvailableOnPlatformEn.internal(
-    _root,
-  );
-  late final TranslationsDialogsQrEn qr = TranslationsDialogsQrEn.internal(
-    _root,
-  );
-  late final TranslationsDialogsQuickActionsEn quickActions =
-      TranslationsDialogsQuickActionsEn.internal(_root);
-  late final TranslationsDialogsQuickSaveNoticeEn quickSaveNotice =
-      TranslationsDialogsQuickSaveNoticeEn.internal(_root);
-  late final TranslationsDialogsQuickSaveFromFavoritesNoticeEn
-  quickSaveFromFavoritesNotice =
+  late final TranslationsDialogsAddFileEn addFile = TranslationsDialogsAddFileEn.internal(_root);
+  late final TranslationsDialogsOpenFileEn openFile = TranslationsDialogsOpenFileEn.internal(_root);
+  late final TranslationsDialogsAddressInputEn addressInput = TranslationsDialogsAddressInputEn.internal(_root);
+  late final TranslationsDialogsCancelSessionEn cancelSession = TranslationsDialogsCancelSessionEn.internal(_root);
+  late final TranslationsDialogsCannotOpenFileEn cannotOpenFile = TranslationsDialogsCannotOpenFileEn.internal(_root);
+  late final TranslationsDialogsEncryptionDisabledNoticeEn encryptionDisabledNotice = TranslationsDialogsEncryptionDisabledNoticeEn.internal(_root);
+  late final TranslationsDialogsErrorDialogEn errorDialog = TranslationsDialogsErrorDialogEn.internal(_root);
+  late final TranslationsDialogsFavoriteDialogEn favoriteDialog = TranslationsDialogsFavoriteDialogEn.internal(_root);
+  late final TranslationsDialogsFavoriteDeleteDialogEn favoriteDeleteDialog = TranslationsDialogsFavoriteDeleteDialogEn.internal(_root);
+  late final TranslationsDialogsFavoriteEditDialogEn favoriteEditDialog = TranslationsDialogsFavoriteEditDialogEn.internal(_root);
+  late final TranslationsDialogsFileInfoEn fileInfo = TranslationsDialogsFileInfoEn.internal(_root);
+  late final TranslationsDialogsFileNameInputEn fileNameInput = TranslationsDialogsFileNameInputEn.internal(_root);
+  late final TranslationsDialogsHistoryClearDialogEn historyClearDialog = TranslationsDialogsHistoryClearDialogEn.internal(_root);
+  late final TranslationsDialogsLocalNetworkUnauthorizedEn localNetworkUnauthorized = TranslationsDialogsLocalNetworkUnauthorizedEn.internal(_root);
+  late final TranslationsDialogsMessageInputEn messageInput = TranslationsDialogsMessageInputEn.internal(_root);
+  late final TranslationsDialogsNoFilesEn noFiles = TranslationsDialogsNoFilesEn.internal(_root);
+  late final TranslationsDialogsNoPermissionEn noPermission = TranslationsDialogsNoPermissionEn.internal(_root);
+  late final TranslationsDialogsNotAvailableOnPlatformEn notAvailableOnPlatform = TranslationsDialogsNotAvailableOnPlatformEn.internal(_root);
+  late final TranslationsDialogsQrEn qr = TranslationsDialogsQrEn.internal(_root);
+  late final TranslationsDialogsQuickActionsEn quickActions = TranslationsDialogsQuickActionsEn.internal(_root);
+  late final TranslationsDialogsQuickSaveNoticeEn quickSaveNotice = TranslationsDialogsQuickSaveNoticeEn.internal(_root);
+  late final TranslationsDialogsQuickSaveFromFavoritesNoticeEn quickSaveFromFavoritesNotice =
       TranslationsDialogsQuickSaveFromFavoritesNoticeEn.internal(_root);
-  late final TranslationsDialogsPinEn pin = TranslationsDialogsPinEn.internal(
-    _root,
-  );
-  late final TranslationsDialogsSendModeHelpEn sendModeHelp =
-      TranslationsDialogsSendModeHelpEn.internal(_root);
-  late final TranslationsDialogsZoomEn zoom =
-      TranslationsDialogsZoomEn.internal(_root);
+  late final TranslationsDialogsPinEn pin = TranslationsDialogsPinEn.internal(_root);
+  late final TranslationsDialogsSendModeHelpEn sendModeHelp = TranslationsDialogsSendModeHelpEn.internal(_root);
+  late final TranslationsDialogsZoomEn zoom = TranslationsDialogsZoomEn.internal(_root);
 }
 
 // Path: sanitization
@@ -903,12 +946,10 @@ class TranslationsAssetPickerEn {
   String get unableToAccessAll => 'Unable to access all files on the device';
 
   /// en: 'Only view files and albums accessible to the app.'
-  String get viewingLimitedAssetsTip =>
-      'Only view files and albums accessible to the app.';
+  String get viewingLimitedAssetsTip => 'Only view files and albums accessible to the app.';
 
   /// en: 'Click to update accessible files'
-  String get changeAccessibleLimitedAssets =>
-      'Click to update accessible files';
+  String get changeAccessibleLimitedAssets => 'Click to update accessible files';
 
   /// en: 'App can only access some files on the device. Go to system settings and allow the app to access all media on the device.'
   String get accessAllTip =>
@@ -1070,21 +1111,17 @@ class TranslationsSettingsTabGeneralEn {
   /// en: 'Theme'
   String get brightness => 'Theme';
 
-  late final TranslationsSettingsTabGeneralBrightnessOptionsEn
-  brightnessOptions =
-      TranslationsSettingsTabGeneralBrightnessOptionsEn.internal(_root);
+  late final TranslationsSettingsTabGeneralBrightnessOptionsEn brightnessOptions = TranslationsSettingsTabGeneralBrightnessOptionsEn.internal(_root);
 
   /// en: 'Color'
   String get color => 'Color';
 
-  late final TranslationsSettingsTabGeneralColorOptionsEn colorOptions =
-      TranslationsSettingsTabGeneralColorOptionsEn.internal(_root);
+  late final TranslationsSettingsTabGeneralColorOptionsEn colorOptions = TranslationsSettingsTabGeneralColorOptionsEn.internal(_root);
 
   /// en: 'Language'
   String get language => 'Language';
 
-  late final TranslationsSettingsTabGeneralLanguageOptionsEn languageOptions =
-      TranslationsSettingsTabGeneralLanguageOptionsEn.internal(_root);
+  late final TranslationsSettingsTabGeneralLanguageOptionsEn languageOptions = TranslationsSettingsTabGeneralLanguageOptionsEn.internal(_root);
 
   /// en: 'Save window position after quit'
   String get saveWindowPlacement => 'Save window position after quit';
@@ -1093,8 +1130,7 @@ class TranslationsSettingsTabGeneralEn {
   String get saveWindowPlacementWindows => 'Save window position after exit';
 
   /// en: 'Minimize to the System Tray/Menu Bar when closing'
-  String get minimizeToTray =>
-      'Minimize to the System Tray/Menu Bar when closing';
+  String get minimizeToTray => 'Minimize to the System Tray/Menu Bar when closing';
 
   /// en: 'Autostart after login'
   String get launchAtStartup => 'Autostart after login';
@@ -1157,8 +1193,7 @@ class TranslationsSettingsTabSendEn {
   String get title => 'Send';
 
   /// en: 'Automatically accept requests in "Share via link" mode'
-  String get shareViaLinkAutoAccept =>
-      'Automatically accept requests in "Share via link" mode';
+  String get shareViaLinkAutoAccept => 'Automatically accept requests in "Share via link" mode';
 }
 
 // Path: settingsTab.network
@@ -1193,8 +1228,7 @@ class TranslationsSettingsTabNetworkEn {
   /// en: 'Network'
   String get network => 'Network';
 
-  late final TranslationsSettingsTabNetworkNetworkOptionsEn networkOptions =
-      TranslationsSettingsTabNetworkNetworkOptionsEn.internal(_root);
+  late final TranslationsSettingsTabNetworkNetworkOptionsEn networkOptions = TranslationsSettingsTabNetworkNetworkOptionsEn.internal(_root);
 
   /// en: 'Discovery Timeout'
   String get discoveryTimeout => 'Discovery Timeout';
@@ -1253,8 +1287,7 @@ class TranslationsTroubleshootPageFirewallEn {
   // Translations
 
   /// en: 'This device can send files to other devices but other devices cannot send files to this device.'
-  String get symptom =>
-      'This device can send files to other devices but other devices cannot send files to this device.';
+  String get symptom => 'This device can send files to other devices but other devices cannot send files to this device.';
 
   /// en: 'This is most likely a firewall issue. You can solve this by allowing incoming connections (UDP and TCP) on port {port}.'
   String solution({required Object port}) =>
@@ -1289,8 +1322,7 @@ class TranslationsTroubleshootPageNoConnectionEn {
   // Translations
 
   /// en: 'Both devices cannot discover each other nor can they share files.'
-  String get symptom =>
-      'Both devices cannot discover each other nor can they share files.';
+  String get symptom => 'Both devices cannot discover each other nor can they share files.';
 
   /// en: 'Does the problem exist on both sides? If so, you need to make sure that both devices are on the same Wi-Fi network and share the same configuration (port, multicast address, encryption). The Wi-Fi network may not allow communication between participants due to Access Point (AP) Isolation. In this case, this option must be disabled on the router.'
   String get solution =>
@@ -1325,16 +1357,13 @@ class TranslationsProgressPageTotalEn {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final TranslationsProgressPageTotalTitleEn title =
-      TranslationsProgressPageTotalTitleEn.internal(_root);
+  late final TranslationsProgressPageTotalTitleEn title = TranslationsProgressPageTotalTitleEn.internal(_root);
 
   /// en: 'Files: {curr} / {n}'
-  String count({required Object curr, required Object n}) =>
-      'Files: ${curr} / ${n}';
+  String count({required Object curr, required Object n}) => 'Files: ${curr} / ${n}';
 
   /// en: 'Size: {curr} / {n}'
-  String size({required Object curr, required Object n}) =>
-      'Size: ${curr} / ${n}';
+  String size({required Object curr, required Object n}) => 'Size: ${curr} / ${n}';
 
   /// en: 'Speed: {speed}/s'
   String speed({required Object speed}) => 'Speed: ${speed}/s';
@@ -1362,8 +1391,7 @@ class TranslationsProgressPageRemainingTimeEn {
   /// Use 'd' for days, 'h' for hours, and 'm' for minutes
   ///
   /// en: '{d}d {h}h {m}m'
-  String days({required Object d, required Object h, required Object m}) =>
-      '${d}d ${h}h ${m}m';
+  String days({required Object d, required Object h, required Object m}) => '${d}d ${h}h ${m}m';
 }
 
 // Path: dialogs.addFile
@@ -1444,8 +1472,7 @@ class TranslationsDialogsCannotOpenFileEn {
   String get title => 'Cannot open file';
 
   /// en: 'Could not open "{file}". Has this file been moved, renamed or deleted?'
-  String content({required Object file}) =>
-      'Could not open "${file}". Has this file been moved, renamed or deleted?';
+  String content({required Object file}) => 'Could not open "${file}". Has this file been moved, renamed or deleted?';
 }
 
 // Path: dialogs.encryptionDisabledNotice
@@ -1460,8 +1487,7 @@ class TranslationsDialogsEncryptionDisabledNoticeEn {
   String get title => 'Encryption disabled';
 
   /// en: 'Communication now takes place via the unencrypted HTTP protocol. To use HTTPS protocol, enable encryption again.'
-  String get content =>
-      'Communication now takes place via the unencrypted HTTP protocol. To use HTTPS protocol, enable encryption again.';
+  String get content => 'Communication now takes place via the unencrypted HTTP protocol. To use HTTPS protocol, enable encryption again.';
 }
 
 // Path: dialogs.errorDialog
@@ -1506,8 +1532,7 @@ class TranslationsDialogsFavoriteDeleteDialogEn {
   String get title => 'Delete from favorites';
 
   /// en: 'Do you really want to delete from favorites "{name}"?'
-  String content({required Object name}) =>
-      'Do you really want to delete from favorites "${name}"?';
+  String content({required Object name}) => 'Do you really want to delete from favorites "${name}"?';
 }
 
 // Path: dialogs.favoriteEditDialog
@@ -1655,8 +1680,7 @@ class TranslationsDialogsNoPermissionEn {
   String get title => 'No permission';
 
   /// en: 'You have not granted the necessary permissions. Please grant them in the settings.'
-  String get content =>
-      'You have not granted the necessary permissions. Please grant them in the settings.';
+  String get content => 'You have not granted the necessary permissions. Please grant them in the settings.';
 }
 
 // Path: dialogs.notAvailableOnPlatform
@@ -1725,8 +1749,7 @@ class TranslationsDialogsQuickSaveNoticeEn {
   String get title => _root.general.quickSave;
 
   /// en: 'File requests are now accepted automatically. Be aware that everyone on the local network can send you files.'
-  String get content =>
-      'File requests are now accepted automatically. Be aware that everyone on the local network can send you files.';
+  String get content => 'File requests are now accepted automatically. Be aware that everyone on the local network can send you files.';
 }
 
 // Path: dialogs.quickSaveFromFavoritesNotice
@@ -1771,16 +1794,13 @@ class TranslationsDialogsSendModeHelpEn {
   String get title => 'Send modes';
 
   /// en: 'Sends files to one recipient. Selection will be cleared after finished files transfer.'
-  String get single =>
-      'Sends files to one recipient. Selection will be cleared after finished files transfer.';
+  String get single => 'Sends files to one recipient. Selection will be cleared after finished files transfer.';
 
   /// en: 'Sends files to multiple recipients. Selection will not be cleared after finished files transfer.'
-  String get multiple =>
-      'Sends files to multiple recipients. Selection will not be cleared after finished files transfer.';
+  String get multiple => 'Sends files to multiple recipients. Selection will not be cleared after finished files transfer.';
 
   /// en: 'Recipients who do not have LocalSend installed can download the selected files by opening the link in their browser.'
-  String get link =>
-      'Recipients who do not have LocalSend installed can download the selected files by opening the link in their browser.';
+  String get link => 'Recipients who do not have LocalSend installed can download the selected files by opening the link in their browser.';
 }
 
 // Path: dialogs.zoom
